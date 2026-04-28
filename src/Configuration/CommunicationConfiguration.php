@@ -4,6 +4,13 @@ namespace EBay\Communication\Configuration;
 
 final class CommunicationConfiguration
 {
+    public RequestOptions $defaultRequestOptions;
+
+    public function __construct()
+    {
+        $this->defaultRequestOptions = new RequestOptions();
+    }
+
     public string $feedbackBaseUrl    = 'https://api.ebay.com/commerce/feedback/v1';
     public string $messageBaseUrl     = 'https://api.ebay.com/commerce/message/v1';
     public string $notificationBaseUrl = 'https://api.ebay.com/commerce/notification/v1';
