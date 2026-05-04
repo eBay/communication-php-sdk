@@ -54,19 +54,19 @@ final class CommunicationClient
 
         $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
 
-        $feedbackAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $feedbackAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $feedbackAdapter->setBaseUrl($config->feedbackBaseUrl);
         $this->feedback = new FeedbackClient(new FeedbackApiClient($feedbackAdapter), $config);
 
-        $messageAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $messageAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $messageAdapter->setBaseUrl($config->messageBaseUrl);
         $this->message = new MessageClient(new MessageApiClient($messageAdapter), $config);
 
-        $negotiationAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $negotiationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $negotiationAdapter->setBaseUrl($config->negotiationBaseUrl);
         $this->negotiation = new NegotiationClient(new NegotiationApiClient($negotiationAdapter), $config);
 
-        $notificationAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $notificationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $notificationAdapter->setBaseUrl($config->notificationBaseUrl);
         $this->notification = new NotificationClient(new NotificationApiClient($notificationAdapter), $config);
     }
