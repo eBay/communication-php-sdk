@@ -19,6 +19,9 @@ use EBay\Communication\Generated\Notification\Models\SubscriptionSearchResponse;
 use EBay\Communication\Generated\Notification\Models\Topic;
 use EBay\Communication\Generated\Notification\Models\TopicSearchResponse;
 use EBay\Communication\Generated\Notification\Models\UpdateSubscriptionRequest;
+use EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Topic\TopicRequestBuilderGetRequestConfiguration;
 
 final class NotificationClient
 {
@@ -39,6 +42,18 @@ final class NotificationClient
         }
     }
 
+    /** @return array<string,string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        $headers = $this->config->defaultRequestOptions->headers;
+        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+        return $headers;
+    }
+
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getConfig(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Config
     {
@@ -52,10 +67,22 @@ final class NotificationClient
         $this->kiota->config()->put($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
     }
 
-    public function getDestinations(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?DestinationSearchResponse
-    {
+    public function getDestinations(
+        ?string $continuationToken = null,
+        ?string $limit = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?DestinationSearchResponse {
         TokenContext::set($accessToken);
-        return $this->kiota->destination()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->destination()->get(
+            new DestinationRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: DestinationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    continuation_token: $continuationToken,
+                    limit: $limit,
+                ),
+            )
+        )->wait();
     }
 
     public function createDestination(DestinationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
@@ -88,10 +115,22 @@ final class NotificationClient
         return $this->kiota->public_key()->byPublic_key_id($publicKeyId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
     }
 
-    public function getSubscriptions(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SubscriptionSearchResponse
-    {
+    public function getSubscriptions(
+        ?string $continuationToken = null,
+        ?string $limit = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?SubscriptionSearchResponse {
         TokenContext::set($accessToken);
-        return $this->kiota->subscription()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->subscription()->get(
+            new SubscriptionRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    continuation_token: $continuationToken,
+                    limit: $limit,
+                ),
+            )
+        )->wait();
     }
 
     public function createSubscription(CreateSubscriptionRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
@@ -160,9 +199,21 @@ final class NotificationClient
         return $this->kiota->topic()->byTopic_id($topicId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
     }
 
-    public function getTopics(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?TopicSearchResponse
-    {
+    public function getTopics(
+        ?string $continuationToken = null,
+        ?string $limit = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?TopicSearchResponse {
         TokenContext::set($accessToken);
-        return $this->kiota->topic()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->topic()->get(
+            new TopicRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: TopicRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    continuation_token: $continuationToken,
+                    limit: $limit,
+                ),
+            )
+        )->wait();
     }
 }

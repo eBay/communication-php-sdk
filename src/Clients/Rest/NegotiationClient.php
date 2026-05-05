@@ -9,6 +9,7 @@ use EBay\Communication\Generated\Negotiation\NegotiationApiClient;
 use EBay\Communication\Generated\Negotiation\Models\CreateOffersRequest;
 use EBay\Communication\Generated\Negotiation\Models\PagedEligibleItemCollection;
 use EBay\Communication\Generated\Negotiation\Models\SendOfferToInterestedBuyersCollectionResponse;
+use EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration;
 
 final class NegotiationClient
 {
@@ -29,11 +30,35 @@ final class NegotiationClient
         }
     }
 
-    /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function findEligibleItems(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PagedEligibleItemCollection
+    /** @return array<string,string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
     {
+        $headers = $this->config->defaultRequestOptions->headers;
+        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+        return $headers;
+    }
+
+    /** @param string|null $accessToken Per-call token; overrides config fallback. */
+    public function findEligibleItems(
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?PagedEligibleItemCollection {
         TokenContext::set($accessToken);
-        return $this->kiota->find_eligible_items()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->find_eligible_items()->get(
+            new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    limit: $limit,
+                    offset: $offset,
+                ),
+            )
+        )->wait();
     }
 
     public function sendOfferToInterestedBuyers(CreateOffersRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendOfferToInterestedBuyersCollectionResponse

@@ -13,6 +13,8 @@ use EBay\Communication\Generated\Message\Models\GetMessagesByConversationIdRespo
 use EBay\Communication\Generated\Message\Models\SendMessageRequest;
 use EBay\Communication\Generated\Message\Models\SendMessageResponse;
 use EBay\Communication\Generated\Message\Models\UpdateConversationRequest;
+use EBay\Communication\Generated\Message\Conversation\ConversationRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Message\Conversation\Item\WithConversation_ItemRequestBuilderGetRequestConfiguration;
 
 final class MessageClient
 {
@@ -33,6 +35,18 @@ final class MessageClient
         }
     }
 
+    /** @return array<string,string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        $headers = $this->config->defaultRequestOptions->headers;
+        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+        return $headers;
+    }
+
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function bulkUpdateConversation(BulkUpdateConversationsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkUpdateConversationsResponse
     {
@@ -40,16 +54,57 @@ final class MessageClient
         return $this->kiota->bulk_update_conversation()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
     }
 
-    public function getConversation(string $conversationId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetMessagesByConversationIdResponse
-    {
+    public function getConversation(
+        string $conversationId,
+        ?string $conversationType = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetMessagesByConversationIdResponse {
         TokenContext::set($accessToken);
-        return $this->kiota->conversation()->byConversation_id($conversationId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->conversation()->byConversation_id($conversationId)->get(
+            new WithConversation_ItemRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: WithConversation_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    conversation_type: $conversationType,
+                    limit: $limit,
+                    offset: $offset,
+                ),
+            )
+        )->wait();
     }
 
-    public function getConversations(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?GetAllMyConversationsResponse
-    {
+    public function getConversations(
+        ?string $conversationType = null,
+        ?string $conversationStatus = null,
+        ?string $endTime = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $otherPartyUsername = null,
+        ?string $referenceId = null,
+        ?string $referenceType = null,
+        ?string $startTime = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetAllMyConversationsResponse {
         TokenContext::set($accessToken);
-        return $this->kiota->conversation()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->conversation()->get(
+            new ConversationRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: ConversationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    conversation_status: $conversationStatus,
+                    conversation_type: $conversationType,
+                    end_time: $endTime,
+                    limit: $limit,
+                    offset: $offset,
+                    other_party_username: $otherPartyUsername,
+                    reference_id: $referenceId,
+                    reference_type: $referenceType,
+                    start_time: $startTime,
+                ),
+            )
+        )->wait();
     }
 
     public function sendMessage(SendMessageRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendMessageResponse
