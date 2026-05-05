@@ -19,9 +19,27 @@ use EBay\Communication\Generated\Notification\Models\SubscriptionSearchResponse;
 use EBay\Communication\Generated\Notification\Models\Topic;
 use EBay\Communication\Generated\Notification\Models\TopicSearchResponse;
 use EBay\Communication\Generated\Notification\Models\UpdateSubscriptionRequest;
+use EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderPutRequestConfiguration;
 use EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderDeleteRequestConfiguration;
+use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderPutRequestConfiguration;
+use EBay\Communication\Generated\Notification\Public_key\Item\WithPublic_key_ItemRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderDeleteRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderPutRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Disable\DisableRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Enable\EnableRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Filter\FilterRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderDeleteRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Subscription\Item\Test\TestRequestBuilderPostRequestConfiguration;
 use EBay\Communication\Generated\Notification\Topic\TopicRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Notification\Topic\Item\WithTopic_ItemRequestBuilderGetRequestConfiguration;
 
 final class NotificationClient
 {
@@ -29,18 +47,6 @@ final class NotificationClient
         private readonly NotificationApiClient $kiota,
         private readonly CommunicationConfiguration $config,
     ) {}
-
-    private function applyHeaders(mixed $headers, ?RequestOptions $requestOptions): void
-    {
-        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
-            $headers->tryAdd($key, $value);
-        }
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                $headers->tryAdd($key, $value);
-            }
-        }
-    }
 
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
@@ -58,13 +64,13 @@ final class NotificationClient
     public function getConfig(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Config
     {
         TokenContext::set($accessToken);
-        return $this->kiota->config()->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->config()->get(new ConfigRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function updateConfig(Config $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->config()->put($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->config()->put($body, new ConfigRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getDestinations(
@@ -88,31 +94,31 @@ final class NotificationClient
     public function createDestination(DestinationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->destination()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->destination()->post($body, new DestinationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getDestination(string $destinationId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Destination
     {
         TokenContext::set($accessToken);
-        return $this->kiota->destination()->byDestination_id($destinationId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->destination()->byDestination_id($destinationId)->get(new WithDestination_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function updateDestination(string $destinationId, DestinationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->destination()->byDestination_id($destinationId)->put($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->destination()->byDestination_id($destinationId)->put($body, new WithDestination_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function deleteDestination(string $destinationId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->destination()->byDestination_id($destinationId)->delete(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->destination()->byDestination_id($destinationId)->delete(new WithDestination_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getPublicKey(string $publicKeyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublicKey
     {
         TokenContext::set($accessToken);
-        return $this->kiota->public_key()->byPublic_key_id($publicKeyId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->public_key()->byPublic_key_id($publicKeyId)->get(new WithPublic_key_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getSubscriptions(
@@ -136,67 +142,67 @@ final class NotificationClient
     public function createSubscription(CreateSubscriptionRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->subscription()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->subscription()->post($body, new SubscriptionRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Subscription
     {
         TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->get(new WithSubscription_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function updateSubscription(string $subscriptionId, UpdateSubscriptionRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->put($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->put($body, new WithSubscription_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function deleteSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->delete(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->delete(new WithSubscription_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function createSubscriptionFilter(string $subscriptionId, CreateSubscriptionFilterRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->post($body, new FilterRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getSubscriptionFilter(string $subscriptionId, string $filterId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SubscriptionFilter
     {
         TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->get(new WithFilter_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function deleteSubscriptionFilter(string $subscriptionId, string $filterId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->delete(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->delete(new WithFilter_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function disableSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->disable()->post(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->disable()->post(new DisableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function enableSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->enable()->post(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->enable()->post(new EnableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function testSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->test()->post(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->subscription()->bySubscription_id($subscriptionId)->test()->post(new TestRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getTopic(string $topicId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Topic
     {
         TokenContext::set($accessToken);
-        return $this->kiota->topic()->byTopic_id($topicId)->get(fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->topic()->byTopic_id($topicId)->get(new WithTopic_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getTopics(

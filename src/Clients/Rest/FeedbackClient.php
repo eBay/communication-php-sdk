@@ -14,7 +14,9 @@ use EBay\Communication\Generated\Feedback\Models\LeaveFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\RespondToFeedbackRequest;
 use EBay\Communication\Generated\Feedback\Awaiting_feedback\Awaiting_feedbackRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderPostRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Feedback\Respond_to_feedback\Respond_to_feedbackRequestBuilderPostRequestConfiguration;
 
 final class FeedbackClient
 {
@@ -22,18 +24,6 @@ final class FeedbackClient
         private readonly FeedbackApiClient $kiota,
         private readonly CommunicationConfiguration $config,
     ) {}
-
-    private function applyHeaders(mixed $headers, ?RequestOptions $requestOptions): void
-    {
-        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
-            $headers->tryAdd($key, $value);
-        }
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                $headers->tryAdd($key, $value);
-            }
-        }
-    }
 
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
@@ -107,7 +97,7 @@ final class FeedbackClient
     public function leaveFeedback(LeaveFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?LeaveFeedbackResponse
     {
         TokenContext::set($accessToken);
-        return $this->kiota->feedback()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getFeedbackRatingSummary(
@@ -131,6 +121,6 @@ final class FeedbackClient
     public function respondToFeedback(RespondToFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->respond_to_feedback()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 }

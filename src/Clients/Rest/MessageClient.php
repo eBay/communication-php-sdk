@@ -13,8 +13,11 @@ use EBay\Communication\Generated\Message\Models\GetMessagesByConversationIdRespo
 use EBay\Communication\Generated\Message\Models\SendMessageRequest;
 use EBay\Communication\Generated\Message\Models\SendMessageResponse;
 use EBay\Communication\Generated\Message\Models\UpdateConversationRequest;
+use EBay\Communication\Generated\Message\Bulk_update_conversation\Bulk_update_conversationRequestBuilderPostRequestConfiguration;
 use EBay\Communication\Generated\Message\Conversation\ConversationRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Message\Conversation\Item\WithConversation_ItemRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Message\Send_message\Send_messageRequestBuilderPostRequestConfiguration;
+use EBay\Communication\Generated\Message\Update_conversation\Update_conversationRequestBuilderPostRequestConfiguration;
 
 final class MessageClient
 {
@@ -22,18 +25,6 @@ final class MessageClient
         private readonly MessageApiClient $kiota,
         private readonly CommunicationConfiguration $config,
     ) {}
-
-    private function applyHeaders(mixed $headers, ?RequestOptions $requestOptions): void
-    {
-        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
-            $headers->tryAdd($key, $value);
-        }
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                $headers->tryAdd($key, $value);
-            }
-        }
-    }
 
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
@@ -51,7 +42,7 @@ final class MessageClient
     public function bulkUpdateConversation(BulkUpdateConversationsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkUpdateConversationsResponse
     {
         TokenContext::set($accessToken);
-        return $this->kiota->bulk_update_conversation()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->bulk_update_conversation()->post($body, new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function getConversation(
@@ -110,12 +101,12 @@ final class MessageClient
     public function sendMessage(SendMessageRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendMessageResponse
     {
         TokenContext::set($accessToken);
-        return $this->kiota->send_message()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->send_message()->post($body, new Send_messageRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 
     public function updateConversation(UpdateConversationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
         TokenContext::set($accessToken);
-        $this->kiota->update_conversation()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        $this->kiota->update_conversation()->post($body, new Update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 }

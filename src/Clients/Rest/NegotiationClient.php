@@ -10,6 +10,7 @@ use EBay\Communication\Generated\Negotiation\Models\CreateOffersRequest;
 use EBay\Communication\Generated\Negotiation\Models\PagedEligibleItemCollection;
 use EBay\Communication\Generated\Negotiation\Models\SendOfferToInterestedBuyersCollectionResponse;
 use EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Negotiation\Send_offer_to_interested_buyers\Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration;
 
 final class NegotiationClient
 {
@@ -17,18 +18,6 @@ final class NegotiationClient
         private readonly NegotiationApiClient $kiota,
         private readonly CommunicationConfiguration $config,
     ) {}
-
-    private function applyHeaders(mixed $headers, ?RequestOptions $requestOptions): void
-    {
-        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
-            $headers->tryAdd($key, $value);
-        }
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                $headers->tryAdd($key, $value);
-            }
-        }
-    }
 
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
@@ -64,6 +53,6 @@ final class NegotiationClient
     public function sendOfferToInterestedBuyers(CreateOffersRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendOfferToInterestedBuyersCollectionResponse
     {
         TokenContext::set($accessToken);
-        return $this->kiota->send_offer_to_interested_buyers()->post($body, fn($c) => $this->applyHeaders($c->headers, $requestOptions))->wait();
+        return $this->kiota->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
     }
 }
