@@ -60,8 +60,7 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?AwaitingFeedbackResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->awaiting_feedback()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->awaiting_feedback()->get(
             new Awaiting_feedbackRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Awaiting_feedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -71,7 +70,7 @@ final class FeedbackClient
                     sort: $sort,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function getFeedback(
@@ -88,8 +87,7 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetFeedbackResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->feedback()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback()->get(
             new FeedbackRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: FeedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -105,13 +103,12 @@ final class FeedbackClient
                     user_id: $userId,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function leaveFeedback(LeaveFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?LeaveFeedbackResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getFeedbackRatingSummary(
@@ -120,8 +117,7 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetFeedbackRatingSummaryResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->feedback_rating_summary()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback_rating_summary()->get(
             new Feedback_rating_summaryRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Feedback_rating_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -129,12 +125,11 @@ final class FeedbackClient
                     user_id: $userId,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function respondToFeedback(RespondToFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 }

@@ -52,8 +52,7 @@ final class NegotiationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?PagedEligibleItemCollection {
-        TokenContext::set($accessToken);
-        return $this->kiota->find_eligible_items()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->find_eligible_items()->get(
             new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -61,12 +60,11 @@ final class NegotiationClient
                     offset: $offset,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function sendOfferToInterestedBuyers(CreateOffersRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendOfferToInterestedBuyersCollectionResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 }

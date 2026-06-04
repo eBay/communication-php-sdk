@@ -77,14 +77,12 @@ final class NotificationClient
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getConfig(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Config
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->config()->get(new ConfigRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->config()->get(new ConfigRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateConfig(Config $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->config()->put($body, new ConfigRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->config()->put($body, new ConfigRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getDestinations(
@@ -93,8 +91,7 @@ final class NotificationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?DestinationSearchResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->destination()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->destination()->get(
             new DestinationRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: DestinationRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -102,37 +99,32 @@ final class NotificationClient
                     limit: $limit,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createDestination(DestinationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->destination()->post($body, new DestinationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->destination()->post($body, new DestinationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getDestination(string $destinationId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Destination
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->destination()->byDestination_id($destinationId)->get(new WithDestination_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->destination()->byDestination_id($destinationId)->get(new WithDestination_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateDestination(string $destinationId, DestinationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->destination()->byDestination_id($destinationId)->put($body, new WithDestination_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->destination()->byDestination_id($destinationId)->put($body, new WithDestination_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteDestination(string $destinationId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->destination()->byDestination_id($destinationId)->delete(new WithDestination_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->destination()->byDestination_id($destinationId)->delete(new WithDestination_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getPublicKey(string $publicKeyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?PublicKey
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->public_key()->byPublic_key_id($publicKeyId)->get(new WithPublic_key_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->public_key()->byPublic_key_id($publicKeyId)->get(new WithPublic_key_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getSubscriptions(
@@ -141,8 +133,7 @@ final class NotificationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?SubscriptionSearchResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->get(
             new SubscriptionRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -150,73 +141,62 @@ final class NotificationClient
                     limit: $limit,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createSubscription(CreateSubscriptionRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->post($body, new SubscriptionRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->post($body, new SubscriptionRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Subscription
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->get(new WithSubscription_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->get(new WithSubscription_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateSubscription(string $subscriptionId, UpdateSubscriptionRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->put($body, new WithSubscription_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->put($body, new WithSubscription_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->delete(new WithSubscription_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->delete(new WithSubscription_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function createSubscriptionFilter(string $subscriptionId, CreateSubscriptionFilterRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->post($body, new FilterRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->post($body, new FilterRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getSubscriptionFilter(string $subscriptionId, string $filterId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SubscriptionFilter
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->get(new WithFilter_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->get(new WithFilter_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteSubscriptionFilter(string $subscriptionId, string $filterId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->delete(new WithFilter_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->delete(new WithFilter_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function disableSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->disable()->post(new DisableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->disable()->post(new DisableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function enableSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->enable()->post(new EnableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->enable()->post(new EnableRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function testSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->subscription()->bySubscription_id($subscriptionId)->test()->post(new TestRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->bySubscription_id($subscriptionId)->test()->post(new TestRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getTopic(string $topicId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Topic
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->topic()->byTopic_id($topicId)->get(new WithTopic_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->topic()->byTopic_id($topicId)->get(new WithTopic_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getTopics(
@@ -225,8 +205,7 @@ final class NotificationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?TopicSearchResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->topic()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->topic()->get(
             new TopicRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: TopicRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -234,6 +213,6 @@ final class NotificationClient
                     limit: $limit,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 }

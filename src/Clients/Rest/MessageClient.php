@@ -55,8 +55,7 @@ final class MessageClient
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function bulkUpdateConversation(BulkUpdateConversationsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkUpdateConversationsResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_update_conversation()->post($body, new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_update_conversation()->post($body, new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getConversation(
@@ -67,8 +66,7 @@ final class MessageClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetMessagesByConversationIdResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->conversation()->byConversation_id($conversationId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->conversation()->byConversation_id($conversationId)->get(
             new WithConversation_ItemRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: WithConversation_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -77,7 +75,7 @@ final class MessageClient
                     offset: $offset,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function getConversations(
@@ -93,8 +91,7 @@ final class MessageClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetAllMyConversationsResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->conversation()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->conversation()->get(
             new ConversationRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: ConversationRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -109,18 +106,16 @@ final class MessageClient
                     start_time: $startTime,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function sendMessage(SendMessageRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendMessageResponse
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->send_message()->post($body, new Send_messageRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->send_message()->post($body, new Send_messageRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateConversation(UpdateConversationRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->update_conversation()->post($body, new Update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->update_conversation()->post($body, new Update_conversationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 }
