@@ -48,7 +48,7 @@ final class CommunicationClient
                     return function ($request, array $options) use ($handler) {
                         return $handler($request, $options)->then(function ($response) use ($request) {
                             if ($response->getStatusCode() >= 400) {
-                                fwrite(STDERR, sprintf("[REST %d] %s %s\n", $response->getStatusCode(), $request->getMethod(), $request->getUri()));
+                                fwrite(STDERR, sprintf("[REST %d] %s %s\n", $response->getStatusCode(), $request->getMethod(), str_replace(["\r", "\n"], ' ', (string) $request->getUri())));
                                 $body = (string) $response->getBody();
                                 fwrite(STDERR, "[REST body] $body\n");
                                 $response->getBody()->rewind();
