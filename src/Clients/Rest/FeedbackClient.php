@@ -17,8 +17,8 @@
 namespace EBay\Communication\Clients\Rest;
 
 use EBay\Communication\Configuration\CommunicationConfiguration;
+use EBay\Communication\Configuration\KiotaAuthProvider;
 use EBay\Communication\Configuration\RequestOptions;
-use EBay\Communication\Configuration\TokenContext;
 use EBay\Communication\Generated\Feedback\FeedbackApiClient;
 use EBay\Communication\Generated\Feedback\Models\AwaitingFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\GetFeedbackResponse;
@@ -31,11 +31,14 @@ use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequ
 use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderPostRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Respond_to_feedback\Respond_to_feedbackRequestBuilderPostRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class FeedbackClient
 {
     public function __construct(
-        private readonly FeedbackApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly CommunicationConfiguration $config,
     ) {}
 
@@ -57,17 +60,20 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?AwaitingFeedbackResponse {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->awaiting_feedback()->get(
-            new Awaiting_feedbackRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Awaiting_feedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                    sort: $sort,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->awaiting_feedback()->get(
+                new Awaiting_feedbackRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Awaiting_feedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                        sort: $sort,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getFeedback(
@@ -84,28 +90,34 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetFeedbackResponse {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback()->get(
-            new FeedbackRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: FeedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    feedback_id: $feedbackId,
-                    feedback_type: $feedbackType,
-                    filter: $filter,
-                    limit: $limit,
-                    listing_id: $listingId,
-                    offset: $offset,
-                    order_line_item_id: $orderLineItemId,
-                    sort: $sort,
-                    transaction_id: $transactionId,
-                    user_id: $userId,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->feedback()->get(
+                new FeedbackRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: FeedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        feedback_id: $feedbackId,
+                        feedback_type: $feedbackType,
+                        filter: $filter,
+                        limit: $limit,
+                        listing_id: $listingId,
+                        offset: $offset,
+                        order_line_item_id: $orderLineItemId,
+                        sort: $sort,
+                        transaction_id: $transactionId,
+                        user_id: $userId,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function leaveFeedback(LeaveFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?LeaveFeedbackResponse
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+        );
     }
 
     public function getFeedbackRatingSummary(
@@ -114,19 +126,42 @@ final class FeedbackClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetFeedbackRatingSummaryResponse {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->feedback_rating_summary()->get(
-            new Feedback_rating_summaryRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Feedback_rating_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    user_id: $userId,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->feedback_rating_summary()->get(
+                new Feedback_rating_summaryRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Feedback_rating_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        user_id: $userId,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function respondToFeedback(RespondToFeedbackRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+        );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set CommunicationConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): FeedbackApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->feedbackBaseUrl);
+        return new FeedbackApiClient($adapter);
     }
 }

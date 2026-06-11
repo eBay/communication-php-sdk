@@ -17,19 +17,22 @@
 namespace EBay\Communication\Clients\Rest;
 
 use EBay\Communication\Configuration\CommunicationConfiguration;
+use EBay\Communication\Configuration\KiotaAuthProvider;
 use EBay\Communication\Configuration\RequestOptions;
-use EBay\Communication\Configuration\TokenContext;
 use EBay\Communication\Generated\Negotiation\NegotiationApiClient;
 use EBay\Communication\Generated\Negotiation\Models\CreateOffersRequest;
 use EBay\Communication\Generated\Negotiation\Models\PagedEligibleItemCollection;
 use EBay\Communication\Generated\Negotiation\Models\SendOfferToInterestedBuyersCollectionResponse;
 use EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Negotiation\Send_offer_to_interested_buyers\Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class NegotiationClient
 {
     public function __construct(
-        private readonly NegotiationApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly CommunicationConfiguration $config,
     ) {}
 
@@ -49,19 +52,42 @@ final class NegotiationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?PagedEligibleItemCollection {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->find_eligible_items()->get(
-            new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    limit: $limit,
-                    offset: $offset,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->find_eligible_items()->get(
+                new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function sendOfferToInterestedBuyers(CreateOffersRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendOfferToInterestedBuyersCollectionResponse
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+        );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set CommunicationConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): NegotiationApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->negotiationBaseUrl);
+        return new NegotiationApiClient($adapter);
     }
 }

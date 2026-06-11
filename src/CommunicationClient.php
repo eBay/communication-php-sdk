@@ -21,15 +21,8 @@ use EBay\Communication\Clients\Rest\MessageClient;
 use EBay\Communication\Clients\Rest\NegotiationClient;
 use EBay\Communication\Clients\Rest\NotificationClient;
 use EBay\Communication\Configuration\CommunicationConfiguration;
-use EBay\Communication\Configuration\KiotaAuthProvider;
-use EBay\Communication\Generated\Feedback\FeedbackApiClient;
-use EBay\Communication\Generated\Message\MessageApiClient;
-use EBay\Communication\Generated\Negotiation\NegotiationApiClient;
-use EBay\Communication\Generated\Notification\NotificationApiClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
-use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
-use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class CommunicationClient
 {
@@ -66,22 +59,9 @@ final class CommunicationClient
             ]);
         }
 
-        $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
-
-        $feedbackAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $feedbackAdapter->setBaseUrl($config->feedbackBaseUrl);
-        $this->feedback = new FeedbackClient(new FeedbackApiClient($feedbackAdapter), $config);
-
-        $messageAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $messageAdapter->setBaseUrl($config->messageBaseUrl);
-        $this->message = new MessageClient(new MessageApiClient($messageAdapter), $config);
-
-        $negotiationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $negotiationAdapter->setBaseUrl($config->negotiationBaseUrl);
-        $this->negotiation = new NegotiationClient(new NegotiationApiClient($negotiationAdapter), $config);
-
-        $notificationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $notificationAdapter->setBaseUrl($config->notificationBaseUrl);
-        $this->notification = new NotificationClient(new NotificationApiClient($notificationAdapter), $config);
+        $this->feedback     = new FeedbackClient($guzzle, $config);
+        $this->message      = new MessageClient($guzzle, $config);
+        $this->negotiation  = new NegotiationClient($guzzle, $config);
+        $this->notification = new NotificationClient($guzzle, $config);
     }
 }
