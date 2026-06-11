@@ -35,6 +35,13 @@ final class CommunicationConfiguration
 
     public bool $diagnosticLogging = false;
 
+    public function __debugInfo(): array
+    {
+        return array_merge(get_object_vars($this), [
+            'accessToken' => $this->accessToken !== null ? '***' : null,
+        ]);
+    }
+
     /** Hostnames tokens may be sent to — passed to AllowedHostsValidator. */
     public function getAllowedHosts(): array
     {
