@@ -18,22 +18,18 @@ namespace EBay\Communication\Configuration;
 
 final class CommunicationConfiguration
 {
-    public RequestOptions $defaultRequestOptions;
+    public readonly RequestOptions $defaultRequestOptions;
 
-    public function __construct()
-    {
+    public function __construct(
+        public readonly string  $feedbackBaseUrl     = 'https://api.ebay.com/commerce/feedback/v1',
+        public readonly string  $messageBaseUrl      = 'https://api.ebay.com/commerce/message/v1',
+        public readonly string  $notificationBaseUrl = 'https://api.ebay.com/commerce/notification/v1',
+        public readonly string  $negotiationBaseUrl  = 'https://api.ebay.com/sell/negotiation/v1',
+        public readonly ?string $accessToken         = null,
+        public readonly bool    $diagnosticLogging   = false,
+    ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
-
-    public string $feedbackBaseUrl    = 'https://api.ebay.com/commerce/feedback/v1';
-    public string $messageBaseUrl     = 'https://api.ebay.com/commerce/message/v1';
-    public string $notificationBaseUrl = 'https://api.ebay.com/commerce/notification/v1';
-    public string $negotiationBaseUrl  = 'https://api.ebay.com/sell/negotiation/v1';
-
-    /** Static fallback; per-call token takes precedence. */
-    public ?string $accessToken = null;
-
-    public bool $diagnosticLogging = false;
 
     public function __debugInfo(): array
     {
