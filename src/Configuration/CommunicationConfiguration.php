@@ -38,10 +38,14 @@ final class CommunicationConfiguration
         ]);
     }
 
-    /** Hostnames tokens may be sent to — passed to AllowedHostsValidator. */
+    /**
+     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     *
+     * @return string[]
+     */
     public function getAllowedHosts(): array
     {
-        return array_unique(array_filter(array_map(
+        return array_values(array_unique(array_filter(array_map(
             fn(string $url) => parse_url($url, PHP_URL_HOST),
             [
                 $this->feedbackBaseUrl,
@@ -49,6 +53,6 @@ final class CommunicationConfiguration
                 $this->notificationBaseUrl,
                 $this->negotiationBaseUrl,
             ]
-        )));
+        ), 'is_string')));
     }
 }

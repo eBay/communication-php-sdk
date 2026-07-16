@@ -26,6 +26,9 @@ final class KiotaAuthProvider implements AccessTokenProvider
 {
     private readonly AllowedHostsValidator $allowedHostsValidator;
 
+    /**
+     * @param string[] $allowedHosts
+     */
     public function __construct(
         private readonly string $token,
         array $allowedHosts,
