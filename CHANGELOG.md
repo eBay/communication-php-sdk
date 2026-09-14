@@ -2,11 +2,13 @@
 
 ## 0.2.0 (09/14/2026)
 
-Consolidated experimental release.
+### Breaking changes
 
-- REST clients: `FeedbackClient`, `MessageClient`, `NegotiationClient`, `NotificationClient`.
-- Includes the current API definitions, regenerated clients, and wrapper updates.
-- Preserves existing wrapper parameter order where signatures allow it.
-- Aligns wrapper query parameter types with the generated Kiota clients.
+#### Changed signatures
 
-This entry establishes the consolidated experimental baseline.
+`NegotiationClient`:
+
+| Operation | Previous parameters | Current parameters |
+| --- | --- | --- |
+| `findEligibleItems` | `(?string, ?string, ?string, ?RequestOptions)` | `(?int, ?int, ?string, ?string, ?RequestOptions)` |
+| `sendOfferToInterestedBuyers` | `(CreateOffersRequest, ?string, ?RequestOptions)` | `(CreateOffersRequest, ?string, ?string, ?RequestOptions)` |
