@@ -18,20 +18,20 @@ declare(strict_types=1);
 
 namespace EBay\Communication\Clients\Rest;
 
-use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\KiotaAuthProvider;
+use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\RequestOptions;
 use EBay\Communication\Generated\Feedback\FeedbackApiClient;
 use EBay\Communication\Generated\Feedback\Models\AwaitingFeedbackResponse;
-use EBay\Communication\Generated\Feedback\Models\GetFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\GetFeedbackRatingSummaryResponse;
+use EBay\Communication\Generated\Feedback\Models\GetFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\LeaveFeedbackRequest;
 use EBay\Communication\Generated\Feedback\Models\LeaveFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\RespondToFeedbackRequest;
 use EBay\Communication\Generated\Feedback\Awaiting_feedback\Awaiting_feedbackRequestBuilderGetRequestConfiguration;
+use EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration;
 use EBay\Communication\Generated\Feedback\Respond_to_feedback\Respond_to_feedbackRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
@@ -44,7 +44,7 @@ final class FeedbackClient
         private readonly CommunicationConfiguration $config,
     ) {}
 
-    /** @return array<string,string> */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -53,7 +53,6 @@ final class FeedbackClient
         );
     }
 
-    /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getItemsAwaitingFeedback(
         ?string $filter = null,
         ?string $limit = null,
@@ -61,7 +60,8 @@ final class FeedbackClient
         ?string $sort = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?AwaitingFeedbackResponse {
+    ): ?AwaitingFeedbackResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->awaiting_feedback()->get(
@@ -91,7 +91,8 @@ final class FeedbackClient
         ?string $userId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?GetFeedbackResponse {
+    ): ?GetFeedbackResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->feedback()->get(
@@ -118,7 +119,10 @@ final class FeedbackClient
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->feedback()->post($body, new FeedbackRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->feedback()->post(
+                $body,
+                new FeedbackRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
@@ -127,7 +131,8 @@ final class FeedbackClient
         ?string $userId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?GetFeedbackRatingSummaryResponse {
+    ): ?GetFeedbackRatingSummaryResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->feedback_rating_summary()->get(
@@ -146,7 +151,10 @@ final class FeedbackClient
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->respond_to_feedback()->post($body, new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->respond_to_feedback()->post(
+                $body,
+                new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 

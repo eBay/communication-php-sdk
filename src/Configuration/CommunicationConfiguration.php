@@ -23,12 +23,12 @@ final class CommunicationConfiguration
     public readonly RequestOptions $defaultRequestOptions;
 
     public function __construct(
-        public readonly string  $feedbackBaseUrl     = 'https://api.ebay.com/commerce/feedback/v1',
-        public readonly string  $messageBaseUrl      = 'https://api.ebay.com/commerce/message/v1',
-        public readonly string  $notificationBaseUrl = 'https://api.ebay.com/commerce/notification/v1',
-        public readonly string  $negotiationBaseUrl  = 'https://api.ebay.com/sell/negotiation/v1',
-        public readonly ?string $accessToken         = null,
-        public readonly bool    $diagnosticLogging   = false,
+        public readonly string $feedbackBaseUrl = 'https://api.ebay.com/commerce/feedback/v1',
+        public readonly string $messageBaseUrl = 'https://api.ebay.com/commerce/message/v1',
+        public readonly string $negotiationBaseUrl = 'https://api.ebay.com/sell/negotiation/v1',
+        public readonly string $notificationBaseUrl = 'https://api.ebay.com/commerce/notification/v1',
+        public readonly ?string $accessToken = null,
+        public readonly bool $diagnosticLogging = false,
     ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
@@ -41,7 +41,7 @@ final class CommunicationConfiguration
     }
 
     /**
-     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     * Hostnames tokens may be sent to. Passed to AllowedHostsValidator.
      *
      * @return string[]
      */
@@ -52,8 +52,8 @@ final class CommunicationConfiguration
             [
                 $this->feedbackBaseUrl,
                 $this->messageBaseUrl,
-                $this->notificationBaseUrl,
                 $this->negotiationBaseUrl,
+                $this->notificationBaseUrl,
             ]
         ), 'is_string')));
     }

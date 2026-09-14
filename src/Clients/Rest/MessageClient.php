@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace EBay\Communication\Clients\Rest;
 
-use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\KiotaAuthProvider;
+use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\RequestOptions;
 use EBay\Communication\Generated\Message\MessageApiClient;
 use EBay\Communication\Generated\Message\Models\BulkUpdateConversationsRequest;
@@ -45,7 +45,7 @@ final class MessageClient
         private readonly CommunicationConfiguration $config,
     ) {}
 
-    /** @return array<string,string> */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -54,12 +54,14 @@ final class MessageClient
         );
     }
 
-    /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function bulkUpdateConversation(BulkUpdateConversationsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?BulkUpdateConversationsResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->bulk_update_conversation()->post($body, new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->bulk_update_conversation()->post(
+                $body,
+                new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
@@ -70,7 +72,8 @@ final class MessageClient
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?GetMessagesByConversationIdResponse {
+    ): ?GetMessagesByConversationIdResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->conversation()->byConversation_id($conversationId)->get(
@@ -87,8 +90,8 @@ final class MessageClient
     }
 
     public function getConversations(
-        ?string $conversationType = null,
         ?string $conversationStatus = null,
+        ?string $conversationType = null,
         ?string $endTime = null,
         ?string $limit = null,
         ?string $offset = null,
@@ -98,7 +101,8 @@ final class MessageClient
         ?string $startTime = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?GetAllMyConversationsResponse {
+    ): ?GetAllMyConversationsResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->conversation()->get(
@@ -124,7 +128,10 @@ final class MessageClient
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
-            $api->send_message()->post($body, new Send_messageRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->send_message()->post(
+                $body,
+                new Send_messageRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
@@ -132,7 +139,10 @@ final class MessageClient
     {
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
-            $api->update_conversation()->post($body, new Update_conversationRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->update_conversation()->post(
+                $body,
+                new Update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 

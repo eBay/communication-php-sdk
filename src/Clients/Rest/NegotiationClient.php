@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace EBay\Communication\Clients\Rest;
 
-use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\KiotaAuthProvider;
+use EBay\Communication\Configuration\CommunicationConfiguration;
 use EBay\Communication\Configuration\RequestOptions;
 use EBay\Communication\Generated\Negotiation\NegotiationApiClient;
 use EBay\Communication\Generated\Negotiation\Models\CreateOffersRequest;
@@ -38,7 +38,7 @@ final class NegotiationClient
         private readonly CommunicationConfiguration $config,
     ) {}
 
-    /** @return array<string,string> */
+    /** @return array<string, string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         return array_merge(
@@ -47,14 +47,18 @@ final class NegotiationClient
         );
     }
 
-    /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function findEligibleItems(
         ?string $limit = null,
         ?string $offset = null,
+        ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?PagedEligibleItemCollection {
+    ): ?PagedEligibleItemCollection
+    {
         $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
         return $this->call($accessToken, fn($api) =>
             $api->find_eligible_items()->get(
                 new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
@@ -68,11 +72,22 @@ final class NegotiationClient
         );
     }
 
-    public function sendOfferToInterestedBuyers(CreateOffersRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?SendOfferToInterestedBuyersCollectionResponse
+    public function sendOfferToInterestedBuyers(
+        CreateOffersRequest $body,
+        ?string $xEBAYCMARKETPLACEID = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?SendOfferToInterestedBuyersCollectionResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
         return $this->call($accessToken, fn($api) =>
-            $api->send_offer_to_interested_buyers()->post($body, new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $headers))->wait()
+            $api->send_offer_to_interested_buyers()->post(
+                $body,
+                new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
