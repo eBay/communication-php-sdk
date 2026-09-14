@@ -32,24 +32,24 @@ class Comment implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CommentCommentPeriod|null $commentPeriod This type provides fields that descrbes timing associated with the comment.
+     * @var CommentCommentPeriod|null $commentPeriod This container indicates the timing of a feedback comment based on when it was left. It is only returned if a comment was provided. Possible values are 30 days, 90 days, 180 days, 365 days, or 5 years: <br><ul><li>Less than 30 days: 30 DAY</li> <li>Over 30 but less than 90 days: 90 DAY</li> <li>Over 90 but less than 180 days: 180 DAY</li> <li>Over 180 but less than 365 days: 365 DAY</li> <li>More than 365 days: 5 YEAR</li></ul>
     */
     private ?CommentCommentPeriod $commentPeriod = null;
     
     /**
-     * @var string|null $commentText The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <b>commentTextRemovedPerPolicy</b> field will return <code>true</code>.
+     * @var string|null $commentText The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <strong>commentTextRemovedPerPolicy</strong> field will return <code>true</code>.
     */
     private ?string $commentText = null;
     
     /**
-     * @var bool|null $commentTextRemovedPerPolicy If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <b>followupComment</b> container is returned.
+     * @var bool|null $commentTextRemovedPerPolicy If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <strong>followupComment</strong> container is returned.
     */
     private ?bool $commentTextRemovedPerPolicy = null;
     
     /**
-     * @var string|null $state This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackCommentStateEnum'>eBay API documentation</a>
+     * @var FeedbackCommentStateEnum|null $state This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment.
     */
-    private ?string $state = null;
+    private ?FeedbackCommentStateEnum $state = null;
     
     /**
      * Instantiates a new Comment and sets the default values.
@@ -76,7 +76,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentPeriod property value. This type provides fields that descrbes timing associated with the comment.
+     * Gets the commentPeriod property value. This container indicates the timing of a feedback comment based on when it was left. It is only returned if a comment was provided. Possible values are 30 days, 90 days, 180 days, 365 days, or 5 years: <br><ul><li>Less than 30 days: 30 DAY</li> <li>Over 30 but less than 90 days: 90 DAY</li> <li>Over 90 but less than 180 days: 180 DAY</li> <li>Over 180 but less than 365 days: 365 DAY</li> <li>More than 365 days: 5 YEAR</li></ul>
      * @return CommentCommentPeriod|null
     */
     public function getCommentPeriod(): ?CommentCommentPeriod {
@@ -84,7 +84,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentText property value. The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <b>commentTextRemovedPerPolicy</b> field will return <code>true</code>.
+     * Gets the commentText property value. The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <strong>commentTextRemovedPerPolicy</strong> field will return <code>true</code>.
      * @return string|null
     */
     public function getCommentText(): ?string {
@@ -92,7 +92,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentTextRemovedPerPolicy property value. If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <b>followupComment</b> container is returned.
+     * Gets the commentTextRemovedPerPolicy property value. If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <strong>followupComment</strong> container is returned.
      * @return bool|null
     */
     public function getCommentTextRemovedPerPolicy(): ?bool {
@@ -109,15 +109,15 @@ class Comment implements AdditionalDataHolder, Parsable
             'commentPeriod' => fn(ParseNode $n) => $o->setCommentPeriod($n->getObjectValue([CommentCommentPeriod::class, 'createFromDiscriminatorValue'])),
             'commentText' => fn(ParseNode $n) => $o->setCommentText($n->getStringValue()),
             'commentTextRemovedPerPolicy' => fn(ParseNode $n) => $o->setCommentTextRemovedPerPolicy($n->getBooleanValue()),
-            'state' => fn(ParseNode $n) => $o->setState($n->getStringValue()),
+            'state' => fn(ParseNode $n) => $o->setState($n->getEnumValue(FeedbackCommentStateEnum::class)),
         ];
     }
 
     /**
-     * Gets the state property value. This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackCommentStateEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the state property value. This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment.
+     * @return FeedbackCommentStateEnum|null
     */
-    public function getState(): ?string {
+    public function getState(): ?FeedbackCommentStateEnum {
         return $this->state;
     }
 
@@ -129,7 +129,7 @@ class Comment implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('commentPeriod', $this->getCommentPeriod());
         $writer->writeStringValue('commentText', $this->getCommentText());
         $writer->writeBooleanValue('commentTextRemovedPerPolicy', $this->getCommentTextRemovedPerPolicy());
-        $writer->writeStringValue('state', $this->getState());
+        $writer->writeEnumValue('state', $this->getState());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentPeriod property value. This type provides fields that descrbes timing associated with the comment.
+     * Sets the commentPeriod property value. This container indicates the timing of a feedback comment based on when it was left. It is only returned if a comment was provided. Possible values are 30 days, 90 days, 180 days, 365 days, or 5 years: <br><ul><li>Less than 30 days: 30 DAY</li> <li>Over 30 but less than 90 days: 90 DAY</li> <li>Over 90 but less than 180 days: 180 DAY</li> <li>Over 180 but less than 365 days: 365 DAY</li> <li>More than 365 days: 5 YEAR</li></ul>
      * @param CommentCommentPeriod|null $value Value to set for the commentPeriod property.
     */
     public function setCommentPeriod(?CommentCommentPeriod $value): void {
@@ -150,7 +150,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentText property value. The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <b>commentTextRemovedPerPolicy</b> field will return <code>true</code>.
+     * Sets the commentText property value. The text of the feedback comment, follow-up, or reply. HTML formatting and personal information (for example, phone numbers) are not allowed. This field is returned if a comment was provided for the feedback entry. If the comment was removed due to eBay policy, this field will contain '<code>--</code>' and the <strong>commentTextRemovedPerPolicy</strong> field will return <code>true</code>.
      * @param string|null $value Value to set for the commentText property.
     */
     public function setCommentText(?string $value): void {
@@ -158,7 +158,7 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentTextRemovedPerPolicy property value. If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <b>followupComment</b> container is returned.
+     * Sets the commentTextRemovedPerPolicy property value. If <code>true</code>, this boolean indicates the feedback follow-up or reply comment text was removed per eBay policy.  This field is only returned when a <strong>followupComment</strong> container is returned.
      * @param bool|null $value Value to set for the commentTextRemovedPerPolicy property.
     */
     public function setCommentTextRemovedPerPolicy(?bool $value): void {
@@ -166,10 +166,10 @@ class Comment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the state property value. This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackCommentStateEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the state property.
+     * Sets the state property value. This enumerated value indicates the state of the feedback (for example, <code>ENTERED</code>). This can be the state of the feedback comment, the follow-up comment, or the reply comment.
+     * @param FeedbackCommentStateEnum|null $value Value to set for the state property.
     */
-    public function setState(?string $value): void {
+    public function setState(?FeedbackCommentStateEnum $value): void {
         $this->state = $value;
     }
 

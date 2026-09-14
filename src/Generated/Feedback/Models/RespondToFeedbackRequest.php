@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for the <b>respondToFeedback</b> request.
+ * The type that defines the fields for the <strong>respondToFeedback</strong> request.
 */
 class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,24 +32,24 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $feedbackId Use this field to provide the unique identifier for the feedback being responded to, used to specify the feedback entry associated with the feedback response. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackId"  target="_blank">feedbackId</a> field).
+     * @var string|null $feedbackId Use this field to provide the unique identifier for the feedback being responded to. It is used to specify the feedback entry associated with the feedback response. This value can be returned using the <strong>getFeedback</strong> method (strong>feedbackId</strong> field).
     */
     private ?string $feedbackId = null;
     
     /**
-     * @var string|null $recipientUserId Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.providerUserDetail.userId"  target="_blank">userId</a> field).<br><br><span class="tablenote"><b>Note:</b> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * @var string|null $recipientUserId Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <strong>getFeedback</strong> method (<strong>userId</strong> field).<br><br><span class="tablenote"><strong>Note:</strong> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $recipientUserId = null;
     
     /**
-     * @var string|null $responseText Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><b>Maximum length:</b> 500 characters.
+     * @var string|null $responseText Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><strong>Maximum length:</strong> 500 characters.
     */
     private ?string $responseText = null;
     
     /**
-     * @var string|null $responseType Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:ResponseTypeEnum'>eBay API documentation</a>
+     * @var ResponseTypeEnum|null $responseType Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>).
     */
-    private ?string $responseType = null;
+    private ?ResponseTypeEnum $responseType = null;
     
     /**
      * Instantiates a new RespondToFeedbackRequest and sets the default values.
@@ -76,7 +76,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackId property value. Use this field to provide the unique identifier for the feedback being responded to, used to specify the feedback entry associated with the feedback response. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackId"  target="_blank">feedbackId</a> field).
+     * Gets the feedbackId property value. Use this field to provide the unique identifier for the feedback being responded to. It is used to specify the feedback entry associated with the feedback response. This value can be returned using the <strong>getFeedback</strong> method (strong>feedbackId</strong> field).
      * @return string|null
     */
     public function getFeedbackId(): ?string {
@@ -93,12 +93,12 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
             'feedbackId' => fn(ParseNode $n) => $o->setFeedbackId($n->getStringValue()),
             'recipientUserId' => fn(ParseNode $n) => $o->setRecipientUserId($n->getStringValue()),
             'responseText' => fn(ParseNode $n) => $o->setResponseText($n->getStringValue()),
-            'responseType' => fn(ParseNode $n) => $o->setResponseType($n->getStringValue()),
+            'responseType' => fn(ParseNode $n) => $o->setResponseType($n->getEnumValue(ResponseTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the recipientUserId property value. Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.providerUserDetail.userId"  target="_blank">userId</a> field).<br><br><span class="tablenote"><b>Note:</b> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * Gets the recipientUserId property value. Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <strong>getFeedback</strong> method (<strong>userId</strong> field).<br><br><span class="tablenote"><strong>Note:</strong> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getRecipientUserId(): ?string {
@@ -106,7 +106,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the responseText property value. Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><b>Maximum length:</b> 500 characters.
+     * Gets the responseText property value. Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><strong>Maximum length:</strong> 500 characters.
      * @return string|null
     */
     public function getResponseText(): ?string {
@@ -114,10 +114,10 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the responseType property value. Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:ResponseTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the responseType property value. Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>).
+     * @return ResponseTypeEnum|null
     */
-    public function getResponseType(): ?string {
+    public function getResponseType(): ?ResponseTypeEnum {
         return $this->responseType;
     }
 
@@ -129,7 +129,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedbackId', $this->getFeedbackId());
         $writer->writeStringValue('recipientUserId', $this->getRecipientUserId());
         $writer->writeStringValue('responseText', $this->getResponseText());
-        $writer->writeStringValue('responseType', $this->getResponseType());
+        $writer->writeEnumValue('responseType', $this->getResponseType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackId property value. Use this field to provide the unique identifier for the feedback being responded to, used to specify the feedback entry associated with the feedback response. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackId"  target="_blank">feedbackId</a> field).
+     * Sets the feedbackId property value. Use this field to provide the unique identifier for the feedback being responded to. It is used to specify the feedback entry associated with the feedback response. This value can be returned using the <strong>getFeedback</strong> method (strong>feedbackId</strong> field).
      * @param string|null $value Value to set for the feedbackId property.
     */
     public function setFeedbackId(?string $value): void {
@@ -150,7 +150,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the recipientUserId property value. Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback"  target="_blank">getFeedback</a> method (<a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.providerUserDetail.userId"  target="_blank">userId</a> field).<br><br><span class="tablenote"><b>Note:</b> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * Sets the recipientUserId property value. Use this field to provide the identifier of the user who provided the original feedback. This value can be returned using the <strong>getFeedback</strong> method (<strong>userId</strong> field).<br><br><span class="tablenote"><strong>Note:</strong> Both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the recipientUserId property.
     */
     public function setRecipientUserId(?string $value): void {
@@ -158,7 +158,7 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the responseText property value. Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><b>Maximum length:</b> 500 characters.
+     * Sets the responseText property value. Use this field to provide the text content of the response. This field is used to provide additional context or address the feedback given by the order partner. No HTML formatting or personal information (such as phone numbers) is permitted.<br><br><strong>Maximum length:</strong> 500 characters.
      * @param string|null $value Value to set for the responseText property.
     */
     public function setResponseText(?string $value): void {
@@ -166,10 +166,10 @@ class RespondToFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the responseType property value. Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:ResponseTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the responseType property.
+     * Sets the responseType property value. Set this enumerated value to describe the type of response being submitted (for example, a <code>REPLY</code> or a <code>FOLLOW_UP</code>).
+     * @param ResponseTypeEnum|null $value Value to set for the responseType property.
     */
-    public function setResponseType(?string $value): void {
+    public function setResponseType(?ResponseTypeEnum $value): void {
         $this->responseType = $value;
     }
 

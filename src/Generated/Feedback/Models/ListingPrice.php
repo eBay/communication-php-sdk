@@ -32,12 +32,12 @@ class ListingPrice implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * @var string|null $currency This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
     */
     private ?string $currency = null;
     
     /**
-     * @var float|null $value This field contains the numerical value of the listing price in the currency specified in the <b>currency</b> field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * @var float|null $value This field contains the numerical value of the listing price in the currency specified in the <strong>currency</strong> field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
     */
     private ?float $value = null;
     
@@ -66,7 +66,7 @@ class ListingPrice implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * Gets the currency property value. This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
      * @return string|null
     */
     public function getCurrency(): ?string {
@@ -86,7 +86,7 @@ class ListingPrice implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. This field contains the numerical value of the listing price in the currency specified in the <b>currency</b> field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * Gets the value property value. This field contains the numerical value of the listing price in the currency specified in the <strong>currency</strong> field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
      * @return float|null
     */
     public function getValue(): ?float {
@@ -112,7 +112,7 @@ class ListingPrice implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * Sets the currency property value. This field provides the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html"  target="_blank">ISO 4217</a> code that represents the currency of the amount in the value field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
      * @param string|null $value Value to set for the currency property.
     */
     public function setCurrency(?string $value): void {
@@ -120,7 +120,7 @@ class ListingPrice implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. This field contains the numerical value of the listing price in the currency specified in the <b>currency</b> field. Both the <b>value</b> and <b>currency</b> fields are always returned when expressing prices.
+     * Sets the value property value. This field contains the numerical value of the listing price in the currency specified in the <strong>currency</strong> field. Both the <strong>value</strong> and <strong>currency</strong> fields are always returned when expressing prices.
      * @param float|null $value Value to set for the value property.
     */
     public function setValue(?float $value): void {

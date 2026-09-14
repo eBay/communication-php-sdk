@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type provides fields for available values for use in a particular rating, and whether the value is enabled.
+ * This type provides fields for available values for use in a particular rating and whether the value is enabled.
 */
 class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable
     private ?bool $enabled = null;
     
     /**
-     * @var string|null $value The value that can be selected for feedback. For most <b>ratingType</b> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <b>ratingType</b> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <b>leaveFeedback</b> methods.
+     * @var string|null $value The value that can be selected for feedback. For most <strong>ratingType</strong> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <strong>ratingType</strong> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <strong>leaveFeedback</strong> methods.
     */
     private ?string $value = null;
     
     /**
-     * @var string|null $valueLabel This field provides information about the corresponding <b>value</b>.
+     * @var string|null $valueLabel This field provides information about the corresponding <strong>value</strong>.
     */
     private ?string $valueLabel = null;
     
@@ -92,7 +92,7 @@ class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. The value that can be selected for feedback. For most <b>ratingType</b> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <b>ratingType</b> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <b>leaveFeedback</b> methods.
+     * Gets the value property value. The value that can be selected for feedback. For most <strong>ratingType</strong> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <strong>ratingType</strong> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <strong>leaveFeedback</strong> methods.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -100,7 +100,7 @@ class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the valueLabel property value. This field provides information about the corresponding <b>value</b>.
+     * Gets the valueLabel property value. This field provides information about the corresponding <strong>value</strong>.
      * @return string|null
     */
     public function getValueLabel(): ?string {
@@ -135,7 +135,7 @@ class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. The value that can be selected for feedback. For most <b>ratingType</b> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <b>ratingType</b> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <b>leaveFeedback</b> methods.
+     * Sets the value property value. The value that can be selected for feedback. For most <strong>ratingType</strong> values, this is <code>1</code> through <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating. For <strong>ratingType</strong> of <code>OVERALL_EXPERIENCE</code>, this can be <code>POSITIVE</code>, <code>NEGATIVE</code>, and <code>NEUTRAL</code>. These are the same values as used with the <strong>leaveFeedback</strong> methods.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {
@@ -143,7 +143,7 @@ class FeedbackRatingAcceptableValue implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the valueLabel property value. This field provides information about the corresponding <b>value</b>.
+     * Sets the valueLabel property value. This field provides information about the corresponding <strong>value</strong>.
      * @param string|null $value Value to set for the valueLabel property.
     */
     public function setValueLabel(?string $value): void {

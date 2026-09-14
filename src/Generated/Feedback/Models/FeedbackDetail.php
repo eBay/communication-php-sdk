@@ -32,14 +32,14 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var bool|null $automatedFeedback If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback normally. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by ebay, only a predefined comment and a positive rating.</span></p>
+     * @var bool|null $automatedFeedback If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback of their own. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by eBay, only a predefined comment and a positive rating.</span></p>
     */
     private ?bool $automatedFeedback = null;
     
     /**
-     * @var string|null $commentType This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
+     * @var FeedbackRatingValuesEnum|null $commentType This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p>
     */
-    private ?string $commentType = null;
+    private ?FeedbackRatingValuesEnum $commentType = null;
     
     /**
      * @var bool|null $eligibleForRevision This boolean indicates whether the feedback is eligible for revision. If returned as <code>true</code>, it means the feedback can be modified. Feedback that is older than 30 days or has already been revised once cannot be erased or further revised.
@@ -47,7 +47,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     private ?bool $eligibleForRevision = null;
     
     /**
-     * @var Comment|null $feedbackComment This type provides the details of the feedback comment left by the user.
+     * @var Comment|null $feedbackComment This container provides the feedback comment left by a user when submitting feedback for a seller or buyer.
     */
     private ?Comment $feedbackComment = null;
     
@@ -57,7 +57,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     private ?string $feedbackEnteredDate = null;
     
     /**
-     * @var FeedbackEnteredPeriod|null $feedbackEnteredPeriod This type specifies the amount of time elapsed associated with a feedback entry.
+     * @var FeedbackEnteredPeriod|null $feedbackEnteredPeriod This container represents the duration since feedback was entered, expressed as a numeric value and a unit of time in days.
     */
     private ?FeedbackEnteredPeriod $feedbackEnteredPeriod = null;
     
@@ -77,12 +77,12 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     private ?int $feedbackScore = null;
     
     /**
-     * @var string|null $feedbackState This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStateEnum'>eBay API documentation</a>
+     * @var FeedbackStateEnum|null $feedbackState This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>).
     */
-    private ?string $feedbackState = null;
+    private ?FeedbackStateEnum $feedbackState = null;
     
     /**
-     * @var Comment|null $followupComment This type provides the details of the feedback comment left by the user.
+     * @var Comment|null $followupComment This container provides the details of any follow-up comment left. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
     */
     private ?Comment $followupComment = null;
     
@@ -97,27 +97,27 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     private ?array $images = null;
     
     /**
-     * @var OrderLineItemSummary|null $orderLineItemSummary This type provides fields for a summary of the line item related to feedback.
+     * @var OrderLineItemSummary|null $orderLineItemSummary This container provides a summary of the line item associated with the feedback entry. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Certain fields within this container are returned only when the request uses the <strong>Authorization code grant flow</strong> (user access token) and the <strong>user_id</strong> matches the authenticated user. These fields are not returned when accessing a different <strong>user_id</strong> or when using the <strong>Client credentials grant flow</strong> (application access token). See <a href="#h3-oauth-scope">OAuth scope</a> for details on the flows and required permissions.</span></p>
     */
     private ?OrderLineItemSummary $orderLineItemSummary = null;
     
     /**
-     * @var ProviderUserDetail|null $providerUserDetail This type provides the details of the user who provided the feedback of a <b>getFeedback</b> response.
+     * @var ProviderUserDetail|null $providerUserDetail This container details the attributes of the user who provided the feedback.
     */
     private ?ProviderUserDetail $providerUserDetail = null;
     
     /**
-     * @var bool|null $repliedBeforeFollowup If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given buy the buyer.
+     * @var bool|null $repliedBeforeFollowup If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given by the buyer.
     */
     private ?bool $repliedBeforeFollowup = null;
     
     /**
-     * @var Comment|null $replyComment This type provides the details of the feedback comment left by the user.
+     * @var Comment|null $replyComment This container provides the details of any reply to the feedback.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
     */
     private ?Comment $replyComment = null;
     
     /**
-     * @var array<Topic>|null $topics This array provides descriptions of AI-generated insights related to a feedback entry for the specified <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter" >filter</a> topic. The feedback provided is considered relevant to the requested <b>topic</b>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
+     * @var array<Topic>|null $topics This array provides descriptions of AI-generated insights related to a feedback entry for the specified <strong>filter</strong> topic. The feedback provided is considered relevant to the requested <strong>topic</strong>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
     */
     private ?array $topics = null;
     
@@ -146,7 +146,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the automatedFeedback property value. If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback normally. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by ebay, only a predefined comment and a positive rating.</span></p>
+     * Gets the automatedFeedback property value. If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback of their own. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by eBay, only a predefined comment and a positive rating.</span></p>
      * @return bool|null
     */
     public function getAutomatedFeedback(): ?bool {
@@ -154,10 +154,10 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentType property value. This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the commentType property value. This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p>
+     * @return FeedbackRatingValuesEnum|null
     */
-    public function getCommentType(): ?string {
+    public function getCommentType(): ?FeedbackRatingValuesEnum {
         return $this->commentType;
     }
 
@@ -170,7 +170,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackComment property value. This type provides the details of the feedback comment left by the user.
+     * Gets the feedbackComment property value. This container provides the feedback comment left by a user when submitting feedback for a seller or buyer.
      * @return Comment|null
     */
     public function getFeedbackComment(): ?Comment {
@@ -186,7 +186,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackEnteredPeriod property value. This type specifies the amount of time elapsed associated with a feedback entry.
+     * Gets the feedbackEnteredPeriod property value. This container represents the duration since feedback was entered, expressed as a numeric value and a unit of time in days.
      * @return FeedbackEnteredPeriod|null
     */
     public function getFeedbackEnteredPeriod(): ?FeedbackEnteredPeriod {
@@ -218,10 +218,10 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackState property value. This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStateEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the feedbackState property value. This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>).
+     * @return FeedbackStateEnum|null
     */
-    public function getFeedbackState(): ?string {
+    public function getFeedbackState(): ?FeedbackStateEnum {
         return $this->feedbackState;
     }
 
@@ -233,7 +233,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'automatedFeedback' => fn(ParseNode $n) => $o->setAutomatedFeedback($n->getBooleanValue()),
-            'commentType' => fn(ParseNode $n) => $o->setCommentType($n->getStringValue()),
+            'commentType' => fn(ParseNode $n) => $o->setCommentType($n->getEnumValue(FeedbackRatingValuesEnum::class)),
             'eligibleForRevision' => fn(ParseNode $n) => $o->setEligibleForRevision($n->getBooleanValue()),
             'feedbackComment' => fn(ParseNode $n) => $o->setFeedbackComment($n->getObjectValue([Comment::class, 'createFromDiscriminatorValue'])),
             'feedbackEnteredDate' => fn(ParseNode $n) => $o->setFeedbackEnteredDate($n->getStringValue()),
@@ -241,7 +241,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
             'feedbackId' => fn(ParseNode $n) => $o->setFeedbackId($n->getStringValue()),
             'feedbackRatings' => fn(ParseNode $n) => $o->setFeedbackRatings($n->getCollectionOfObjectValues([FeedbackRating::class, 'createFromDiscriminatorValue'])),
             'feedbackScore' => fn(ParseNode $n) => $o->setFeedbackScore($n->getIntegerValue()),
-            'feedbackState' => fn(ParseNode $n) => $o->setFeedbackState($n->getStringValue()),
+            'feedbackState' => fn(ParseNode $n) => $o->setFeedbackState($n->getEnumValue(FeedbackStateEnum::class)),
             'followupComment' => fn(ParseNode $n) => $o->setFollowupComment($n->getObjectValue([Comment::class, 'createFromDiscriminatorValue'])),
             'hasImages' => fn(ParseNode $n) => $o->setHasImages($n->getBooleanValue()),
             'images' => fn(ParseNode $n) => $o->setImages($n->getCollectionOfObjectValues([Image::class, 'createFromDiscriminatorValue'])),
@@ -254,7 +254,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the followupComment property value. This type provides the details of the feedback comment left by the user.
+     * Gets the followupComment property value. This container provides the details of any follow-up comment left. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
      * @return Comment|null
     */
     public function getFollowupComment(): ?Comment {
@@ -278,7 +278,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderLineItemSummary property value. This type provides fields for a summary of the line item related to feedback.
+     * Gets the orderLineItemSummary property value. This container provides a summary of the line item associated with the feedback entry. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Certain fields within this container are returned only when the request uses the <strong>Authorization code grant flow</strong> (user access token) and the <strong>user_id</strong> matches the authenticated user. These fields are not returned when accessing a different <strong>user_id</strong> or when using the <strong>Client credentials grant flow</strong> (application access token). See <a href="#h3-oauth-scope">OAuth scope</a> for details on the flows and required permissions.</span></p>
      * @return OrderLineItemSummary|null
     */
     public function getOrderLineItemSummary(): ?OrderLineItemSummary {
@@ -286,7 +286,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the providerUserDetail property value. This type provides the details of the user who provided the feedback of a <b>getFeedback</b> response.
+     * Gets the providerUserDetail property value. This container details the attributes of the user who provided the feedback.
      * @return ProviderUserDetail|null
     */
     public function getProviderUserDetail(): ?ProviderUserDetail {
@@ -294,7 +294,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the repliedBeforeFollowup property value. If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given buy the buyer.
+     * Gets the repliedBeforeFollowup property value. If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given by the buyer.
      * @return bool|null
     */
     public function getRepliedBeforeFollowup(): ?bool {
@@ -302,7 +302,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the replyComment property value. This type provides the details of the feedback comment left by the user.
+     * Gets the replyComment property value. This container provides the details of any reply to the feedback.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
      * @return Comment|null
     */
     public function getReplyComment(): ?Comment {
@@ -310,7 +310,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the topics property value. This array provides descriptions of AI-generated insights related to a feedback entry for the specified <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter" >filter</a> topic. The feedback provided is considered relevant to the requested <b>topic</b>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
+     * Gets the topics property value. This array provides descriptions of AI-generated insights related to a feedback entry for the specified <strong>filter</strong> topic. The feedback provided is considered relevant to the requested <strong>topic</strong>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
      * @return array<Topic>|null
     */
     public function getTopics(): ?array {
@@ -323,7 +323,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeBooleanValue('automatedFeedback', $this->getAutomatedFeedback());
-        $writer->writeStringValue('commentType', $this->getCommentType());
+        $writer->writeEnumValue('commentType', $this->getCommentType());
         $writer->writeBooleanValue('eligibleForRevision', $this->getEligibleForRevision());
         $writer->writeObjectValue('feedbackComment', $this->getFeedbackComment());
         $writer->writeStringValue('feedbackEnteredDate', $this->getFeedbackEnteredDate());
@@ -331,7 +331,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('feedbackId', $this->getFeedbackId());
         $writer->writeCollectionOfObjectValues('feedbackRatings', $this->getFeedbackRatings());
         $writer->writeIntegerValue('feedbackScore', $this->getFeedbackScore());
-        $writer->writeStringValue('feedbackState', $this->getFeedbackState());
+        $writer->writeEnumValue('feedbackState', $this->getFeedbackState());
         $writer->writeObjectValue('followupComment', $this->getFollowupComment());
         $writer->writeBooleanValue('hasImages', $this->getHasImages());
         $writer->writeCollectionOfObjectValues('images', $this->getImages());
@@ -352,7 +352,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the automatedFeedback property value. If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback normally. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by ebay, only a predefined comment and a positive rating.</span></p>
+     * Sets the automatedFeedback property value. If the returned value is <code>true</code>, feedback was generated and added automatically by eBay. If a seller has a feedback score 10 or less, eBay automatically leaves feedback. The buyer can choose to override the eBay feedback and leave feedback of their own. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Detailed Seller Ratings (DSRs) are not provided by eBay, only a predefined comment and a positive rating.</span></p>
      * @param bool|null $value Value to set for the automatedFeedback property.
     */
     public function setAutomatedFeedback(?bool $value): void {
@@ -360,10 +360,10 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentType property value. This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the commentType property.
+     * Sets the commentType property value. This enumerated value indicates the type of feedback: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only leave positive feedback for buyers.</span></p>
+     * @param FeedbackRatingValuesEnum|null $value Value to set for the commentType property.
     */
-    public function setCommentType(?string $value): void {
+    public function setCommentType(?FeedbackRatingValuesEnum $value): void {
         $this->commentType = $value;
     }
 
@@ -376,7 +376,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackComment property value. This type provides the details of the feedback comment left by the user.
+     * Sets the feedbackComment property value. This container provides the feedback comment left by a user when submitting feedback for a seller or buyer.
      * @param Comment|null $value Value to set for the feedbackComment property.
     */
     public function setFeedbackComment(?Comment $value): void {
@@ -392,7 +392,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackEnteredPeriod property value. This type specifies the amount of time elapsed associated with a feedback entry.
+     * Sets the feedbackEnteredPeriod property value. This container represents the duration since feedback was entered, expressed as a numeric value and a unit of time in days.
      * @param FeedbackEnteredPeriod|null $value Value to set for the feedbackEnteredPeriod property.
     */
     public function setFeedbackEnteredPeriod(?FeedbackEnteredPeriod $value): void {
@@ -424,15 +424,15 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackState property value. This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStateEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the feedbackState property.
+     * Sets the feedbackState property value. This enumerated value indicates the current state of the feedback entry (for example, <code>ENTERED</code>).
+     * @param FeedbackStateEnum|null $value Value to set for the feedbackState property.
     */
-    public function setFeedbackState(?string $value): void {
+    public function setFeedbackState(?FeedbackStateEnum $value): void {
         $this->feedbackState = $value;
     }
 
     /**
-     * Sets the followupComment property value. This type provides the details of the feedback comment left by the user.
+     * Sets the followupComment property value. This container provides the details of any follow-up comment left. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
      * @param Comment|null $value Value to set for the followupComment property.
     */
     public function setFollowupComment(?Comment $value): void {
@@ -456,7 +456,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderLineItemSummary property value. This type provides fields for a summary of the line item related to feedback.
+     * Sets the orderLineItemSummary property value. This container provides a summary of the line item associated with the feedback entry. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Certain fields within this container are returned only when the request uses the <strong>Authorization code grant flow</strong> (user access token) and the <strong>user_id</strong> matches the authenticated user. These fields are not returned when accessing a different <strong>user_id</strong> or when using the <strong>Client credentials grant flow</strong> (application access token). See <a href="#h3-oauth-scope">OAuth scope</a> for details on the flows and required permissions.</span></p>
      * @param OrderLineItemSummary|null $value Value to set for the orderLineItemSummary property.
     */
     public function setOrderLineItemSummary(?OrderLineItemSummary $value): void {
@@ -464,7 +464,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the providerUserDetail property value. This type provides the details of the user who provided the feedback of a <b>getFeedback</b> response.
+     * Sets the providerUserDetail property value. This container details the attributes of the user who provided the feedback.
      * @param ProviderUserDetail|null $value Value to set for the providerUserDetail property.
     */
     public function setProviderUserDetail(?ProviderUserDetail $value): void {
@@ -472,7 +472,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the repliedBeforeFollowup property value. If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given buy the buyer.
+     * Sets the repliedBeforeFollowup property value. If returned as <code>true</code>, this boolean indicates the feedback reply was given by the seller before the follow-up comment was given by the buyer.
      * @param bool|null $value Value to set for the repliedBeforeFollowup property.
     */
     public function setRepliedBeforeFollowup(?bool $value): void {
@@ -480,7 +480,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the replyComment property value. This type provides the details of the feedback comment left by the user.
+     * Sets the replyComment property value. This container provides the details of any reply to the feedback.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>A buyer leaves follow-up comments and a seller leaves reply comments.</span></p>
      * @param Comment|null $value Value to set for the replyComment property.
     */
     public function setReplyComment(?Comment $value): void {
@@ -488,7 +488,7 @@ class FeedbackDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the topics property value. This array provides descriptions of AI-generated insights related to a feedback entry for the specified <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter" >filter</a> topic. The feedback provided is considered relevant to the requested <b>topic</b>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
+     * Sets the topics property value. This array provides descriptions of AI-generated insights related to a feedback entry for the specified <strong>filter</strong> topic. The feedback provided is considered relevant to the requested <strong>topic</strong>. For example, when using the request parameter filter of <code>topics:product-satisfaction</code>, the returned array might be: <p><pre>{<br>  "coarseTopic" : "product-satisfaction",<br>  "highlightedTexts" : [<br>    "This machine is amazing",<br>    "Very happy with this purchase"<br>    ],<br>  "sentiment" : "Positive"<br>}</pre></p><p>If no topics exist for that feedback, an empty array is returned.</p>
      * @param array<Topic>|null $value Value to set for the topics property.
     */
     public function setTopics(?array $value): void {

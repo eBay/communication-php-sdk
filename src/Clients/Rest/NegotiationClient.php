@@ -25,8 +25,6 @@ use EBay\Communication\Generated\Negotiation\NegotiationApiClient;
 use EBay\Communication\Generated\Negotiation\Models\CreateOffersRequest;
 use EBay\Communication\Generated\Negotiation\Models\PagedEligibleItemCollection;
 use EBay\Communication\Generated\Negotiation\Models\SendOfferToInterestedBuyersCollectionResponse;
-use EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Negotiation\Send_offer_to_interested_buyers\Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -48,8 +46,8 @@ final class NegotiationClient
     }
 
     public function findEligibleItems(
-        ?string $limit = null,
-        ?string $offset = null,
+        ?int $limit = null,
+        ?int $offset = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -61,9 +59,9 @@ final class NegotiationClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->find_eligible_items()->get(
-                new Find_eligible_itemsRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Negotiation\Find_eligible_items\Find_eligible_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -86,7 +84,7 @@ final class NegotiationClient
         return $this->call($accessToken, fn($api) =>
             $api->send_offer_to_interested_buyers()->post(
                 $body,
-                new Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Negotiation\Send_offer_to_interested_buyers\Send_offer_to_interested_buyersRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

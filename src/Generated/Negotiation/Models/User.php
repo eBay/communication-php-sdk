@@ -32,7 +32,7 @@ class User implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $maskedUsername The masked user name is a user name that has certain characters hidden for privacy of the user.<!-- This field is populated only when the full user name cannot be used.-->
+     * @var string|null $maskedUsername The masked user name is a user name that has certain characters hidden for privacy of the user.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span> <!-- This field is populated only when the full user name cannot be used.-->
     */
     private ?string $maskedUsername = null;
     
@@ -72,7 +72,7 @@ class User implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the maskedUsername property value. The masked user name is a user name that has certain characters hidden for privacy of the user.<!-- This field is populated only when the full user name cannot be used.-->
+     * Gets the maskedUsername property value. The masked user name is a user name that has certain characters hidden for privacy of the user.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span> <!-- This field is populated only when the full user name cannot be used.-->
      * @return string|null
     */
     public function getMaskedUsername(): ?string {
@@ -97,7 +97,7 @@ class User implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the maskedUsername property value. The masked user name is a user name that has certain characters hidden for privacy of the user.<!-- This field is populated only when the full user name cannot be used.-->
+     * Sets the maskedUsername property value. The masked user name is a user name that has certain characters hidden for privacy of the user.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span> <!-- This field is populated only when the full user name cannot be used.-->
      * @param string|null $value Value to set for the maskedUsername property.
     */
     public function setMaskedUsername(?string $value): void {

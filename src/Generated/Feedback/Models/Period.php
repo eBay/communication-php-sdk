@@ -32,12 +32,12 @@ class Period implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit The unit of the period's <b>value</b>. Supported value: <code>DAY</code>.
+     * @var string|null $unit The unit of the period's <strong>value</strong>. Supported value: <code>DAY</code>.
     */
     private ?string $unit = null;
     
     /**
-     * @var int|null $value The value for the feedback period, specified in units of <b>unit</b>. Supported value: <code>90</code>.
+     * @var int|null $value The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
     */
     private ?int $value = null;
     
@@ -78,7 +78,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the unit property value. The unit of the period's <b>value</b>. Supported value: <code>DAY</code>.
+     * Gets the unit property value. The unit of the period's <strong>value</strong>. Supported value: <code>DAY</code>.
      * @return string|null
     */
     public function getUnit(): ?string {
@@ -86,7 +86,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. The value for the feedback period, specified in units of <b>unit</b>. Supported value: <code>90</code>.
+     * Gets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
      * @return int|null
     */
     public function getValue(): ?int {
@@ -112,7 +112,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. The unit of the period's <b>value</b>. Supported value: <code>DAY</code>.
+     * Sets the unit property value. The unit of the period's <strong>value</strong>. Supported value: <code>DAY</code>.
      * @param string|null $value Value to set for the unit property.
     */
     public function setUnit(?string $value): void {
@@ -120,7 +120,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. The value for the feedback period, specified in units of <b>unit</b>. Supported value: <code>90</code>.
+     * Sets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
      * @param int|null $value Value to set for the value property.
     */
     public function setValue(?int $value): void {

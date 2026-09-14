@@ -32,12 +32,12 @@ class FeedbackEnteredPeriod implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit The unit for the feedback entry period's <b>value</b>. Supported value: <code>DAY</code>.
+     * @var string|null $unit The unit for the feedback entry period's <strong>value</strong>. Supported value: <code>DAY</code>.
     */
     private ?string $unit = null;
     
     /**
-     * @var int|null $value The value for the feedback entry period, specified in units of <b>unit</b>. Supported values: <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
+     * @var int|null $value The value for the feedback entry period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
     */
     private ?int $value = null;
     
@@ -78,7 +78,7 @@ class FeedbackEnteredPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the unit property value. The unit for the feedback entry period's <b>value</b>. Supported value: <code>DAY</code>.
+     * Gets the unit property value. The unit for the feedback entry period's <strong>value</strong>. Supported value: <code>DAY</code>.
      * @return string|null
     */
     public function getUnit(): ?string {
@@ -86,7 +86,7 @@ class FeedbackEnteredPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. The value for the feedback entry period, specified in units of <b>unit</b>. Supported values: <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
+     * Gets the value property value. The value for the feedback entry period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
      * @return int|null
     */
     public function getValue(): ?int {
@@ -112,7 +112,7 @@ class FeedbackEnteredPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. The unit for the feedback entry period's <b>value</b>. Supported value: <code>DAY</code>.
+     * Sets the unit property value. The unit for the feedback entry period's <strong>value</strong>. Supported value: <code>DAY</code>.
      * @param string|null $value Value to set for the unit property.
     */
     public function setUnit(?string $value): void {
@@ -120,7 +120,7 @@ class FeedbackEnteredPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. The value for the feedback entry period, specified in units of <b>unit</b>. Supported values: <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
+     * Sets the value property value. The value for the feedback entry period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code>.
      * @param int|null $value Value to set for the value property.
     */
     public function setValue(?int $value): void {

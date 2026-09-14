@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\SubscriptionFilter;
 use Exception;
 use Http\Promise\Promise;
@@ -44,14 +45,20 @@ class WithFilter_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows applications to disable the active filter on a subscription, so that a new subscription filter may be added.<br><br><span class="tablenote"><b>Note:</b> Subscription filters in <strong>PENDING</strong> status can not be disabled. However, a new filter can be created instead with the <strong>createSubscriptionFilter</strong> method and this new filter will override the <strong>PENDING</strong> filter.</span>
+     * This method allows applications to disable the active filter on a subscription, so that a new subscription filter may be added.<br><br><span class="tablenote"><b>Note:</b> Subscription filters in <code>PENDING</code> status can not be disabled. However, a new filter can be created instead with the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-createsubscriptionfilter">createSubscriptionFilter</a>  method and this new filter will override the <code>PENDING</code> filter.</span>
      * @param WithFilter_ItemRequestBuilderDeleteRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function delete(?WithFilter_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -62,11 +69,17 @@ class WithFilter_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithFilter_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionFilter::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionFilter::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows applications to disable the active filter on a subscription, so that a new subscription filter may be added.<br><br><span class="tablenote"><b>Note:</b> Subscription filters in <strong>PENDING</strong> status can not be disabled. However, a new filter can be created instead with the <strong>createSubscriptionFilter</strong> method and this new filter will override the <strong>PENDING</strong> filter.</span>
+     * This method allows applications to disable the active filter on a subscription, so that a new subscription filter may be added.<br><br><span class="tablenote"><b>Note:</b> Subscription filters in <code>PENDING</code> status can not be disabled. However, a new filter can be created instead with the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-createsubscriptionfilter">createSubscriptionFilter</a>  method and this new filter will override the <code>PENDING</code> filter.</span>
      * @param WithFilter_ItemRequestBuilderDeleteRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -79,6 +92,7 @@ class WithFilter_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

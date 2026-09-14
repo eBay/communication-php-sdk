@@ -18,6 +18,7 @@ namespace EBay\Communication\Generated\Notification\Destination\Item;
 
 use EBay\Communication\Generated\Notification\Models\Destination;
 use EBay\Communication\Generated\Notification\Models\DestinationRequest;
+use EBay\Communication\Generated\Notification\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -52,7 +53,13 @@ class WithDestination_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function delete(?WithDestination_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -63,19 +70,30 @@ class WithDestination_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithDestination_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [Destination::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Destination::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows applications to update a destination.<br><br><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully. Refer to the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a> for more information.</span>
-     * @param DestinationRequest $body A type that contains information about the destination request.
+     * This method allows applications to update a destination.<br><br><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully.</span>
+     * @param DestinationRequest $body The create subscription request.
      * @param WithDestination_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function put(DestinationRequest $body, ?WithDestination_ItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -92,6 +110,7 @@ class WithDestination_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 
@@ -114,8 +133,8 @@ class WithDestination_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows applications to update a destination.<br><br><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully. Refer to the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a> for more information.</span>
-     * @param DestinationRequest $body A type that contains information about the destination request.
+     * This method allows applications to update a destination.<br><br><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully.</span>
+     * @param DestinationRequest $body The create subscription request.
      * @param WithDestination_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -128,6 +147,7 @@ class WithDestination_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

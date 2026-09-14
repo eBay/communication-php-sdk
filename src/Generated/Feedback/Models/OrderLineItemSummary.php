@@ -32,17 +32,17 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $listingId This field provides the unique identifier for the listing associated with the feedback entry. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * @var string|null $listingId This field provides the unique identifier for the listing associated with the feedback entry. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
     */
     private ?string $listingId = null;
     
     /**
-     * @var ListingPrice|null $listingPrice This type provides details about the price of the listing awaiting feedback.
+     * @var ListingPrice|null $listingPrice This container provides the sale price of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
     */
     private ?ListingPrice $listingPrice = null;
     
     /**
-     * @var string|null $listingTitle This field contains the title of the listing. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * @var string|null $listingTitle This field contains the title of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
     */
     private ?string $listingTitle = null;
     
@@ -52,12 +52,12 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     private ?array $orderLineItemAttributes = null;
     
     /**
-     * @var string|null $orderLineItemId The unique identifier of the line item for this feedback. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * @var string|null $orderLineItemId The unique identifier of the line item for this feedback. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
     */
     private ?string $orderLineItemId = null;
     
     /**
-     * @var TransactionPeriod|null $transactionPeriod This type specifies the amount of time elapsed and the threshold associated with a transaction.
+     * @var TransactionPeriod|null $transactionPeriod This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days
     */
     private ?TransactionPeriod $transactionPeriod = null;
     
@@ -102,7 +102,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingId property value. This field provides the unique identifier for the listing associated with the feedback entry. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Gets the listingId property value. This field provides the unique identifier for the listing associated with the feedback entry. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @return string|null
     */
     public function getListingId(): ?string {
@@ -110,7 +110,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingPrice property value. This type provides details about the price of the listing awaiting feedback.
+     * Gets the listingPrice property value. This container provides the sale price of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @return ListingPrice|null
     */
     public function getListingPrice(): ?ListingPrice {
@@ -118,7 +118,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingTitle property value. This field contains the title of the listing. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Gets the listingTitle property value. This field contains the title of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @return string|null
     */
     public function getListingTitle(): ?string {
@@ -134,7 +134,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderLineItemId property value. The unique identifier of the line item for this feedback. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Gets the orderLineItemId property value. The unique identifier of the line item for this feedback. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @return string|null
     */
     public function getOrderLineItemId(): ?string {
@@ -142,7 +142,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transactionPeriod property value. This type specifies the amount of time elapsed and the threshold associated with a transaction.
+     * Gets the transactionPeriod property value. This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days
      * @return TransactionPeriod|null
     */
     public function getTransactionPeriod(): ?TransactionPeriod {
@@ -172,7 +172,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingId property value. This field provides the unique identifier for the listing associated with the feedback entry. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Sets the listingId property value. This field provides the unique identifier for the listing associated with the feedback entry. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @param string|null $value Value to set for the listingId property.
     */
     public function setListingId(?string $value): void {
@@ -180,7 +180,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingPrice property value. This type provides details about the price of the listing awaiting feedback.
+     * Sets the listingPrice property value. This container provides the sale price of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @param ListingPrice|null $value Value to set for the listingPrice property.
     */
     public function setListingPrice(?ListingPrice $value): void {
@@ -188,7 +188,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingTitle property value. This field contains the title of the listing. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Sets the listingTitle property value. This field contains the title of the listing. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @param string|null $value Value to set for the listingTitle property.
     */
     public function setListingTitle(?string $value): void {
@@ -204,7 +204,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderLineItemId property value. The unique identifier of the line item for this feedback. Conditionally returned based on the authorization flow and user context. See <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary">orderLineItemSummary</a> for details on when this field is included.
+     * Sets the orderLineItemId property value. The unique identifier of the line item for this feedback. It is conditionally returned based on the authorization flow and user context. See <strong>orderLineItemSummary</strong> for details on when this field is included.
      * @param string|null $value Value to set for the orderLineItemId property.
     */
     public function setOrderLineItemId(?string $value): void {
@@ -212,7 +212,7 @@ class OrderLineItemSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transactionPeriod property value. This type specifies the amount of time elapsed and the threshold associated with a transaction.
+     * Sets the transactionPeriod property value. This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days
      * @param TransactionPeriod|null $value Value to set for the transactionPeriod property.
     */
     public function setTransactionPeriod(?TransactionPeriod $value): void {

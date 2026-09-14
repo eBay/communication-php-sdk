@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>getFeedback</b> response.
+ * This type defines the fields for the <strong>getFeedback</strong> response.
 */
 class GetFeedbackResponse implements AdditionalDataHolder, Parsable 
 {
@@ -37,7 +37,7 @@ class GetFeedbackResponse implements AdditionalDataHolder, Parsable
     private ?array $feedbackEntries = null;
     
     /**
-     * @var Pagination|null $pagination This type provides pagination information for the returned line items.
+     * @var Pagination|null $pagination This container provides pagination information for the returned feedback response (as filtered).
     */
     private ?Pagination $pagination = null;
     
@@ -86,7 +86,7 @@ class GetFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pagination property value. This type provides pagination information for the returned line items.
+     * Gets the pagination property value. This container provides pagination information for the returned feedback response (as filtered).
      * @return Pagination|null
     */
     public function getPagination(): ?Pagination {
@@ -120,7 +120,7 @@ class GetFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pagination property value. This type provides pagination information for the returned line items.
+     * Sets the pagination property value. This container provides pagination information for the returned feedback response (as filtered).
      * @param Pagination|null $value Value to set for the pagination property.
     */
     public function setPagination(?Pagination $value): void {

@@ -38,9 +38,9 @@ class Topic implements AdditionalDataHolder, Parsable
     private ?array $authorizationScopes = null;
     
     /**
-     * @var string|null $context The business context associated with this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ContextEnum'>eBay API documentation</a>
+     * @var ContextEnum|null $context The business context associated with this topic.
     */
-    private ?string $context = null;
+    private ?ContextEnum $context = null;
     
     /**
      * @var string|null $description The description of the topic.
@@ -53,14 +53,14 @@ class Topic implements AdditionalDataHolder, Parsable
     private ?bool $filterable = null;
     
     /**
-     * @var string|null $scope The scope of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ScopeEnum'>eBay API documentation</a>
+     * @var ScopeEnum|null $scope The scope of this topic.
     */
-    private ?string $scope = null;
+    private ?ScopeEnum $scope = null;
     
     /**
-     * @var string|null $status The status of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:StatusEnum'>eBay API documentation</a>
+     * @var StatusEnum|null $status The status of this topic.
     */
-    private ?string $status = null;
+    private ?StatusEnum $status = null;
     
     /**
      * @var array<PayloadDetail>|null $supportedPayloads The supported payloads for this topic.
@@ -105,10 +105,10 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the context property value. The business context associated with this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ContextEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the context property value. The business context associated with this topic.
+     * @return ContextEnum|null
     */
-    public function getContext(): ?string {
+    public function getContext(): ?ContextEnum {
         return $this->context;
     }
 
@@ -135,11 +135,11 @@ class Topic implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setAuthorizationScopes($val);
             },
-            'context' => fn(ParseNode $n) => $o->setContext($n->getStringValue()),
+            'context' => fn(ParseNode $n) => $o->setContext($n->getEnumValue(ContextEnum::class)),
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'filterable' => fn(ParseNode $n) => $o->setFilterable($n->getBooleanValue()),
-            'scope' => fn(ParseNode $n) => $o->setScope($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'scope' => fn(ParseNode $n) => $o->setScope($n->getEnumValue(ScopeEnum::class)),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(StatusEnum::class)),
             'supportedPayloads' => fn(ParseNode $n) => $o->setSupportedPayloads($n->getCollectionOfObjectValues([PayloadDetail::class, 'createFromDiscriminatorValue'])),
             'topicId' => fn(ParseNode $n) => $o->setTopicId($n->getStringValue()),
         ];
@@ -154,18 +154,18 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the scope property value. The scope of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ScopeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the scope property value. The scope of this topic.
+     * @return ScopeEnum|null
     */
-    public function getScope(): ?string {
+    public function getScope(): ?ScopeEnum {
         return $this->scope;
     }
 
     /**
-     * Gets the status property value. The status of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:StatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The status of this topic.
+     * @return StatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?StatusEnum {
         return $this->status;
     }
 
@@ -191,11 +191,11 @@ class Topic implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfPrimitiveValues('authorizationScopes', $this->getAuthorizationScopes());
-        $writer->writeStringValue('context', $this->getContext());
+        $writer->writeEnumValue('context', $this->getContext());
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeBooleanValue('filterable', $this->getFilterable());
-        $writer->writeStringValue('scope', $this->getScope());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('scope', $this->getScope());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeCollectionOfObjectValues('supportedPayloads', $this->getSupportedPayloads());
         $writer->writeStringValue('topicId', $this->getTopicId());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -218,10 +218,10 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the context property value. The business context associated with this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ContextEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the context property.
+     * Sets the context property value. The business context associated with this topic.
+     * @param ContextEnum|null $value Value to set for the context property.
     */
-    public function setContext(?string $value): void {
+    public function setContext(?ContextEnum $value): void {
         $this->context = $value;
     }
 
@@ -242,18 +242,18 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the scope property value. The scope of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ScopeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the scope property.
+     * Sets the scope property value. The scope of this topic.
+     * @param ScopeEnum|null $value Value to set for the scope property.
     */
-    public function setScope(?string $value): void {
+    public function setScope(?ScopeEnum $value): void {
         $this->scope = $value;
     }
 
     /**
-     * Sets the status property value. The status of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:StatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The status of this topic.
+     * @param StatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?StatusEnum $value): void {
         $this->status = $value;
     }
 

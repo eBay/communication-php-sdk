@@ -32,17 +32,17 @@ class SubscriptionPayloadDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $deliveryProtocol The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
+     * @var ProtocolEnum|null $deliveryProtocol The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span>
     */
-    private ?string $deliveryProtocol = null;
+    private ?ProtocolEnum $deliveryProtocol = null;
     
     /**
-     * @var string|null $format The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:FormatTypeEnum'>eBay API documentation</a>
+     * @var FormatTypeEnum|null $format The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span>
     */
-    private ?string $format = null;
+    private ?FormatTypeEnum $format = null;
     
     /**
-     * @var string|null $schemaVersion The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <b>getTopics</b> or <b>getTopic</b> response.
+     * @var string|null $schemaVersion The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> response.
     */
     private ?string $schemaVersion = null;
     
@@ -71,10 +71,10 @@ class SubscriptionPayloadDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the deliveryProtocol property value. The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the deliveryProtocol property value. The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span>
+     * @return ProtocolEnum|null
     */
-    public function getDeliveryProtocol(): ?string {
+    public function getDeliveryProtocol(): ?ProtocolEnum {
         return $this->deliveryProtocol;
     }
 
@@ -85,22 +85,22 @@ class SubscriptionPayloadDetail implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'deliveryProtocol' => fn(ParseNode $n) => $o->setDeliveryProtocol($n->getStringValue()),
-            'format' => fn(ParseNode $n) => $o->setFormat($n->getStringValue()),
+            'deliveryProtocol' => fn(ParseNode $n) => $o->setDeliveryProtocol($n->getEnumValue(ProtocolEnum::class)),
+            'format' => fn(ParseNode $n) => $o->setFormat($n->getEnumValue(FormatTypeEnum::class)),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the format property value. The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:FormatTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the format property value. The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span>
+     * @return FormatTypeEnum|null
     */
-    public function getFormat(): ?string {
+    public function getFormat(): ?FormatTypeEnum {
         return $this->format;
     }
 
     /**
-     * Gets the schemaVersion property value. The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <b>getTopics</b> or <b>getTopic</b> response.
+     * Gets the schemaVersion property value. The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> response.
      * @return string|null
     */
     public function getSchemaVersion(): ?string {
@@ -112,8 +112,8 @@ class SubscriptionPayloadDetail implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('deliveryProtocol', $this->getDeliveryProtocol());
-        $writer->writeStringValue('format', $this->getFormat());
+        $writer->writeEnumValue('deliveryProtocol', $this->getDeliveryProtocol());
+        $writer->writeEnumValue('format', $this->getFormat());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -127,23 +127,23 @@ class SubscriptionPayloadDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the deliveryProtocol property value. The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the deliveryProtocol property.
+     * Sets the deliveryProtocol property value. The supported delivery protocol of the notification topic.<br><br><span class="tablenote"><b>Note:</b> <code>HTTPS</code> is currently the only supported delivery protocol of all notification topics. </span>
+     * @param ProtocolEnum|null $value Value to set for the deliveryProtocol property.
     */
-    public function setDeliveryProtocol(?string $value): void {
+    public function setDeliveryProtocol(?ProtocolEnum $value): void {
         $this->deliveryProtocol = $value;
     }
 
     /**
-     * Sets the format property value. The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:FormatTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the format property.
+     * Sets the format property value. The supported data format of the payload.<br><br><span class="tablenote"><b>Note:</b> JSON is currently the only supported format for all notification topics.</span>
+     * @param FormatTypeEnum|null $value Value to set for the format property.
     */
-    public function setFormat(?string $value): void {
+    public function setFormat(?FormatTypeEnum $value): void {
         $this->format = $value;
     }
 
     /**
-     * Sets the schemaVersion property value. The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <b>getTopics</b> or <b>getTopic</b> response.
+     * Sets the schemaVersion property value. The supported schema version for the notification topic. See the <b>supportedPayloads.schemaVersion</b> field for the topic in <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> response.
      * @param string|null $value Value to set for the schemaVersion property.
     */
     public function setSchemaVersion(?string $value): void {

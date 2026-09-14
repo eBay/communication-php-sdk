@@ -33,7 +33,7 @@ class Topic implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $coarseTopic The main topic (or category) detected in the comment. See the available <b>topics</b> in <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter">filter</a>.
+     * @var string|null $coarseTopic The main topic (or category) detected in the comment. See the available <strong>topics</strong> in the <strong>filter</strong> query parameter.
     */
     private ?string $coarseTopic = null;
     
@@ -43,7 +43,7 @@ class Topic implements AdditionalDataHolder, Parsable
     private ?string $fineTopic = null;
     
     /**
-     * @var array<string>|null $highlightedTexts This array lists any text snippets, phrases, or examples, from the feedback that supports the detected topic.
+     * @var array<string>|null $highlightedTexts This array lists any text snippets, phrases, or examples from the feedback that supports the detected topic.
     */
     private ?array $highlightedTexts = null;
     
@@ -77,7 +77,7 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the coarseTopic property value. The main topic (or category) detected in the comment. See the available <b>topics</b> in <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter">filter</a>.
+     * Gets the coarseTopic property value. The main topic (or category) detected in the comment. See the available <strong>topics</strong> in the <strong>filter</strong> query parameter.
      * @return string|null
     */
     public function getCoarseTopic(): ?string {
@@ -114,7 +114,7 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the highlightedTexts property value. This array lists any text snippets, phrases, or examples, from the feedback that supports the detected topic.
+     * Gets the highlightedTexts property value. This array lists any text snippets, phrases, or examples from the feedback that supports the detected topic.
      * @return array<string>|null
     */
     public function getHighlightedTexts(): ?array {
@@ -150,7 +150,7 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the coarseTopic property value. The main topic (or category) detected in the comment. See the available <b>topics</b> in <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#uri.filter">filter</a>.
+     * Sets the coarseTopic property value. The main topic (or category) detected in the comment. See the available <strong>topics</strong> in the <strong>filter</strong> query parameter.
      * @param string|null $value Value to set for the coarseTopic property.
     */
     public function setCoarseTopic(?string $value): void {
@@ -166,7 +166,7 @@ class Topic implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the highlightedTexts property value. This array lists any text snippets, phrases, or examples, from the feedback that supports the detected topic.
+     * Sets the highlightedTexts property value. This array lists any text snippets, phrases, or examples from the feedback that supports the detected topic.
      * @param array<string>|null $value Value to set for the highlightedTexts property.
     */
     public function setHighlightedTexts(?array $value): void {

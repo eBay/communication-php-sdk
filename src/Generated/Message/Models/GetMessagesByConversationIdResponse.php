@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the response payload of the <b>getConversation</b> method.
+ * This type defines the response payload of the <strong>getConversation</strong> method.
 */
 class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsable 
 {
@@ -52,7 +52,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     private ?string $href = null;
     
     /**
-     * @var int|null $limit The value of the <b>limit</b> parameter submitted in the request.
+     * @var int|null $limit The value of the <strong>limit</strong> parameter submitted in the request.
     */
     private ?int $limit = null;
     
@@ -67,12 +67,12 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     private ?string $next = null;
     
     /**
-     * @var int|null $offset The value of the <b>offset</b> parameter submitted in the request.
+     * @var int|null $offset The value of the <strong>offset</strong> parameter submitted in the request.
     */
     private ?int $offset = null;
     
     /**
-     * @var string|null $prev The URI for the previous page of results.<br><br>This is only retuned if there is a previous page of results in the result set.
+     * @var string|null $prev The URI for the previous page of results.<br><br>This value is only returned if there is a previous page of results in the result set.
     */
     private ?string $prev = null;
     
@@ -158,7 +158,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the limit property value. The value of the <b>limit</b> parameter submitted in the request.
+     * Gets the limit property value. The value of the <strong>limit</strong> parameter submitted in the request.
      * @return int|null
     */
     public function getLimit(): ?int {
@@ -182,7 +182,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the offset property value. The value of the <b>offset</b> parameter submitted in the request.
+     * Gets the offset property value. The value of the <strong>offset</strong> parameter submitted in the request.
      * @return int|null
     */
     public function getOffset(): ?int {
@@ -190,7 +190,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Gets the prev property value. The URI for the previous page of results.<br><br>This is only retuned if there is a previous page of results in the result set.
+     * Gets the prev property value. The URI for the previous page of results.<br><br>This value is only returned if there is a previous page of results in the result set.
      * @return string|null
     */
     public function getPrev(): ?string {
@@ -264,7 +264,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the limit property value. The value of the <b>limit</b> parameter submitted in the request.
+     * Sets the limit property value. The value of the <strong>limit</strong> parameter submitted in the request.
      * @param int|null $value Value to set for the limit property.
     */
     public function setLimit(?int $value): void {
@@ -288,7 +288,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the offset property value. The value of the <b>offset</b> parameter submitted in the request.
+     * Sets the offset property value. The value of the <strong>offset</strong> parameter submitted in the request.
      * @param int|null $value Value to set for the offset property.
     */
     public function setOffset(?int $value): void {
@@ -296,7 +296,7 @@ class GetMessagesByConversationIdResponse implements AdditionalDataHolder, Parsa
     }
 
     /**
-     * Sets the prev property value. The URI for the previous page of results.<br><br>This is only retuned if there is a previous page of results in the result set.
+     * Sets the prev property value. The URI for the previous page of results.<br><br>This value is only returned if there is a previous page of results in the result set.
      * @param string|null $value Value to set for the prev property.
     */
     public function setPrev(?string $value): void {

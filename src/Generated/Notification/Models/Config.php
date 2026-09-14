@@ -32,7 +32,7 @@ class Config implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $alertEmail This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <b>getConfig</b> can be used to get the email address currently being used for alerts.
+     * @var string|null $alertEmail This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <a href="/develop/api/sell/notification_api#sell-notification_api-config-getconfig">getConfig</a> can be used to get the email address currently being used for alerts.
     */
     private ?string $alertEmail = null;
     
@@ -61,7 +61,7 @@ class Config implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the alertEmail property value. This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <b>getConfig</b> can be used to get the email address currently being used for alerts.
+     * Gets the alertEmail property value. This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <a href="/develop/api/sell/notification_api#sell-notification_api-config-getconfig">getConfig</a> can be used to get the email address currently being used for alerts.
      * @return string|null
     */
     public function getAlertEmail(): ?string {
@@ -97,7 +97,7 @@ class Config implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the alertEmail property value. This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <b>getConfig</b> can be used to get the email address currently being used for alerts.
+     * Sets the alertEmail property value. This field is used to add or modify an email address that will be used for Notification API alerts associated with the application. <a href="/develop/api/sell/notification_api#sell-notification_api-config-getconfig">getConfig</a> can be used to get the email address currently being used for alerts.
      * @param string|null $value Value to set for the alertEmail property.
     */
     public function setAlertEmail(?string $value): void {

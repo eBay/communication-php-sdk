@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * A type that describes the details about a topic's payload.
@@ -33,9 +32,9 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $deliveryProtocol The supported delivery protocols. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
+     * @var ProtocolEnum|null $deliveryProtocol The supported delivery protocols.
     */
-    private ?string $deliveryProtocol = null;
+    private ?ProtocolEnum $deliveryProtocol = null;
     
     /**
      * @var bool|null $deprecated A deprecation indicator.
@@ -43,7 +42,7 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
     private ?bool $deprecated = null;
     
     /**
-     * @var array<string>|null $format The supported format. Presently, <code>JSON</code> is the only supported format.
+     * @var array<FormatTypeEnum>|null $format The supported format. Presently, <code>JSON</code> is the only supported format.
     */
     private ?array $format = null;
     
@@ -77,10 +76,10 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the deliveryProtocol property value. The supported delivery protocols. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the deliveryProtocol property value. The supported delivery protocols.
+     * @return ProtocolEnum|null
     */
-    public function getDeliveryProtocol(): ?string {
+    public function getDeliveryProtocol(): ?ProtocolEnum {
         return $this->deliveryProtocol;
     }
 
@@ -99,23 +98,16 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'deliveryProtocol' => fn(ParseNode $n) => $o->setDeliveryProtocol($n->getStringValue()),
+            'deliveryProtocol' => fn(ParseNode $n) => $o->setDeliveryProtocol($n->getEnumValue(ProtocolEnum::class)),
             'deprecated' => fn(ParseNode $n) => $o->setDeprecated($n->getBooleanValue()),
-            'format' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setFormat($val);
-            },
+            'format' => fn(ParseNode $n) => $o->setFormat($n->getCollectionOfEnumValues(FormatTypeEnum::class)),
             'schemaVersion' => fn(ParseNode $n) => $o->setSchemaVersion($n->getStringValue()),
         ];
     }
 
     /**
      * Gets the format property value. The supported format. Presently, <code>JSON</code> is the only supported format.
-     * @return array<string>|null
+     * @return array<FormatTypeEnum>|null
     */
     public function getFormat(): ?array {
         return $this->format;
@@ -134,9 +126,9 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('deliveryProtocol', $this->getDeliveryProtocol());
+        $writer->writeEnumValue('deliveryProtocol', $this->getDeliveryProtocol());
         $writer->writeBooleanValue('deprecated', $this->getDeprecated());
-        $writer->writeCollectionOfPrimitiveValues('format', $this->getFormat());
+        $writer->writeCollectionOfEnumValues('format', $this->getFormat());
         $writer->writeStringValue('schemaVersion', $this->getSchemaVersion());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -150,10 +142,10 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the deliveryProtocol property value. The supported delivery protocols. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the deliveryProtocol property.
+     * Sets the deliveryProtocol property value. The supported delivery protocols.
+     * @param ProtocolEnum|null $value Value to set for the deliveryProtocol property.
     */
-    public function setDeliveryProtocol(?string $value): void {
+    public function setDeliveryProtocol(?ProtocolEnum $value): void {
         $this->deliveryProtocol = $value;
     }
 
@@ -167,7 +159,7 @@ class PayloadDetail implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the format property value. The supported format. Presently, <code>JSON</code> is the only supported format.
-     * @param array<string>|null $value Value to set for the format property.
+     * @param array<FormatTypeEnum>|null $value Value to set for the format property.
     */
     public function setFormat(?array $value): void {
         $this->format = $value;

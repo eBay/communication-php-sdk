@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Subscription\Item\Test;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -43,18 +44,23 @@ class TestRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method triggers a mocked test payload that includes a notification ID, publish date, and so on. Use this method to test your subscription end-to-end.<br><br>You can create the subscription in disabled mode, test it using this method, and when everything is ready, you can enable the subscription (see the <strong>enableSubscription</strong> method).<br><br><span class="tablenote"><b>Note:</b> Use the <strong>notificationId</strong> to tell the difference between a test payload and a real payload.</span>
+     * This method triggers a mocked test payload that includes a notification ID, publish date, and so on. Use this method to test your subscription end-to-end.<br><br>You can create the subscription in disabled mode, test it using this method, and when everything is ready, you can enable the subscription (see the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a> method).<br><br><span class="tablenote"><b>Note:</b> Use the <strong>notificationId</strong> to tell the difference between a test payload and a real payload.</span>
      * @param TestRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
-     * @return Promise<void|null>
+     * @return Promise<Error|null>
      * @throws Exception
     */
     public function post(?TestRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Error::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method triggers a mocked test payload that includes a notification ID, publish date, and so on. Use this method to test your subscription end-to-end.<br><br>You can create the subscription in disabled mode, test it using this method, and when everything is ready, you can enable the subscription (see the <strong>enableSubscription</strong> method).<br><br><span class="tablenote"><b>Note:</b> Use the <strong>notificationId</strong> to tell the difference between a test payload and a real payload.</span>
+     * This method triggers a mocked test payload that includes a notification ID, publish date, and so on. Use this method to test your subscription end-to-end.<br><br>You can create the subscription in disabled mode, test it using this method, and when everything is ready, you can enable the subscription (see the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a> method).<br><br><span class="tablenote"><b>Note:</b> Use the <strong>notificationId</strong> to tell the difference between a test payload and a real payload.</span>
      * @param TestRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -67,6 +73,7 @@ class TestRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

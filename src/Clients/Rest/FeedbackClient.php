@@ -28,11 +28,6 @@ use EBay\Communication\Generated\Feedback\Models\GetFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\LeaveFeedbackRequest;
 use EBay\Communication\Generated\Feedback\Models\LeaveFeedbackResponse;
 use EBay\Communication\Generated\Feedback\Models\RespondToFeedbackRequest;
-use EBay\Communication\Generated\Feedback\Awaiting_feedback\Awaiting_feedbackRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Feedback\Respond_to_feedback\Respond_to_feedbackRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -65,9 +60,9 @@ final class FeedbackClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->awaiting_feedback()->get(
-                new Awaiting_feedbackRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Feedback\Awaiting_feedback\Awaiting_feedbackRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Awaiting_feedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Feedback\Awaiting_feedback\Awaiting_feedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,
@@ -96,9 +91,9 @@ final class FeedbackClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->feedback()->get(
-                new FeedbackRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: FeedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderGetRequestConfiguration::createQueryParameters(
                         feedback_id: $feedbackId,
                         feedback_type: $feedbackType,
                         filter: $filter,
@@ -121,7 +116,7 @@ final class FeedbackClient
         return $this->call($accessToken, fn($api) =>
             $api->feedback()->post(
                 $body,
-                new FeedbackRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Feedback\Feedback\FeedbackRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -136,9 +131,9 @@ final class FeedbackClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->feedback_rating_summary()->get(
-                new Feedback_rating_summaryRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Feedback_rating_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Feedback\Feedback_rating_summary\Feedback_rating_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         user_id: $userId,
                     ),
@@ -153,7 +148,7 @@ final class FeedbackClient
         return $this->call($accessToken, fn($api) =>
             $api->respond_to_feedback()->post(
                 $body,
-                new Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Feedback\Respond_to_feedback\Respond_to_feedbackRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

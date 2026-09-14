@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type provides the details of the user who provided the feedback of a <b>getFeedback</b> response.
+ * This type provides the details of the user who provided the feedback of a <strong>getFeedback</strong> response.
 */
 class ProviderUserDetail implements AdditionalDataHolder, Parsable 
 {
@@ -32,19 +32,19 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $feedbackScore This integer indicates the feedback score of the feedback provider at the time of providing this specific feedback.
+     * @var int|null $feedbackScore This integer indicates the feedback score of the feedback provider at the time the specific feedback was left.
     */
     private ?int $feedbackScore = null;
     
     /**
-     * @var string|null $feedbackStar This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStarTypeEnum'>eBay API documentation</a>
+     * @var FeedbackStarTypeEnum|null $feedbackStar This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>).
     */
-    private ?string $feedbackStar = null;
+    private ?FeedbackStarTypeEnum $feedbackStar = null;
     
     /**
-     * @var string|null $role This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
+     * @var UserRoleEnum|null $role This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>).
     */
-    private ?string $role = null;
+    private ?UserRoleEnum $role = null;
     
     /**
      * @var array<ProviderUserDetailUserAttributes>|null $userAttributes This array lists additional attributes that relate to the user (such as verification status).
@@ -52,7 +52,7 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     private ?array $userAttributes = null;
     
     /**
-     * @var string|null $userId This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><b>Note:</b> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * @var string|null $userId This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><strong>Note:</strong> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $userId = null;
     
@@ -81,7 +81,7 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackScore property value. This integer indicates the feedback score of the feedback provider at the time of providing this specific feedback.
+     * Gets the feedbackScore property value. This integer indicates the feedback score of the feedback provider at the time the specific feedback was left.
      * @return int|null
     */
     public function getFeedbackScore(): ?int {
@@ -89,10 +89,10 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackStar property value. This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStarTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the feedbackStar property value. This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>).
+     * @return FeedbackStarTypeEnum|null
     */
-    public function getFeedbackStar(): ?string {
+    public function getFeedbackStar(): ?FeedbackStarTypeEnum {
         return $this->feedbackStar;
     }
 
@@ -104,18 +104,18 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'feedbackScore' => fn(ParseNode $n) => $o->setFeedbackScore($n->getIntegerValue()),
-            'feedbackStar' => fn(ParseNode $n) => $o->setFeedbackStar($n->getStringValue()),
-            'role' => fn(ParseNode $n) => $o->setRole($n->getStringValue()),
+            'feedbackStar' => fn(ParseNode $n) => $o->setFeedbackStar($n->getEnumValue(FeedbackStarTypeEnum::class)),
+            'role' => fn(ParseNode $n) => $o->setRole($n->getEnumValue(UserRoleEnum::class)),
             'userAttributes' => fn(ParseNode $n) => $o->setUserAttributes($n->getCollectionOfObjectValues([ProviderUserDetailUserAttributes::class, 'createFromDiscriminatorValue'])),
             'userId' => fn(ParseNode $n) => $o->setUserId($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the role property value. This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the role property value. This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>).
+     * @return UserRoleEnum|null
     */
-    public function getRole(): ?string {
+    public function getRole(): ?UserRoleEnum {
         return $this->role;
     }
 
@@ -128,7 +128,7 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the userId property value. This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><b>Note:</b> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * Gets the userId property value. This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><strong>Note:</strong> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getUserId(): ?string {
@@ -141,8 +141,8 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeIntegerValue('feedbackScore', $this->getFeedbackScore());
-        $writer->writeStringValue('feedbackStar', $this->getFeedbackStar());
-        $writer->writeStringValue('role', $this->getRole());
+        $writer->writeEnumValue('feedbackStar', $this->getFeedbackStar());
+        $writer->writeEnumValue('role', $this->getRole());
         $writer->writeCollectionOfObjectValues('userAttributes', $this->getUserAttributes());
         $writer->writeStringValue('userId', $this->getUserId());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -157,7 +157,7 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackScore property value. This integer indicates the feedback score of the feedback provider at the time of providing this specific feedback.
+     * Sets the feedbackScore property value. This integer indicates the feedback score of the feedback provider at the time the specific feedback was left.
      * @param int|null $value Value to set for the feedbackScore property.
     */
     public function setFeedbackScore(?int $value): void {
@@ -165,18 +165,18 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackStar property value. This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackStarTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the feedbackStar property.
+     * Sets the feedbackStar property value. This enumerated value provides the visual star representation of the feedback score (for example, <code>YELLOW_STAR</code>).
+     * @param FeedbackStarTypeEnum|null $value Value to set for the feedbackStar property.
     */
-    public function setFeedbackStar(?string $value): void {
+    public function setFeedbackStar(?FeedbackStarTypeEnum $value): void {
         $this->feedbackStar = $value;
     }
 
     /**
-     * Sets the role property value. This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the role property.
+     * Sets the role property value. This enumerated value indicates the user's role in the transaction (<code>BUYER</code> or <code>SELLER</code>).
+     * @param UserRoleEnum|null $value Value to set for the role property.
     */
-    public function setRole(?string $value): void {
+    public function setRole(?UserRoleEnum $value): void {
         $this->role = $value;
     }
 
@@ -189,7 +189,7 @@ class ProviderUserDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the userId property value. This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><b>Note:</b> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
+     * Sets the userId property value. This field indicates the unique identifier of the user who gave the feedback.<br><br><span class="tablenote"><strong>Note:</strong> Select developers will not receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the userId property.
     */
     public function setUserId(?string $value): void {

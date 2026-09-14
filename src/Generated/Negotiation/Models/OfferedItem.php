@@ -32,7 +32,7 @@ class OfferedItem implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $discountPercentage This value denotes the percentage that the listing in the offer will be discounted from its original listed price.  <br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.  <br><br><b>Minimum:</b> <code>5</code>  <br><br><i>Required if</i> you do not specify a <b>price</b> value.
+     * @var string|null $discountPercentage This value denotes the percentage (as either a whole number or decimal value) that the listing in the offer will be discounted from its original listed price.<br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.<br><br><b>Minimum:</b> <code>5.0</code>  <br><br>This field is <i>required</i> if you do not specify a <b>price</b> value.
     */
     private ?string $discountPercentage = null;
     
@@ -76,7 +76,7 @@ class OfferedItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the discountPercentage property value. This value denotes the percentage that the listing in the offer will be discounted from its original listed price.  <br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.  <br><br><b>Minimum:</b> <code>5</code>  <br><br><i>Required if</i> you do not specify a <b>price</b> value.
+     * Gets the discountPercentage property value. This value denotes the percentage (as either a whole number or decimal value) that the listing in the offer will be discounted from its original listed price.<br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.<br><br><b>Minimum:</b> <code>5.0</code>  <br><br>This field is <i>required</i> if you do not specify a <b>price</b> value.
      * @return string|null
     */
     public function getDiscountPercentage(): ?string {
@@ -142,7 +142,7 @@ class OfferedItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the discountPercentage property value. This value denotes the percentage that the listing in the offer will be discounted from its original listed price.  <br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.  <br><br><b>Minimum:</b> <code>5</code>  <br><br><i>Required if</i> you do not specify a <b>price</b> value.
+     * Sets the discountPercentage property value. This value denotes the percentage (as either a whole number or decimal value) that the listing in the offer will be discounted from its original listed price.<br><br>The seller can specify either the exact price of the discounted items with the <b>price</b> field or they can use this field to specify the percentage that the listing will be discounted, but not both.<br><br><b>Minimum:</b> <code>5.0</code>  <br><br>This field is <i>required</i> if you do not specify a <b>price</b> value.
      * @param string|null $value Value to set for the discountPercentage property.
     */
     public function setDiscountPercentage(?string $value): void {

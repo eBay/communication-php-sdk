@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Topic\Item;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\Topic;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,23 @@ class WithTopic_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic.<br><br>Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br><br>A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).<br><br>Specify the topic to retrieve using the <b>topic_id</b> URI parameter.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/commerce/notification/resources/topic/methods/getTopics">getTopics</a> method to find a topic if you do not know the topic ID.</span>
+     * This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic.<br><br>Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br><br>A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).<br><br>Specify the topic to retrieve using the <b>topic_id</b> URI parameter.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> method to find a topic if you do not know the topic ID.</span>
      * @param WithTopic_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Topic|null>
      * @throws Exception
     */
     public function get(?WithTopic_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [Topic::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Topic::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic.<br><br>Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br><br>A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).<br><br>Specify the topic to retrieve using the <b>topic_id</b> URI parameter.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/commerce/notification/resources/topic/methods/getTopics">getTopics</a> method to find a topic if you do not know the topic ID.</span>
+     * This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic.<br><br>Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br><br>A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).<br><br>Specify the topic to retrieve using the <b>topic_id</b> URI parameter.<br><br><span class="tablenote"><b>Note:</b> Use the <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> method to find a topic if you do not know the topic ID.</span>
      * @param WithTopic_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

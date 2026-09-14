@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Subscription\Item;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\Subscription;
 use EBay\Communication\Generated\Notification\Models\UpdateSubscriptionRequest;
 use EBay\Communication\Generated\Notification\Subscription\Item\Disable\DisableRequestBuilder;
@@ -84,30 +85,46 @@ class WithSubscription_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function delete(?WithSubscription_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This method allows applications to retrieve subscription details for the specified subscription.<br><br>Specify the subscription to retrieve using the <strong>subscription_id</strong>. Use the <strong>getSubscriptions</strong> method to browse all subscriptions if you do not know the <strong>subscription_id</strong>.<br><br>Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.
+     * This method allows applications to retrieve subscription details for the specified subscription.<br><br>Specify the subscription to retrieve using the <strong>subscription_id</strong>. Use the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-getsubscriptions">getSubscriptions</a> method to browse all subscriptions if you do not know the <strong>subscription_id</strong>.<br><br>Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.
      * @param WithSubscription_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Subscription|null>
      * @throws Exception
     */
     public function get(?WithSubscription_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [Subscription::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Subscription::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows applications to update a subscription. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br><span class="tablenote"><b>Note:</b> This call returns an error if an application is not authorized to subscribe to a topic.</span><br><br>You can pause and restart a subscription. See the <b>disableSubscription</b> and <b>enableSubscription</b> methods.
-     * @param UpdateSubscriptionRequest $body A type that describes the details of the update subscription request.
+     * This method allows applications to update a subscription. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br><span class="tablenote"><b>Note:</b> This call returns an error if an application is not authorized to subscribe to a topic.</span><br><br>You can pause and restart a subscription. See the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-disablesubscription">disableSubscription</a> and <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a>methods.
+     * @param UpdateSubscriptionRequest $body The create subscription request.
      * @param WithSubscription_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function put(UpdateSubscriptionRequest $body, ?WithSubscription_ItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -124,11 +141,12 @@ class WithSubscription_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 
     /**
-     * This method allows applications to retrieve subscription details for the specified subscription.<br><br>Specify the subscription to retrieve using the <strong>subscription_id</strong>. Use the <strong>getSubscriptions</strong> method to browse all subscriptions if you do not know the <strong>subscription_id</strong>.<br><br>Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.
+     * This method allows applications to retrieve subscription details for the specified subscription.<br><br>Specify the subscription to retrieve using the <strong>subscription_id</strong>. Use the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-getsubscriptions">getSubscriptions</a> method to browse all subscriptions if you do not know the <strong>subscription_id</strong>.<br><br>Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.
      * @param WithSubscription_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -146,8 +164,8 @@ class WithSubscription_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows applications to update a subscription. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br><span class="tablenote"><b>Note:</b> This call returns an error if an application is not authorized to subscribe to a topic.</span><br><br>You can pause and restart a subscription. See the <b>disableSubscription</b> and <b>enableSubscription</b> methods.
-     * @param UpdateSubscriptionRequest $body A type that describes the details of the update subscription request.
+     * This method allows applications to update a subscription. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br><span class="tablenote"><b>Note:</b> This call returns an error if an application is not authorized to subscribe to a topic.</span><br><br>You can pause and restart a subscription. See the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-disablesubscription">disableSubscription</a> and <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a>methods.
+     * @param UpdateSubscriptionRequest $body The create subscription request.
      * @param WithSubscription_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -160,6 +178,7 @@ class WithSubscription_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }
