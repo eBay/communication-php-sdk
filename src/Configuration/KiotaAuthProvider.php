@@ -23,7 +23,6 @@ use Http\Promise\FulfilledPromise;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\Authentication\AllowedHostsValidator;
 
-
 final class KiotaAuthProvider implements AccessTokenProvider
 {
     private readonly AllowedHostsValidator $allowedHostsValidator;
