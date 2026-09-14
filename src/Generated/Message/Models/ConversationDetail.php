@@ -37,12 +37,12 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     private ?string $conversationId = null;
     
     /**
-     * @var string|null $conversationStatus This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVE</code>.
+     * @var string|null $conversationStatus This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVED</code>.
     */
     private ?string $conversationStatus = null;
     
     /**
-     * @var string|null $conversationTitle The title of the conversation.
+     * @var string|null $conversationTitle This value indicates the title of the conversation.
     */
     private ?string $conversationTitle = null;
     
@@ -52,27 +52,27 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     private ?string $conversationType = null;
     
     /**
-     * @var string|null $createdDate This value indicates the date, in ISO 8601 format, the conversation was created.
+     * @var string|null $createdDate This value indicates the date the conversation was created in ISO 8601 format.
     */
     private ?string $createdDate = null;
     
     /**
-     * @var MessageDetail|null $latestMessage This type defines message details for a conversation.
+     * @var MessageDetail|null $latestMessage This container returns the latest message in the conversation and its details.
     */
     private ?MessageDetail $latestMessage = null;
     
     /**
-     * @var string|null $referenceId This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>In the case of a <code>LISTING</code> <b>referenceType</b>, this value will be the item ID value of the associated listing.
+     * @var string|null $referenceId This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>In the case of a <code>LISTING</code> <strong>referenceType</strong>, this value will be the item ID value of the associated listing.
     */
     private ?string $referenceId = null;
     
     /**
-     * @var string|null $referenceType This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> will be returned.
+     * @var string|null $referenceType This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
     */
     private ?string $referenceType = null;
     
     /**
-     * @var int|null $unreadCount This value indicates the amount of unread messages in the conversation.
+     * @var int|null $unreadCount This value indicates the number of unread messages in the conversation.
     */
     private ?int $unreadCount = null;
     
@@ -109,7 +109,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationStatus property value. This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVE</code>.
+     * Gets the conversationStatus property value. This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVED</code>.
      * @return string|null
     */
     public function getConversationStatus(): ?string {
@@ -117,7 +117,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationTitle property value. The title of the conversation.
+     * Gets the conversationTitle property value. This value indicates the title of the conversation.
      * @return string|null
     */
     public function getConversationTitle(): ?string {
@@ -133,7 +133,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the createdDate property value. This value indicates the date, in ISO 8601 format, the conversation was created.
+     * Gets the createdDate property value. This value indicates the date the conversation was created in ISO 8601 format.
      * @return string|null
     */
     public function getCreatedDate(): ?string {
@@ -160,7 +160,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the latestMessage property value. This type defines message details for a conversation.
+     * Gets the latestMessage property value. This container returns the latest message in the conversation and its details.
      * @return MessageDetail|null
     */
     public function getLatestMessage(): ?MessageDetail {
@@ -168,7 +168,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceId property value. This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>In the case of a <code>LISTING</code> <b>referenceType</b>, this value will be the item ID value of the associated listing.
+     * Gets the referenceId property value. This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>In the case of a <code>LISTING</code> <strong>referenceType</strong>, this value will be the item ID value of the associated listing.
      * @return string|null
     */
     public function getReferenceId(): ?string {
@@ -176,7 +176,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceType property value. This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> will be returned.
+     * Gets the referenceType property value. This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
      * @return string|null
     */
     public function getReferenceType(): ?string {
@@ -184,7 +184,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the unreadCount property value. This value indicates the amount of unread messages in the conversation.
+     * Gets the unreadCount property value. This value indicates the number of unread messages in the conversation.
      * @return int|null
     */
     public function getUnreadCount(): ?int {
@@ -225,7 +225,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationStatus property value. This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVE</code>.
+     * Sets the conversationStatus property value. This value indicates the current status of the conversation, such as <code>ACTIVE</code> or <code>ARCHIVED</code>.
      * @param string|null $value Value to set for the conversationStatus property.
     */
     public function setConversationStatus(?string $value): void {
@@ -233,7 +233,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationTitle property value. The title of the conversation.
+     * Sets the conversationTitle property value. This value indicates the title of the conversation.
      * @param string|null $value Value to set for the conversationTitle property.
     */
     public function setConversationTitle(?string $value): void {
@@ -249,7 +249,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the createdDate property value. This value indicates the date, in ISO 8601 format, the conversation was created.
+     * Sets the createdDate property value. This value indicates the date the conversation was created in ISO 8601 format.
      * @param string|null $value Value to set for the createdDate property.
     */
     public function setCreatedDate(?string $value): void {
@@ -257,7 +257,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the latestMessage property value. This type defines message details for a conversation.
+     * Sets the latestMessage property value. This container returns the latest message in the conversation and its details.
      * @param MessageDetail|null $value Value to set for the latestMessage property.
     */
     public function setLatestMessage(?MessageDetail $value): void {
@@ -265,7 +265,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceId property value. This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>In the case of a <code>LISTING</code> <b>referenceType</b>, this value will be the item ID value of the associated listing.
+     * Sets the referenceId property value. This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>In the case of a <code>LISTING</code> <strong>referenceType</strong>, this value will be the item ID value of the associated listing.
      * @param string|null $value Value to set for the referenceId property.
     */
     public function setReferenceId(?string $value): void {
@@ -273,7 +273,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceType property value. This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> will be returned.
+     * Sets the referenceType property value. This value indicates the reference type, if applicable, associated with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
      * @param string|null $value Value to set for the referenceType property.
     */
     public function setReferenceType(?string $value): void {
@@ -281,7 +281,7 @@ class ConversationDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unreadCount property value. This value indicates the amount of unread messages in the conversation.
+     * Sets the unreadCount property value. This value indicates the number of unread messages in the conversation.
      * @param int|null $value Value to set for the unreadCount property.
     */
     public function setUnreadCount(?int $value): void {

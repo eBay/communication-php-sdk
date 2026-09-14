@@ -42,14 +42,14 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     private ?array $feedbackRatingValueDistribution = null;
     
     /**
-     * @var Period|null $period This type provides fields for the time period on which the feedback summary is calculated.
+     * @var Period|null $period The time period on which the feedback summary is calculated.
     */
     private ?Period $period = null;
     
     /**
-     * @var string|null $userRoleType This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
+     * @var UserRoleEnum|null $userRoleType This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>).
     */
-    private ?string $userRoleType = null;
+    private ?UserRoleEnum $userRoleType = null;
     
     /**
      * Instantiates a new RatingSummaryByRatingType and sets the default values.
@@ -101,12 +101,12 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
             'feedbackMetrics' => fn(ParseNode $n) => $o->setFeedbackMetrics($n->getCollectionOfObjectValues([FeedbackMetrics::class, 'createFromDiscriminatorValue'])),
             'feedbackRatingValueDistribution' => fn(ParseNode $n) => $o->setFeedbackRatingValueDistribution($n->getCollectionOfObjectValues([FeedbackRatingValueDistribution::class, 'createFromDiscriminatorValue'])),
             'period' => fn(ParseNode $n) => $o->setPeriod($n->getObjectValue([Period::class, 'createFromDiscriminatorValue'])),
-            'userRoleType' => fn(ParseNode $n) => $o->setUserRoleType($n->getStringValue()),
+            'userRoleType' => fn(ParseNode $n) => $o->setUserRoleType($n->getEnumValue(UserRoleEnum::class)),
         ];
     }
 
     /**
-     * Gets the period property value. This type provides fields for the time period on which the feedback summary is calculated.
+     * Gets the period property value. The time period on which the feedback summary is calculated.
      * @return Period|null
     */
     public function getPeriod(): ?Period {
@@ -114,10 +114,10 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the userRoleType property value. This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the userRoleType property value. This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>).
+     * @return UserRoleEnum|null
     */
-    public function getUserRoleType(): ?string {
+    public function getUserRoleType(): ?UserRoleEnum {
         return $this->userRoleType;
     }
 
@@ -129,7 +129,7 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfObjectValues('feedbackMetrics', $this->getFeedbackMetrics());
         $writer->writeCollectionOfObjectValues('feedbackRatingValueDistribution', $this->getFeedbackRatingValueDistribution());
         $writer->writeObjectValue('period', $this->getPeriod());
-        $writer->writeStringValue('userRoleType', $this->getUserRoleType());
+        $writer->writeEnumValue('userRoleType', $this->getUserRoleType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -158,7 +158,7 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the period property value. This type provides fields for the time period on which the feedback summary is calculated.
+     * Sets the period property value. The time period on which the feedback summary is calculated.
      * @param Period|null $value Value to set for the period property.
     */
     public function setPeriod(?Period $value): void {
@@ -166,10 +166,10 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the userRoleType property value. This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserRoleEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the userRoleType property.
+     * Sets the userRoleType property value. This enumerated value indicates the user's role in the feedback  (<code>BUYER</code> or <code>SELLER</code>).
+     * @param UserRoleEnum|null $value Value to set for the userRoleType property.
     */
-    public function setUserRoleType(?string $value): void {
+    public function setUserRoleType(?UserRoleEnum $value): void {
         $this->userRoleType = $value;
     }
 

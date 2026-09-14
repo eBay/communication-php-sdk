@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines filter details for the specified subscription filter.
+*/
 class SubscriptionFilter implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -44,9 +47,9 @@ class SubscriptionFilter implements AdditionalDataHolder, Parsable
     private ?SubscriptionFilter_filterSchema $filterSchema = null;
     
     /**
-     * @var string|null $filterStatus The status of this subscription filter. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionFilterStatus'>eBay API documentation</a>
+     * @var SubscriptionFilterStatus|null $filterStatus The status of this subscription filter.
     */
-    private ?string $filterStatus = null;
+    private ?SubscriptionFilterStatus $filterStatus = null;
     
     /**
      * @var string|null $subscriptionId The unique identifier for the subscription.
@@ -95,7 +98,7 @@ class SubscriptionFilter implements AdditionalDataHolder, Parsable
             'creationDate' => fn(ParseNode $n) => $o->setCreationDate($n->getStringValue()),
             'filterId' => fn(ParseNode $n) => $o->setFilterId($n->getStringValue()),
             'filterSchema' => fn(ParseNode $n) => $o->setFilterSchema($n->getObjectValue([SubscriptionFilter_filterSchema::class, 'createFromDiscriminatorValue'])),
-            'filterStatus' => fn(ParseNode $n) => $o->setFilterStatus($n->getStringValue()),
+            'filterStatus' => fn(ParseNode $n) => $o->setFilterStatus($n->getEnumValue(SubscriptionFilterStatus::class)),
             'subscriptionId' => fn(ParseNode $n) => $o->setSubscriptionId($n->getStringValue()),
         ];
     }
@@ -117,10 +120,10 @@ class SubscriptionFilter implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the filterStatus property value. The status of this subscription filter. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionFilterStatus'>eBay API documentation</a>
-     * @return string|null
+     * Gets the filterStatus property value. The status of this subscription filter.
+     * @return SubscriptionFilterStatus|null
     */
-    public function getFilterStatus(): ?string {
+    public function getFilterStatus(): ?SubscriptionFilterStatus {
         return $this->filterStatus;
     }
 
@@ -140,7 +143,7 @@ class SubscriptionFilter implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('creationDate', $this->getCreationDate());
         $writer->writeStringValue('filterId', $this->getFilterId());
         $writer->writeObjectValue('filterSchema', $this->getFilterSchema());
-        $writer->writeStringValue('filterStatus', $this->getFilterStatus());
+        $writer->writeEnumValue('filterStatus', $this->getFilterStatus());
         $writer->writeStringValue('subscriptionId', $this->getSubscriptionId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -178,10 +181,10 @@ class SubscriptionFilter implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the filterStatus property value. The status of this subscription filter. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionFilterStatus'>eBay API documentation</a>
-     * @param string|null $value Value to set for the filterStatus property.
+     * Sets the filterStatus property value. The status of this subscription filter.
+     * @param SubscriptionFilterStatus|null $value Value to set for the filterStatus property.
     */
-    public function setFilterStatus(?string $value): void {
+    public function setFilterStatus(?SubscriptionFilterStatus $value): void {
         $this->filterStatus = $value;
     }
 

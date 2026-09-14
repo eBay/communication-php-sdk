@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type provides field for an array listing the distribution values of the feedback ratings.
+ * This type provides fields for an array listing the distribution values of the feedback ratings.
 */
 class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $count An integer representing the number of occurrences for a specific feedback rating <b>value</b>. For example, for the <code>POSITIVE</code> <b>value</b>, a <code>3</code> returned as the <b>count</b> represents three positive ratings were returned.
+     * @var int|null $count An integer representing the number of occurrences for a specific feedback rating <strong>value</strong>. For example, for the <code>POSITIVE</code> <strong>value</strong>, a <code>3</code> returned as the <strong>count</strong> represents three positive ratings were returned.
     */
     private ?int $count = null;
     
     /**
-     * @var string|null $value A string indicating the specific feedback rating value. Supported values include: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
+     * @var string|null $value A string indicating the specific feedback rating value. Supported values include <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
     */
     private ?string $value = null;
     
@@ -66,7 +66,7 @@ class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the count property value. An integer representing the number of occurrences for a specific feedback rating <b>value</b>. For example, for the <code>POSITIVE</code> <b>value</b>, a <code>3</code> returned as the <b>count</b> represents three positive ratings were returned.
+     * Gets the count property value. An integer representing the number of occurrences for a specific feedback rating <strong>value</strong>. For example, for the <code>POSITIVE</code> <strong>value</strong>, a <code>3</code> returned as the <strong>count</strong> represents three positive ratings were returned.
      * @return int|null
     */
     public function getCount(): ?int {
@@ -86,7 +86,7 @@ class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. A string indicating the specific feedback rating value. Supported values include: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
+     * Gets the value property value. A string indicating the specific feedback rating value. Supported values include <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -112,7 +112,7 @@ class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the count property value. An integer representing the number of occurrences for a specific feedback rating <b>value</b>. For example, for the <code>POSITIVE</code> <b>value</b>, a <code>3</code> returned as the <b>count</b> represents three positive ratings were returned.
+     * Sets the count property value. An integer representing the number of occurrences for a specific feedback rating <strong>value</strong>. For example, for the <code>POSITIVE</code> <strong>value</strong>, a <code>3</code> returned as the <strong>count</strong> represents three positive ratings were returned.
      * @param int|null $value Value to set for the count property.
     */
     public function setCount(?int $value): void {
@@ -120,7 +120,7 @@ class FeedbackRatingValueDistribution implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. A string indicating the specific feedback rating value. Supported values include: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
+     * Sets the value property value. A string indicating the specific feedback rating value. Supported values include <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

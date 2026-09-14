@@ -47,7 +47,7 @@ class Offer implements AdditionalDataHolder, Parsable
     private ?string $creationDate = null;
     
     /**
-     * @var string|null $initiatedBy The eBay <b>UserName</b> of the user (seller) who initiated the offer.
+     * @var string|null $initiatedBy The eBay <b>UserName</b> of the user (seller) who initiated the offer.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span>
     */
     private ?string $initiatedBy = null;
     
@@ -77,14 +77,14 @@ class Offer implements AdditionalDataHolder, Parsable
     private ?string $offerId = null;
     
     /**
-     * @var string|null $offerStatus The current state, or status, of an offer.  <br><br>Status states include <code>PENDING</code>, <code>COUNTERED</code>, <code>ACCEPTED</code>, and <code>DECLINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay API documentation</a>
+     * @var OfferStatusEnum|null $offerStatus The status of the offer that was extended to a buyer.
     */
-    private ?string $offerStatus = null;
+    private ?OfferStatusEnum $offerStatus = null;
     
     /**
-     * @var string|null $offerType The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay API documentation</a>
+     * @var OfferTypeEnum|null $offerType This enum describes the types of offers that can be made in a buyer-seller discount negotiation.
     */
-    private ?string $offerType = null;
+    private ?OfferTypeEnum $offerType = null;
     
     /**
      * @var string|null $revision A unique, eBay-assigned ID for the revision of the offer.
@@ -155,14 +155,14 @@ class Offer implements AdditionalDataHolder, Parsable
             'offerDuration' => fn(ParseNode $n) => $o->setOfferDuration($n->getObjectValue([TimeDuration::class, 'createFromDiscriminatorValue'])),
             'offeredItems' => fn(ParseNode $n) => $o->setOfferedItems($n->getCollectionOfObjectValues([OfferedItem::class, 'createFromDiscriminatorValue'])),
             'offerId' => fn(ParseNode $n) => $o->setOfferId($n->getStringValue()),
-            'offerStatus' => fn(ParseNode $n) => $o->setOfferStatus($n->getStringValue()),
-            'offerType' => fn(ParseNode $n) => $o->setOfferType($n->getStringValue()),
+            'offerStatus' => fn(ParseNode $n) => $o->setOfferStatus($n->getEnumValue(OfferStatusEnum::class)),
+            'offerType' => fn(ParseNode $n) => $o->setOfferType($n->getEnumValue(OfferTypeEnum::class)),
             'revision' => fn(ParseNode $n) => $o->setRevision($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the initiatedBy property value. The eBay <b>UserName</b> of the user (seller) who initiated the offer.
+     * Gets the initiatedBy property value. The eBay <b>UserName</b> of the user (seller) who initiated the offer.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getInitiatedBy(): ?string {
@@ -210,18 +210,18 @@ class Offer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the offerStatus property value. The current state, or status, of an offer.  <br><br>Status states include <code>PENDING</code>, <code>COUNTERED</code>, <code>ACCEPTED</code>, and <code>DECLINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the offerStatus property value. The status of the offer that was extended to a buyer.
+     * @return OfferStatusEnum|null
     */
-    public function getOfferStatus(): ?string {
+    public function getOfferStatus(): ?OfferStatusEnum {
         return $this->offerStatus;
     }
 
     /**
-     * Gets the offerType property value. The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the offerType property value. This enum describes the types of offers that can be made in a buyer-seller discount negotiation.
+     * @return OfferTypeEnum|null
     */
-    public function getOfferType(): ?string {
+    public function getOfferType(): ?OfferTypeEnum {
         return $this->offerType;
     }
 
@@ -247,8 +247,8 @@ class Offer implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('offerDuration', $this->getOfferDuration());
         $writer->writeCollectionOfObjectValues('offeredItems', $this->getOfferedItems());
         $writer->writeStringValue('offerId', $this->getOfferId());
-        $writer->writeStringValue('offerStatus', $this->getOfferStatus());
-        $writer->writeStringValue('offerType', $this->getOfferType());
+        $writer->writeEnumValue('offerStatus', $this->getOfferStatus());
+        $writer->writeEnumValue('offerType', $this->getOfferType());
         $writer->writeStringValue('revision', $this->getRevision());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -286,7 +286,7 @@ class Offer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the initiatedBy property value. The eBay <b>UserName</b> of the user (seller) who initiated the offer.
+     * Sets the initiatedBy property value. The eBay <b>UserName</b> of the user (seller) who initiated the offer.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the initiatedBy property.
     */
     public function setInitiatedBy(?string $value): void {
@@ -334,18 +334,18 @@ class Offer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the offerStatus property value. The current state, or status, of an offer.  <br><br>Status states include <code>PENDING</code>, <code>COUNTERED</code>, <code>ACCEPTED</code>, and <code>DECLINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the offerStatus property.
+     * Sets the offerStatus property value. The status of the offer that was extended to a buyer.
+     * @param OfferStatusEnum|null $value Value to set for the offerStatus property.
     */
-    public function setOfferStatus(?string $value): void {
+    public function setOfferStatus(?OfferStatusEnum $value): void {
         $this->offerStatus = $value;
     }
 
     /**
-     * Sets the offerType property value. The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the offerType property.
+     * Sets the offerType property value. This enum describes the types of offers that can be made in a buyer-seller discount negotiation.
+     * @param OfferTypeEnum|null $value Value to set for the offerType property.
     */
-    public function setOfferType(?string $value): void {
+    public function setOfferType(?OfferTypeEnum $value): void {
         $this->offerType = $value;
     }
 

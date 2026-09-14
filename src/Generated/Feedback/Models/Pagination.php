@@ -37,7 +37,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     private ?int $count = null;
     
     /**
-     * @var int|null $limit The value of the <b>limit</b> parameter submitted in the request. This is the maximum number of line items, as filtered, awaiting feedback to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <b>limit</b> value. </span></p><p>If a <b>limit</b> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><b>Default: </b>25</p>
+     * @var int|null $limit The value of the <strong>limit</strong> parameter submitted in the request. This is the maximum number of line items awaiting feedback, as filtered, to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <strong>limit</strong> value. </span></p><p>If a <strong>limit</strong> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><strong>Default: </strong>25</p>
     */
     private ?int $limit = null;
     
@@ -47,7 +47,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     private ?string $next = null;
     
     /**
-     * @var int|null $offset The value of the <b>offset</b> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <b>offset</b> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><b>Default: </b>0</p>
+     * @var int|null $offset The value of the <strong>offset</strong> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <strong>offset</strong> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><strong>Default: </strong>0</p>
     */
     private ?int $offset = null;
     
@@ -110,7 +110,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the limit property value. The value of the <b>limit</b> parameter submitted in the request. This is the maximum number of line items, as filtered, awaiting feedback to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <b>limit</b> value. </span></p><p>If a <b>limit</b> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><b>Default: </b>25</p>
+     * Gets the limit property value. The value of the <strong>limit</strong> parameter submitted in the request. This is the maximum number of line items awaiting feedback, as filtered, to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <strong>limit</strong> value. </span></p><p>If a <strong>limit</strong> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><strong>Default: </strong>25</p>
      * @return int|null
     */
     public function getLimit(): ?int {
@@ -126,7 +126,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the offset property value. The value of the <b>offset</b> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <b>offset</b> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><b>Default: </b>0</p>
+     * Gets the offset property value. The value of the <strong>offset</strong> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <strong>offset</strong> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><strong>Default: </strong>0</p>
      * @return int|null
     */
     public function getOffset(): ?int {
@@ -180,7 +180,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the limit property value. The value of the <b>limit</b> parameter submitted in the request. This is the maximum number of line items, as filtered, awaiting feedback to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <b>limit</b> value. </span></p><p>If a <b>limit</b> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><b>Default: </b>25</p>
+     * Sets the limit property value. The value of the <strong>limit</strong> parameter submitted in the request. This is the maximum number of line items awaiting feedback, as filtered, to return per page from the result set. This field indicates the number of line items returned per page of data. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>If this is the last or only page of the result set, the page may contain fewer line items than the <strong>limit</strong> value. </span></p><p>If a <strong>limit</strong> parameter was not included in the request, this value will default to <code>25</code>, returning up to 25 line items on each page.</p><p><strong>Default: </strong>25</p>
      * @param int|null $value Value to set for the limit property.
     */
     public function setLimit(?int $value): void {
@@ -196,7 +196,7 @@ class Pagination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the offset property value. The value of the <b>offset</b> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <b>offset</b> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><b>Default: </b>0</p>
+     * Sets the offset property value. The value of the <strong>offset</strong> parameter submitted in the request. This field indicates how many results were skipped in the response. If an <strong>offset</strong> parameter was not included in the request, this value will default to <code>0</code>, returning the first page of results.<p><strong>Default: </strong>0</p>
      * @param int|null $value Value to set for the offset property.
     */
     public function setOffset(?int $value): void {

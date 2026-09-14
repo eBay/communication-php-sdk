@@ -32,22 +32,22 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $destinationId The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <b>getDestinations</b> method to retrieve destination IDs.
+     * @var string|null $destinationId The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <a href="/develop/api/sell/notification_api#sell-notification_api-destination-getdestinations">getDestinations</a>  method to retrieve destination IDs.
     */
     private ?string $destinationId = null;
     
     /**
-     * @var SubscriptionPayloadDetail|null $payload A type that describes the details of the subscription payload.
+     * @var SubscriptionPayloadDetail|null $payload The payload associated with the notification topic. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> to get the supported payload for the topic.
     */
     private ?SubscriptionPayloadDetail $payload = null;
     
     /**
-     * @var string|null $status Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
+     * @var SubscriptionStatusEnum|null $status Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>.
     */
-    private ?string $status = null;
+    private ?SubscriptionStatusEnum $status = null;
     
     /**
-     * @var string|null $topicId The unique identifier of the notification topic to subscribe to. Use <b>getTopics</b> to get topic IDs.
+     * @var string|null $topicId The unique identifier of the notification topic to subscribe to. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> to get topic IDs.
     */
     private ?string $topicId = null;
     
@@ -76,7 +76,7 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the destinationId property value. The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <b>getDestinations</b> method to retrieve destination IDs.
+     * Gets the destinationId property value. The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <a href="/develop/api/sell/notification_api#sell-notification_api-destination-getdestinations">getDestinations</a>  method to retrieve destination IDs.
      * @return string|null
     */
     public function getDestinationId(): ?string {
@@ -92,13 +92,13 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
         return  [
             'destinationId' => fn(ParseNode $n) => $o->setDestinationId($n->getStringValue()),
             'payload' => fn(ParseNode $n) => $o->setPayload($n->getObjectValue([SubscriptionPayloadDetail::class, 'createFromDiscriminatorValue'])),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(SubscriptionStatusEnum::class)),
             'topicId' => fn(ParseNode $n) => $o->setTopicId($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the payload property value. A type that describes the details of the subscription payload.
+     * Gets the payload property value. The payload associated with the notification topic. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> to get the supported payload for the topic.
      * @return SubscriptionPayloadDetail|null
     */
     public function getPayload(): ?SubscriptionPayloadDetail {
@@ -106,15 +106,15 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>.
+     * @return SubscriptionStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?SubscriptionStatusEnum {
         return $this->status;
     }
 
     /**
-     * Gets the topicId property value. The unique identifier of the notification topic to subscribe to. Use <b>getTopics</b> to get topic IDs.
+     * Gets the topicId property value. The unique identifier of the notification topic to subscribe to. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> to get topic IDs.
      * @return string|null
     */
     public function getTopicId(): ?string {
@@ -128,7 +128,7 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('destinationId', $this->getDestinationId());
         $writer->writeObjectValue('payload', $this->getPayload());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('topicId', $this->getTopicId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -142,7 +142,7 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the destinationId property value. The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <b>getDestinations</b> method to retrieve destination IDs.
+     * Sets the destinationId property value. The unique identifier of the destination endpoint that will receive notifications associated with this subscription. Use the <a href="/develop/api/sell/notification_api#sell-notification_api-destination-getdestinations">getDestinations</a>  method to retrieve destination IDs.
      * @param string|null $value Value to set for the destinationId property.
     */
     public function setDestinationId(?string $value): void {
@@ -150,7 +150,7 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payload property value. A type that describes the details of the subscription payload.
+     * Sets the payload property value. The payload associated with the notification topic. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> or <a href="/api-docs/commerce/notification/resources/topic/methods/getTopic">getTopic</a> to get the supported payload for the topic.
      * @param SubscriptionPayloadDetail|null $value Value to set for the payload property.
     */
     public function setPayload(?SubscriptionPayloadDetail $value): void {
@@ -158,15 +158,15 @@ class CreateSubscriptionRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. Set the status of the subscription to <code>ENABLED</code> or <code>DISABLED</code>.
+     * @param SubscriptionStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?SubscriptionStatusEnum $value): void {
         $this->status = $value;
     }
 
     /**
-     * Sets the topicId property value. The unique identifier of the notification topic to subscribe to. Use <b>getTopics</b> to get topic IDs.
+     * Sets the topicId property value. The unique identifier of the notification topic to subscribe to. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> to get topic IDs.
      * @param string|null $value Value to set for the topicId property.
     */
     public function setTopicId(?string $value): void {

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type specifies the type of message media sent when sending a message.
+ * This type specifies the format of media that was included when sending a message.
 */
 class MessageMedia implements AdditionalDataHolder, Parsable 
 {
@@ -37,7 +37,7 @@ class MessageMedia implements AdditionalDataHolder, Parsable
     private ?string $mediaName = null;
     
     /**
-     * @var string|null $mediaType The type of media attached to the message.<br><br><b>Valid values:</b><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
+     * @var string|null $mediaType The type of media attached to the message.<br><br><strong>Valid values:</strong><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
     */
     private ?string $mediaType = null;
     
@@ -92,7 +92,7 @@ class MessageMedia implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the mediaType property value. The type of media attached to the message.<br><br><b>Valid values:</b><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
+     * Gets the mediaType property value. The type of media attached to the message.<br><br><strong>Valid values:</strong><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
      * @return string|null
     */
     public function getMediaType(): ?string {
@@ -135,7 +135,7 @@ class MessageMedia implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the mediaType property value. The type of media attached to the message.<br><br><b>Valid values:</b><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
+     * Sets the mediaType property value. The type of media attached to the message.<br><br><strong>Valid values:</strong><ul><li><code>IMAGE</code></li><li><code>PDF</code></li><li><code>DOC</code></li><li><code>TXT</code></li></ul>
      * @param string|null $value Value to set for the mediaType property.
     */
     public function setMediaType(?string $value): void {

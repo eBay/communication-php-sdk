@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>getItemsAwaitingFeedback</b> response.
+ * This type defines the fields for the <strong>getItemsAwaitingFeedback</strong> response.
 */
 class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ItemsAwaitingFeedbackCount|null $itemsAwaitingFeedbackCount This type returns the number of line items awaiting feedback.
+     * @var ItemsAwaitingFeedbackCount|null $itemsAwaitingFeedbackCount This container returns the number of line items awaiting feedback. The <strong>asSeller</strong> and <strong>asBuyer</strong> fields return the total count of items awaiting feedback as seller and buyer and are not affected by the <strong>userRole</strong> filter.
     */
     private ?ItemsAwaitingFeedbackCount $itemsAwaitingFeedbackCount = null;
     
@@ -42,7 +42,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     private ?array $lineItems = null;
     
     /**
-     * @var Pagination|null $pagination This type provides pagination information for the returned line items.
+     * @var Pagination|null $pagination This container provides pagination information for the returned line items awaiting feedback (as filtered).
     */
     private ?Pagination $pagination = null;
     
@@ -84,7 +84,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the itemsAwaitingFeedbackCount property value. This type returns the number of line items awaiting feedback.
+     * Gets the itemsAwaitingFeedbackCount property value. This container returns the number of line items awaiting feedback. The <strong>asSeller</strong> and <strong>asBuyer</strong> fields return the total count of items awaiting feedback as seller and buyer and are not affected by the <strong>userRole</strong> filter.
      * @return ItemsAwaitingFeedbackCount|null
     */
     public function getItemsAwaitingFeedbackCount(): ?ItemsAwaitingFeedbackCount {
@@ -100,7 +100,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pagination property value. This type provides pagination information for the returned line items.
+     * Gets the pagination property value. This container provides pagination information for the returned line items awaiting feedback (as filtered).
      * @return Pagination|null
     */
     public function getPagination(): ?Pagination {
@@ -127,7 +127,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the itemsAwaitingFeedbackCount property value. This type returns the number of line items awaiting feedback.
+     * Sets the itemsAwaitingFeedbackCount property value. This container returns the number of line items awaiting feedback. The <strong>asSeller</strong> and <strong>asBuyer</strong> fields return the total count of items awaiting feedback as seller and buyer and are not affected by the <strong>userRole</strong> filter.
      * @param ItemsAwaitingFeedbackCount|null $value Value to set for the itemsAwaitingFeedbackCount property.
     */
     public function setItemsAwaitingFeedbackCount(?ItemsAwaitingFeedbackCount $value): void {
@@ -143,7 +143,7 @@ class AwaitingFeedbackResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pagination property value. This type provides pagination information for the returned line items.
+     * Sets the pagination property value. This container provides pagination information for the returned line items awaiting feedback (as filtered).
      * @param Pagination|null $value Value to set for the pagination property.
     */
     public function setPagination(?Pagination $value): void {

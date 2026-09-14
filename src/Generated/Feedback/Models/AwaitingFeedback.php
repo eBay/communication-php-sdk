@@ -32,12 +32,12 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $listingId This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing for which feedback is being awaited.
+     * @var string|null $listingId This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing that is awaiting feedback.
     */
     private ?string $listingId = null;
     
     /**
-     * @var ListingPrice|null $listingPrice This type provides details about the price of the listing awaiting feedback.
+     * @var ListingPrice|null $listingPrice This container shows the sale price of the listing.
     */
     private ?ListingPrice $listingPrice = null;
     
@@ -47,12 +47,12 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     private ?string $listingTitle = null;
     
     /**
-     * @var string|null $orderLineItemId The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item for which feedback is being awaited.
+     * @var string|null $orderLineItemId The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item awaiting feedback.
     */
     private ?string $orderLineItemId = null;
     
     /**
-     * @var array<FeedbackRatingTemplateType>|null $ratingTemplates This array contains a list of available values for use in a particular rating, and whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <b>leaveFeedback</b> method. The key field in this container is the <b>ratingKey</b> field. See <a href="/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum" >FeedbackRatingTypeEnum</a> for its values. The other metadata returned in this container apply to each <b>ratingKey</b> value that is returned.</p>
+     * @var array<FeedbackRatingTemplateType>|null $ratingTemplates This array contains a list of available values for use in a particular rating as well as whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <strong>leaveFeedback</strong> method. The key field in this container is the <strong>ratingKey</strong> field. See <strong>FeedbackRatingTypeEnum</strong> for its values. The other metadata returned in this container apply to each <strong>ratingKey</strong> value that is returned.</p>
     */
     private ?array $ratingTemplates = null;
     
@@ -102,7 +102,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingId property value. This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing for which feedback is being awaited.
+     * Gets the listingId property value. This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing that is awaiting feedback.
      * @return string|null
     */
     public function getListingId(): ?string {
@@ -110,7 +110,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingPrice property value. This type provides details about the price of the listing awaiting feedback.
+     * Gets the listingPrice property value. This container shows the sale price of the listing.
      * @return ListingPrice|null
     */
     public function getListingPrice(): ?ListingPrice {
@@ -126,7 +126,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderLineItemId property value. The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item for which feedback is being awaited.
+     * Gets the orderLineItemId property value. The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item awaiting feedback.
      * @return string|null
     */
     public function getOrderLineItemId(): ?string {
@@ -134,7 +134,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ratingTemplates property value. This array contains a list of available values for use in a particular rating, and whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <b>leaveFeedback</b> method. The key field in this container is the <b>ratingKey</b> field. See <a href="/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum" >FeedbackRatingTypeEnum</a> for its values. The other metadata returned in this container apply to each <b>ratingKey</b> value that is returned.</p>
+     * Gets the ratingTemplates property value. This array contains a list of available values for use in a particular rating as well as whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <strong>leaveFeedback</strong> method. The key field in this container is the <strong>ratingKey</strong> field. See <strong>FeedbackRatingTypeEnum</strong> for its values. The other metadata returned in this container apply to each <strong>ratingKey</strong> value that is returned.</p>
      * @return array<FeedbackRatingTemplateType>|null
     */
     public function getRatingTemplates(): ?array {
@@ -172,7 +172,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingId property value. This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing for which feedback is being awaited.
+     * Sets the listingId property value. This is the unique identifier for the listing associated with the line item. It is used to reference the specific listing that is awaiting feedback.
      * @param string|null $value Value to set for the listingId property.
     */
     public function setListingId(?string $value): void {
@@ -180,7 +180,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingPrice property value. This type provides details about the price of the listing awaiting feedback.
+     * Sets the listingPrice property value. This container shows the sale price of the listing.
      * @param ListingPrice|null $value Value to set for the listingPrice property.
     */
     public function setListingPrice(?ListingPrice $value): void {
@@ -196,7 +196,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderLineItemId property value. The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item for which feedback is being awaited.
+     * Sets the orderLineItemId property value. The unique identifier for the eBay order line item associated with the listing. It is used to pinpoint the exact line item awaiting feedback.
      * @param string|null $value Value to set for the orderLineItemId property.
     */
     public function setOrderLineItemId(?string $value): void {
@@ -204,7 +204,7 @@ class AwaitingFeedback implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ratingTemplates property value. This array contains a list of available values for use in a particular rating, and whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <b>leaveFeedback</b> method. The key field in this container is the <b>ratingKey</b> field. See <a href="/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum" >FeedbackRatingTypeEnum</a> for its values. The other metadata returned in this container apply to each <b>ratingKey</b> value that is returned.</p>
+     * Sets the ratingTemplates property value. This array contains a list of available values for use in a particular rating as well as whether the value is enabled. This is dependent on what seller ratings the buyer's order partner qualifies.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Rating templates should only be returned to the user in their role as a buyer; only sellers have Detailed Seller Ratings (DSRs). </span></p><p>Use the metadata returned here when leaving DSR ratings through the <strong>leaveFeedback</strong> method. The key field in this container is the <strong>ratingKey</strong> field. See <strong>FeedbackRatingTypeEnum</strong> for its values. The other metadata returned in this container apply to each <strong>ratingKey</strong> value that is returned.</p>
      * @param array<FeedbackRatingTemplateType>|null $value Value to set for the ratingTemplates property.
     */
     public function setRatingTemplates(?array $value): void {

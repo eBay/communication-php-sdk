@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Public_key\Item;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\PublicKey;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,23 @@ class WithPublic_key_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br><br>The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The retrieved public key value should be cached for a temporary — but reasonable — amount of time (e.g., one-hour is recommended.) This key should not be requested for every notification since doing so can result in exceeding <a href="/develop/apis/api-call-limits" target="_blank">API call limits</a> if a large number of notification requests is received.</p></div><br><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a>.</span>
+     * This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br><br>The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The retrieved public key value should be cached for a temporary — but reasonable — amount of time (e.g., one-hour is recommended.) This key should not be requested for every notification since doing so can result in exceeding <a href="/develop/apis/api-call-limits" target="_blank">API call limits</a> if a large number of notification requests is received.</p></div><br><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/develop/guides-v2/sell-communications-guide#overview" target="_blank">Communications Guide</a>.</span>
      * @param WithPublic_key_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<PublicKey|null>
      * @throws Exception
     */
     public function get(?WithPublic_key_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PublicKey::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PublicKey::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br><br>The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The retrieved public key value should be cached for a temporary — but reasonable — amount of time (e.g., one-hour is recommended.) This key should not be requested for every notification since doing so can result in exceeding <a href="/develop/apis/api-call-limits" target="_blank">API call limits</a> if a large number of notification requests is received.</p></div><br><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a>.</span>
+     * This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br><br>The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> The retrieved public key value should be cached for a temporary — but reasonable — amount of time (e.g., one-hour is recommended.) This key should not be requested for every notification since doing so can result in exceeding <a href="/develop/apis/api-call-limits" target="_blank">API call limits</a> if a large number of notification requests is received.</p></div><br><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/develop/guides-v2/sell-communications-guide#overview" target="_blank">Communications Guide</a>.</span>
      * @param WithPublic_key_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

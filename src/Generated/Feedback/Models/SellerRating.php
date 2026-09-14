@@ -32,12 +32,12 @@ class SellerRating implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $key The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:KeyEnum'>eBay API documentation</a>
+     * @var KeyEnum|null $key The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>).
     */
-    private ?string $key = null;
+    private ?KeyEnum $key = null;
     
     /**
-     * @var string|null $value The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with the <code>1</code> being the lowest rating and <code>5</code> being the highest.
+     * @var string|null $value The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with <code>1</code> being the lowest rating and <code>5</code> being the highest.
     */
     private ?string $value = null;
     
@@ -72,21 +72,21 @@ class SellerRating implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'key' => fn(ParseNode $n) => $o->setKey($n->getStringValue()),
+            'key' => fn(ParseNode $n) => $o->setKey($n->getEnumValue(KeyEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the key property value. The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:KeyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the key property value. The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>).
+     * @return KeyEnum|null
     */
-    public function getKey(): ?string {
+    public function getKey(): ?KeyEnum {
         return $this->key;
     }
 
     /**
-     * Gets the value property value. The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with the <code>1</code> being the lowest rating and <code>5</code> being the highest.
+     * Gets the value property value. The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with <code>1</code> being the lowest rating and <code>5</code> being the highest.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -98,7 +98,7 @@ class SellerRating implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('key', $this->getKey());
+        $writer->writeEnumValue('key', $this->getKey());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class SellerRating implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the key property value. The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/api:KeyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the key property.
+     * Sets the key property value. The enumerated value of the category being rated, such as delivery timeliness (<code>ON_TIME_DELIVERY</code>).
+     * @param KeyEnum|null $value Value to set for the key property.
     */
-    public function setKey(?string $value): void {
+    public function setKey(?KeyEnum $value): void {
         $this->key = $value;
     }
 
     /**
-     * Sets the value property value. The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with the <code>1</code> being the lowest rating and <code>5</code> being the highest.
+     * Sets the value property value. The value assigned for the selected category. Use a value of <code>1</code> through <code>5</code>, with <code>1</code> being the lowest rating and <code>5</code> being the highest.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

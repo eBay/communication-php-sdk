@@ -32,14 +32,14 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Period|null $period This type provides fields for the time period on which the feedback summary is calculated.
+     * @var Period|null $period This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days.
     */
     private ?Period $period = null;
     
     /**
-     * @var string|null $thresholdType This enumerated value indicates whether a transaction <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary.transactionPeriod.period" >period</a> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:ThresholdTypeEnum'>eBay API documentation</a>
+     * @var ThresholdTypeEnum|null $thresholdType This enumerated value indicates whether a transaction <strong>period</strong> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold.
     */
-    private ?string $thresholdType = null;
+    private ?ThresholdTypeEnum $thresholdType = null;
     
     /**
      * Instantiates a new TransactionPeriod and sets the default values.
@@ -73,12 +73,12 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'period' => fn(ParseNode $n) => $o->setPeriod($n->getObjectValue([Period::class, 'createFromDiscriminatorValue'])),
-            'thresholdType' => fn(ParseNode $n) => $o->setThresholdType($n->getStringValue()),
+            'thresholdType' => fn(ParseNode $n) => $o->setThresholdType($n->getEnumValue(ThresholdTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the period property value. This type provides fields for the time period on which the feedback summary is calculated.
+     * Gets the period property value. This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days.
      * @return Period|null
     */
     public function getPeriod(): ?Period {
@@ -86,10 +86,10 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the thresholdType property value. This enumerated value indicates whether a transaction <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary.transactionPeriod.period" >period</a> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:ThresholdTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the thresholdType property value. This enumerated value indicates whether a transaction <strong>period</strong> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold.
+     * @return ThresholdTypeEnum|null
     */
-    public function getThresholdType(): ?string {
+    public function getThresholdType(): ?ThresholdTypeEnum {
         return $this->thresholdType;
     }
 
@@ -99,7 +99,7 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('period', $this->getPeriod());
-        $writer->writeStringValue('thresholdType', $this->getThresholdType());
+        $writer->writeEnumValue('thresholdType', $this->getThresholdType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the period property value. This type provides fields for the time period on which the feedback summary is calculated.
+     * Sets the period property value. This container indicates if the time since the item was bought on eBay is less than, more than, or equal to 90 days.
      * @param Period|null $value Value to set for the period property.
     */
     public function setPeriod(?Period $value): void {
@@ -120,10 +120,10 @@ class TransactionPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the thresholdType property value. This enumerated value indicates whether a transaction <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.orderLineItemSummary.transactionPeriod.period" >period</a> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:ThresholdTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the thresholdType property.
+     * Sets the thresholdType property value. This enumerated value indicates whether a transaction <strong>period</strong> exceeds, falls short, or matches the threshold. You can use this field to trigger specific logic or actions based on whether a transaction period exceeds, falls short, or matches the threshold.
+     * @param ThresholdTypeEnum|null $value Value to set for the thresholdType property.
     */
-    public function setThresholdType(?string $value): void {
+    public function setThresholdType(?ThresholdTypeEnum $value): void {
         $this->thresholdType = $value;
     }
 

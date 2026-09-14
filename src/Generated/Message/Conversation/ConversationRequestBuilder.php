@@ -32,7 +32,7 @@ class ConversationRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/Communication/Generated/Message.conversation.item collection
-     * @param string $conversation_id This path parameters specifies the unique identifier of the conversation that is to be retrieved.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.
+     * @param string $conversation_id This path parameters specify the unique identifier of the conversation that is to be retrieved.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
      * @return WithConversation_ItemRequestBuilder
     */
     public function byConversation_id(string $conversation_id): WithConversation_ItemRequestBuilder {
@@ -56,7 +56,7 @@ class ConversationRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method can be used to retrieve one or more conversations associated with a user.<br><br>The <b>conversation_type</b> query parameter is required when using this method to specify if the retrieved conversations are from eBay or from members.<br><br>The result set can also optionally be filtered by conversation status, reference, username, and/or time range. The <b>limit</b> and <b>offset</b> path parameters can be used to paginate the result set and control how many conversations are returned in the response.
+     * This method can be used to retrieve one or more conversations associated with a user.<br><br>The <strong>conversation_type</strong> query parameter is required when using this method to specify if the retrieved conversations are from eBay or from members.<br><br>The result set can also optionally be filtered by conversation status, reference, username, and/or time range. The <strong>limit</strong> and <strong>offset</strong> path parameters can be used to paginate the result set and control how many conversations are returned in the response.
      * @param ConversationRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetAllMyConversationsResponse|null>
      * @throws Exception
@@ -67,7 +67,7 @@ class ConversationRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method can be used to retrieve one or more conversations associated with a user.<br><br>The <b>conversation_type</b> query parameter is required when using this method to specify if the retrieved conversations are from eBay or from members.<br><br>The result set can also optionally be filtered by conversation status, reference, username, and/or time range. The <b>limit</b> and <b>offset</b> path parameters can be used to paginate the result set and control how many conversations are returned in the response.
+     * This method can be used to retrieve one or more conversations associated with a user.<br><br>The <strong>conversation_type</strong> query parameter is required when using this method to specify if the retrieved conversations are from eBay or from members.<br><br>The result set can also optionally be filtered by conversation status, reference, username, and/or time range. The <strong>limit</strong> and <strong>offset</strong> path parameters can be used to paginate the result set and control how many conversations are returned in the response.
      * @param ConversationRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

@@ -32,12 +32,12 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit Unit of time for the <b>value</b>. Supported values: <code>DAY</code>, or <code>YEAR</code>.
+     * @var string|null $unit Unit of time for the <strong>value</strong>. Supported values: <code>DAY</code> or <code>YEAR</code>.
     */
     private ?string $unit = null;
     
     /**
-     * @var int|null $value Value of the time period expressed in the period contained in the <b>unit</b>. Supported values: <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackComment.commentPeriod">commentPeriod</a> container for more information.</p>
+     * @var int|null $value Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
     */
     private ?int $value = null;
     
@@ -78,7 +78,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the unit property value. Unit of time for the <b>value</b>. Supported values: <code>DAY</code>, or <code>YEAR</code>.
+     * Gets the unit property value. Unit of time for the <strong>value</strong>. Supported values: <code>DAY</code> or <code>YEAR</code>.
      * @return string|null
     */
     public function getUnit(): ?string {
@@ -86,7 +86,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. Value of the time period expressed in the period contained in the <b>unit</b>. Supported values: <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackComment.commentPeriod">commentPeriod</a> container for more information.</p>
+     * Gets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
      * @return int|null
     */
     public function getValue(): ?int {
@@ -112,7 +112,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. Unit of time for the <b>value</b>. Supported values: <code>DAY</code>, or <code>YEAR</code>.
+     * Sets the unit property value. Unit of time for the <strong>value</strong>. Supported values: <code>DAY</code> or <code>YEAR</code>.
      * @param string|null $value Value to set for the unit property.
     */
     public function setUnit(?string $value): void {
@@ -120,7 +120,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. Value of the time period expressed in the period contained in the <b>unit</b>. Supported values: <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <a href="/api-docs/commerce/feedback/resources/feedback/methods/getFeedback#response.feedbackEntries.feedbackComment.commentPeriod">commentPeriod</a> container for more information.</p>
+     * Sets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
      * @param int|null $value Value to set for the value property.
     */
     public function setValue(?int $value): void {

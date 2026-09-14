@@ -32,9 +32,9 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit A time-measurement unit that specifies a singular period of time.  <br><br>A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>.  <br><br>Time-measurement units can be YEAR, MONTH, DAY, and so on. See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
+     * @var TimeDurationUnitEnum|null $unit An enum value that specifies the time-measurement unit that's used to express a time span.
     */
-    private ?string $unit = null;
+    private ?TimeDurationUnitEnum $unit = null;
     
     /**
      * @var int|null $value An integer that represents an amount of time, as measured by the time-measurement unit specified in the <b>unit</b> field.
@@ -72,16 +72,16 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'unit' => fn(ParseNode $n) => $o->setUnit($n->getStringValue()),
+            'unit' => fn(ParseNode $n) => $o->setUnit($n->getEnumValue(TimeDurationUnitEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getIntegerValue()),
         ];
     }
 
     /**
-     * Gets the unit property value. A time-measurement unit that specifies a singular period of time.  <br><br>A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>.  <br><br>Time-measurement units can be YEAR, MONTH, DAY, and so on. See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the unit property value. An enum value that specifies the time-measurement unit that's used to express a time span.
+     * @return TimeDurationUnitEnum|null
     */
-    public function getUnit(): ?string {
+    public function getUnit(): ?TimeDurationUnitEnum {
         return $this->unit;
     }
 
@@ -98,7 +98,7 @@ class TimeDuration implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('unit', $this->getUnit());
+        $writer->writeEnumValue('unit', $this->getUnit());
         $writer->writeIntegerValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. A time-measurement unit that specifies a singular period of time.  <br><br>A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>.  <br><br>Time-measurement units can be YEAR, MONTH, DAY, and so on. See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the unit property.
+     * Sets the unit property value. An enum value that specifies the time-measurement unit that's used to express a time span.
+     * @param TimeDurationUnitEnum|null $value Value to set for the unit property.
     */
-    public function setUnit(?string $value): void {
+    public function setUnit(?TimeDurationUnitEnum $value): void {
         $this->unit = $value;
     }
 

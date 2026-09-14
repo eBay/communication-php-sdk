@@ -32,9 +32,9 @@ class FeedbackRating implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $ratingType This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
+     * @var FeedbackRatingTypeEnum|null $ratingType This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>).
     */
-    private ?string $ratingType = null;
+    private ?FeedbackRatingTypeEnum $ratingType = null;
     
     /**
      * @var string|null $value The value assigned to the rating, specified as a string representing a number from <code>1</code> to <code>5</code>, with <code>1</code> representing the lowest rating and <code>5</code> representing the highest rating.
@@ -72,16 +72,16 @@ class FeedbackRating implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'ratingType' => fn(ParseNode $n) => $o->setRatingType($n->getStringValue()),
+            'ratingType' => fn(ParseNode $n) => $o->setRatingType($n->getEnumValue(FeedbackRatingTypeEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the ratingType property value. This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the ratingType property value. This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>).
+     * @return FeedbackRatingTypeEnum|null
     */
-    public function getRatingType(): ?string {
+    public function getRatingType(): ?FeedbackRatingTypeEnum {
         return $this->ratingType;
     }
 
@@ -98,7 +98,7 @@ class FeedbackRating implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('ratingType', $this->getRatingType());
+        $writer->writeEnumValue('ratingType', $this->getRatingType());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class FeedbackRating implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ratingType property value. This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the ratingType property.
+     * Sets the ratingType property value. This enumerated value indicates the type of rating (for example, <code>OVERALL_EXPERIENCE</code>, <code>DSR_ITEM_AS_DESCRIBED</code>).
+     * @param FeedbackRatingTypeEnum|null $value Value to set for the ratingType property.
     */
-    public function setRatingType(?string $value): void {
+    public function setRatingType(?FeedbackRatingTypeEnum $value): void {
         $this->ratingType = $value;
     }
 

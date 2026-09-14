@@ -29,11 +29,6 @@ use EBay\Communication\Generated\Message\Models\GetMessagesByConversationIdRespo
 use EBay\Communication\Generated\Message\Models\SendMessageRequest;
 use EBay\Communication\Generated\Message\Models\SendMessageResponse;
 use EBay\Communication\Generated\Message\Models\UpdateConversationRequest;
-use EBay\Communication\Generated\Message\Bulk_update_conversation\Bulk_update_conversationRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Message\Conversation\ConversationRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Message\Conversation\Item\WithConversation_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Message\Send_message\Send_messageRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Message\Update_conversation\Update_conversationRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -60,7 +55,7 @@ final class MessageClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_update_conversation()->post(
                 $body,
-                new Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Message\Bulk_update_conversation\Bulk_update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -77,9 +72,9 @@ final class MessageClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->conversation()->byConversation_id($conversationId)->get(
-                new WithConversation_ItemRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Message\Conversation\Item\WithConversation_ItemRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: WithConversation_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Message\Conversation\Item\WithConversation_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
                         conversation_type: $conversationType,
                         limit: $limit,
                         offset: $offset,
@@ -106,9 +101,9 @@ final class MessageClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->conversation()->get(
-                new ConversationRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Message\Conversation\ConversationRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: ConversationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Message\Conversation\ConversationRequestBuilderGetRequestConfiguration::createQueryParameters(
                         conversation_status: $conversationStatus,
                         conversation_type: $conversationType,
                         end_time: $endTime,
@@ -130,7 +125,7 @@ final class MessageClient
         return $this->call($accessToken, fn($api) =>
             $api->send_message()->post(
                 $body,
-                new Send_messageRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Message\Send_message\Send_messageRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -141,7 +136,7 @@ final class MessageClient
         $this->call($accessToken, fn($api) =>
             $api->update_conversation()->post(
                 $body,
-                new Update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Message\Update_conversation\Update_conversationRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

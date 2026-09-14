@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Topic;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\TopicSearchResponse;
 use EBay\Communication\Generated\Notification\Topic\Item\WithTopic_ItemRequestBuilder;
 use Exception;
@@ -32,7 +33,7 @@ class TopicRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/Communication/Generated/Notification.topic.item collection
-     * @param string $topic_id The unique identifier of the notification topic for which the details are retrieved. Use <b>getTopics</b> to retrieve the topic ID.
+     * @param string $topic_id The unique identifier of the notification topic for which the details are retrieved. Use <a href="/develop/api/sell/notification_api#sell-notification_api-topic-gettopics">getTopics</a> to retrieve the topic ID.
      * @return WithTopic_ItemRequestBuilder
     */
     public function byTopic_id(string $topic_id): WithTopic_ItemRequestBuilder {
@@ -63,7 +64,11 @@ class TopicRequestBuilder extends BaseRequestBuilder
     */
     public function get(?TopicRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [TopicSearchResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [TopicSearchResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

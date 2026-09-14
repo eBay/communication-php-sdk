@@ -32,7 +32,7 @@ class Image implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $url This field provides the URL of an attached image and is included in the response whenever an image is attached.
+     * @var string|null $url This field provides the URL of an attached image and is included in the response whenever an image is attached to the feedback.
     */
     private ?string $url = null;
     
@@ -72,7 +72,7 @@ class Image implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the url property value. This field provides the URL of an attached image and is included in the response whenever an image is attached.
+     * Gets the url property value. This field provides the URL of an attached image and is included in the response whenever an image is attached to the feedback.
      * @return string|null
     */
     public function getUrl(): ?string {
@@ -97,7 +97,7 @@ class Image implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the url property value. This field provides the URL of an attached image and is included in the response whenever an image is attached.
+     * Sets the url property value. This field provides the URL of an attached image and is included in the response whenever an image is attached to the feedback.
      * @param string|null $value Value to set for the url property.
     */
     public function setUrl(?string $value): void {

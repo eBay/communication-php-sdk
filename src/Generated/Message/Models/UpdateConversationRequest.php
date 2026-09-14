@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the request payload of the <b>updateConversation</b> method.
+ * This type defines the request payload of the <strong>updateConversation</strong> method.
 */
 class UpdateConversationRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,22 +32,22 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $conversationId This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values
+     * @var string|null $conversationId This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
     */
     private ?string $conversationId = null;
     
     /**
-     * @var string|null $conversationStatus This field specifies the status for which to update the specified conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>read</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * @var string|null $conversationStatus This field specifies the status for which to update the specified conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>read</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
     */
     private ?string $conversationStatus = null;
     
     /**
-     * @var string|null $conversationType This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required as part of the request payload.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * @var string|null $conversationType This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required as part of the request payload.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
     */
     private ?string $conversationType = null;
     
     /**
-     * @var bool|null $read This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>conversationStatus</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * @var bool|null $read This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>conversationStatus</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
     */
     private ?bool $read = null;
     
@@ -76,7 +76,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationId property value. This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values
+     * Gets the conversationId property value. This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
      * @return string|null
     */
     public function getConversationId(): ?string {
@@ -84,7 +84,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationStatus property value. This field specifies the status for which to update the specified conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>read</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * Gets the conversationStatus property value. This field specifies the status for which to update the specified conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>read</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
      * @return string|null
     */
     public function getConversationStatus(): ?string {
@@ -92,7 +92,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationType property value. This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required as part of the request payload.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * Gets the conversationType property value. This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required as part of the request payload.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
      * @return string|null
     */
     public function getConversationType(): ?string {
@@ -114,7 +114,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the read property value. This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>conversationStatus</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * Gets the read property value. This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>conversationStatus</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
      * @return bool|null
     */
     public function getRead(): ?bool {
@@ -142,7 +142,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationId property value. This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values
+     * Sets the conversationId property value. This field specifies the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
      * @param string|null $value Value to set for the conversationId property.
     */
     public function setConversationId(?string $value): void {
@@ -150,7 +150,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationStatus property value. This field specifies the status for which to update the specified conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>read</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * Sets the conversationStatus property value. This field specifies the status for which to update the specified conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li></ul><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>read</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
      * @param string|null $value Value to set for the conversationStatus property.
     */
     public function setConversationStatus(?string $value): void {
@@ -158,7 +158,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationType property value. This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required as part of the request payload.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * Sets the conversationType property value. This field specifies the existing type of the conversation being updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required as part of the request payload.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
      * @param string|null $value Value to set for the conversationType property.
     */
     public function setConversationType(?string $value): void {
@@ -166,7 +166,7 @@ class UpdateConversationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the read property value. This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><b>Note:</b> This field should not be used in conjunction with the <b>conversationStatus</b> field. If both fields are input in the request, only the <b>read</b> status will be updated for the specified conversation and the <b>conversationStatus</b> field will be ignored.</span>
+     * Sets the read property value. This boolean specifies the read status for which to update the conversation.<br><br>If set to <code>true</code>, the conversation will update to 'read', and if set to <code>false</code>, the conversation will update to 'unread'.<br><br><span class="tablenote"><strong>Note:</strong> This field should not be used in conjunction with the <strong>conversationStatus</strong> field. If both fields are input in the request, only the <strong>read</strong> status will be updated for the specified conversation and the <strong>conversationStatus</strong> field will be ignored.</span>
      * @param bool|null $value Value to set for the read property.
     */
     public function setRead(?bool $value): void {

@@ -42,11 +42,11 @@ class Find_eligible_itemsRequestBuilderGetRequestConfiguration extends BaseReque
 
     /**
      * Instantiates a new Find_eligible_itemsRequestBuilderGetQueryParameters.
-     * @param string|null $limit This query parameter specifies the maximum number of items to return from the result set on a page in the paginated response.<br><br><b>Minimum:</b> 1<br><br><b>Maximum:</b> 200<br><br><b>Default: </b>10
-     * @param string|null $offset This query parameter specifies the number of results to skip in the result set before returning the first result in the paginated response.  <br><br>Combine <b>offset</b> with the <b>limit</b> query parameter to control the items returned in the response. For example, if you supply an <b>offset</b> of <code>0</code> and a <b>limit</b> of <code>10</code>, the first page of the response contains the first 10 results from the complete list of items retrieved by the call. If <b>offset</b> is <code>10</code> and <b>limit</b> is <code>20</code>, the first page of the response contains items 11-30 from the complete result set. <br><br><b>Default:</b> 0
+     * @param int|null $limit This query parameter specifies the maximum number of items to return from the result set on a page in the paginated response.<br><br><b>Minimum:</b> 1<br><br><b>Maximum:</b> 200<br><br><b>Default: </b>10
+     * @param int|null $offset This query parameter specifies the number of results to skip in the result set before returning the first result in the paginated response.  <br><br>Combine <b>offset</b> with the <b>limit</b> query parameter to control the items returned in the response. For example, if you supply an <b>offset</b> of <code>0</code> and a <b>limit</b> of <code>10</code>, the first page of the response contains the first 10 results from the complete list of items retrieved by the call. If <b>offset</b> is <code>10</code> and <b>limit</b> is <code>20</code>, the first page of the response contains items 11-30 from the complete result set. <br><br><b>Default:</b> 0
      * @return Find_eligible_itemsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $limit = null, ?string $offset = null): Find_eligible_itemsRequestBuilderGetQueryParameters {
+    public static function createQueryParameters(?int $limit = null, ?int $offset = null): Find_eligible_itemsRequestBuilderGetQueryParameters {
         return new Find_eligible_itemsRequestBuilderGetQueryParameters($limit, $offset);
     }
 

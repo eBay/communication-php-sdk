@@ -32,12 +32,12 @@ class Reference implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $referenceId This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
+     * @var string|null $referenceId This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
     */
     private ?string $referenceId = null;
     
     /**
-     * @var string|null $referenceType This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> is supported.
+     * @var string|null $referenceType This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
     */
     private ?string $referenceType = null;
     
@@ -78,7 +78,7 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceId property value. This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
+     * Gets the referenceId property value. This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
      * @return string|null
     */
     public function getReferenceId(): ?string {
@@ -86,7 +86,7 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceType property value. This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> is supported.
+     * Gets the referenceType property value. This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
      * @return string|null
     */
     public function getReferenceType(): ?string {
@@ -112,7 +112,7 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceId property value. This value indicates the reference ID associated with the corresponding <b>referenceType</b> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
+     * Sets the referenceId property value. This value indicates the reference ID associated with the corresponding <strong>referenceType</strong> value.<br><br>For example, in the case of a <code>LISTING</code> reference type, this value will be the item ID value of the listing.
      * @param string|null $value Value to set for the referenceId property.
     */
     public function setReferenceId(?string $value): void {
@@ -120,7 +120,7 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceType property value. This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <b>referenceId</b> field.<br><br>Currently, only <code>LISTING</code> is supported.
+     * Sets the referenceType property value. This value indicates the reference type to associate with the conversation.<br><br>The reference type is used to specify what the conversation is in reference to. For example, a value of <code>LISTING</code> specifies that the conversation is associated with a specific listing. The item ID associated with this listing will then be returned in the <strong>referenceId</strong> field.<br><br>Currently, only the <code>LISTING</code> reference type is supported.
      * @param string|null $value Value to set for the referenceType property.
     */
     public function setReferenceType(?string $value): void {

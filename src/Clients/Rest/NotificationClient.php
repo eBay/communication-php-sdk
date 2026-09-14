@@ -28,6 +28,7 @@ use EBay\Communication\Generated\Notification\Models\CreateSubscriptionRequest;
 use EBay\Communication\Generated\Notification\Models\Destination;
 use EBay\Communication\Generated\Notification\Models\DestinationRequest;
 use EBay\Communication\Generated\Notification\Models\DestinationSearchResponse;
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\PublicKey;
 use EBay\Communication\Generated\Notification\Models\Subscription;
 use EBay\Communication\Generated\Notification\Models\SubscriptionFilter;
@@ -35,27 +36,6 @@ use EBay\Communication\Generated\Notification\Models\SubscriptionSearchResponse;
 use EBay\Communication\Generated\Notification\Models\Topic;
 use EBay\Communication\Generated\Notification\Models\TopicSearchResponse;
 use EBay\Communication\Generated\Notification\Models\UpdateSubscriptionRequest;
-use EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderPutRequestConfiguration;
-use EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderPutRequestConfiguration;
-use EBay\Communication\Generated\Notification\Public_key\Item\WithPublic_key_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Disable\DisableRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Enable\EnableRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Filter\FilterRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\Test\TestRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderPutRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderPostRequestConfiguration;
-use EBay\Communication\Generated\Notification\Topic\Item\WithTopic_ItemRequestBuilderGetRequestConfiguration;
-use EBay\Communication\Generated\Notification\Topic\TopicRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -81,7 +61,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->config()->get(
-                new ConfigRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -92,7 +72,7 @@ final class NotificationClient
         $this->call($accessToken, fn($api) =>
             $api->config()->put(
                 $body,
-                new ConfigRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Config\ConfigRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -107,9 +87,9 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->destination()->get(
-                new DestinationRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: DestinationRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderGetRequestConfiguration::createQueryParameters(
                         continuation_token: $continuationToken,
                         limit: $limit,
                     ),
@@ -124,7 +104,7 @@ final class NotificationClient
         return $this->call($accessToken, fn($api) =>
             $api->destination()->post(
                 $body,
-                new DestinationRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Destination\DestinationRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -134,7 +114,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->destination()->byDestination_id($destinationId)->get(
-                new WithDestination_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -150,7 +130,7 @@ final class NotificationClient
         $this->call($accessToken, fn($api) =>
             $api->destination()->byDestination_id($destinationId)->put(
                 $body,
-                new WithDestination_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -160,7 +140,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->destination()->byDestination_id($destinationId)->delete(
-                new WithDestination_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Destination\Item\WithDestination_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -170,7 +150,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->public_key()->byPublic_key_id($publicKeyId)->get(
-                new WithPublic_key_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Public_key\Item\WithPublic_key_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -185,9 +165,9 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->get(
-                new SubscriptionRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
                         continuation_token: $continuationToken,
                         limit: $limit,
                     ),
@@ -202,7 +182,7 @@ final class NotificationClient
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->post(
                 $body,
-                new SubscriptionRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\SubscriptionRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -218,7 +198,7 @@ final class NotificationClient
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->filter()->post(
                 $body,
-                new FilterRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Filter\FilterRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -228,7 +208,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->get(
-                new WithSubscription_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -244,7 +224,7 @@ final class NotificationClient
         $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->put(
                 $body,
-                new WithSubscription_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -254,7 +234,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->delete(
-                new WithSubscription_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -269,7 +249,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->get(
-                new WithFilter_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -284,7 +264,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->filter()->byFilter_id($filterId)->delete(
-                new WithFilter_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Filter\Item\WithFilter_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -294,7 +274,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->disable()->post(
-                new DisableRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Disable\DisableRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -304,17 +284,17 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->enable()->post(
-                new EnableRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Enable\EnableRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
-    public function testSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
+    public function testSubscription(string $subscriptionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?Error
     {
         $headers = $this->mergedHeaders($requestOptions);
-        $this->call($accessToken, fn($api) =>
+        return $this->call($accessToken, fn($api) =>
             $api->subscription()->bySubscription_id($subscriptionId)->test()->post(
-                new TestRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Subscription\Item\Test\TestRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -324,7 +304,7 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->topic()->byTopic_id($topicId)->get(
-                new WithTopic_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\Communication\Generated\Notification\Topic\Item\WithTopic_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -339,9 +319,9 @@ final class NotificationClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->topic()->get(
-                new TopicRequestBuilderGetRequestConfiguration(
+                new \EBay\Communication\Generated\Notification\Topic\TopicRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: TopicRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\Communication\Generated\Notification\Topic\TopicRequestBuilderGetRequestConfiguration::createQueryParameters(
                         continuation_token: $continuationToken,
                         limit: $limit,
                     ),

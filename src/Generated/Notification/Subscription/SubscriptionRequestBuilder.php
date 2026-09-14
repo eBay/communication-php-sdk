@@ -17,6 +17,7 @@
 namespace EBay\Communication\Generated\Notification\Subscription;
 
 use EBay\Communication\Generated\Notification\Models\CreateSubscriptionRequest;
+use EBay\Communication\Generated\Notification\Models\Error;
 use EBay\Communication\Generated\Notification\Models\SubscriptionSearchResponse;
 use EBay\Communication\Generated\Notification\Subscription\Item\WithSubscription_ItemRequestBuilder;
 use Exception;
@@ -33,7 +34,7 @@ class SubscriptionRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/Communication/Generated/Notification.subscription.item collection
-     * @param string $subscription_id The unique identifier of the subscription to retrieve. Use <b>getSubscriptions</b> to retrieve subscription IDs.
+     * @param string $subscription_id The unique identifier of the subscription to retrieve. Use <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-getsubscriptions">getSubscriptions</a> to retrieve subscription IDs.
      * @return WithSubscription_ItemRequestBuilder
     */
     public function bySubscription_id(string $subscription_id): WithSubscription_ItemRequestBuilder {
@@ -64,19 +65,29 @@ class SubscriptionRequestBuilder extends BaseRequestBuilder
     */
     public function get(?SubscriptionRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionSearchResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionSearchResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method allows applications to create a subscription for a topic and supported schema version. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br>Each application and topic-schema pairing to a subscription should have a 1:1 cardinality.<br><br>You can create the subscription in disabled mode, test it (see the <b>test</b> method), and when everything is ready, you can enable the subscription (see the <b>enableSubscription</b> method).<br><br><span class="tablenote"><b>Note:</b> If an application is not authorized to subscribe to a topic, for example, if your authorization does not include the list of scopes required for the topic, an error code of 195011 is returned.</span>
-     * @param CreateSubscriptionRequest $body This type contains information about a subscription request.
+     * This method allows applications to create a subscription for a topic and supported schema version. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br>Each application and topic-schema pairing to a subscription should have a 1:1 cardinality.<br><br>You can create the subscription in disabled mode, test it (see the <b>test</b> method), and when everything is ready, you can enable the subscription (see the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a> method).<br><br><span class="tablenote"><b>Note:</b> If an application is not authorized to subscribe to a topic, for example, if your authorization does not include the list of scopes required for the topic, an error code of 195011 is returned.</span>
+     * @param CreateSubscriptionRequest $body The create subscription request.
      * @param SubscriptionRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SubscriptionPostResponse|null>
      * @throws Exception
     */
     public function post(CreateSubscriptionRequest $body, ?SubscriptionRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionPostResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SubscriptionPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -101,8 +112,8 @@ class SubscriptionRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method allows applications to create a subscription for a topic and supported schema version. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br>Each application and topic-schema pairing to a subscription should have a 1:1 cardinality.<br><br>You can create the subscription in disabled mode, test it (see the <b>test</b> method), and when everything is ready, you can enable the subscription (see the <b>enableSubscription</b> method).<br><br><span class="tablenote"><b>Note:</b> If an application is not authorized to subscribe to a topic, for example, if your authorization does not include the list of scopes required for the topic, an error code of 195011 is returned.</span>
-     * @param CreateSubscriptionRequest $body This type contains information about a subscription request.
+     * This method allows applications to create a subscription for a topic and supported schema version. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br><br>Each application and topic-schema pairing to a subscription should have a 1:1 cardinality.<br><br>You can create the subscription in disabled mode, test it (see the <b>test</b> method), and when everything is ready, you can enable the subscription (see the <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a> method).<br><br><span class="tablenote"><b>Note:</b> If an application is not authorized to subscribe to a topic, for example, if your authorization does not include the list of scopes required for the topic, an error code of 195011 is returned.</span>
+     * @param CreateSubscriptionRequest $body The create subscription request.
      * @param SubscriptionRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

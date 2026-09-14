@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>leaveFeedback</b> response for feedback that has been left.
+ * This type defines the fields for the <strong>leaveFeedback</strong> response for the feedback.
 */
 class LeaveFeedbackResponse implements AdditionalDataHolder, Parsable 
 {

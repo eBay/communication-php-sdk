@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the request body of the <b>bulkUpdateConversation</b> method.
+ * This type defines the request body of the <strong>bulkUpdateConversation</strong> method.
 */
 class BulkUpdateConversationsRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class BulkUpdateConversationsRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<BulkConversation>|null $conversations This array specifies the list of conversations to update and the updated <b>conversationStatus</b> for each.
+     * @var array<BulkConversation>|null $conversations This array specifies the list of conversations to update and the updated <strong>conversationStatus</strong> for each.
     */
     private ?array $conversations = null;
     
@@ -61,7 +61,7 @@ class BulkUpdateConversationsRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversations property value. This array specifies the list of conversations to update and the updated <b>conversationStatus</b> for each.
+     * Gets the conversations property value. This array specifies the list of conversations to update and the updated <strong>conversationStatus</strong> for each.
      * @return array<BulkConversation>|null
     */
     public function getConversations(): ?array {
@@ -97,7 +97,7 @@ class BulkUpdateConversationsRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversations property value. This array specifies the list of conversations to update and the updated <b>conversationStatus</b> for each.
+     * Sets the conversations property value. This array specifies the list of conversations to update and the updated <strong>conversationStatus</strong> for each.
      * @param array<BulkConversation>|null $value Value to set for the conversations property.
     */
     public function setConversations(?array $value): void {

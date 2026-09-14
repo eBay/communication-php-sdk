@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the request payload of the <b>sendMessage</b> method.
+ * This type defines the request payload of the <strong>sendMessage</strong> method.
 */
 class SendMessageRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $conversationId This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
+     * @var string|null $conversationId This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
     */
     private ?string $conversationId = null;
     
@@ -42,22 +42,22 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     private ?bool $emailCopyToSender = null;
     
     /**
-     * @var array<MessageMedia>|null $messageMedia This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
+     * @var array<MessageMedia>|null $messageMedia This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
     */
     private ?array $messageMedia = null;
     
     /**
-     * @var string|null $messageText The text of the message.<br><br><b>Max length:</b> 2000 characters
+     * @var string|null $messageText The text of the message.<br><br><strong>Maximum length:</strong> 2000 characters
     */
     private ?string $messageText = null;
     
     /**
-     * @var string|null $otherPartyUsername This field specifies the eBay username of the entity for which to send the message.<br><br>This field is required if starting a new conversation with another eBay user.
+     * @var string|null $otherPartyUsername This field specifies the eBay username of the entity to whom to send the message.<br><br>This field is required if starting a new conversation with another eBay user.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $otherPartyUsername = null;
     
     /**
-     * @var Reference|null $reference This type specifies the reference type and associated reference ID associated with a message.
+     * @var Reference|null $reference This container should be used if the new or existing conversation is related to a specific eBay listing.<br><br>For example, a <strong>referenceType</strong> of <code>LISTING</code> and an associated <strong>referenceId</strong> will specify the item ID value of the listing associated with the message.
     */
     private ?Reference $reference = null;
     
@@ -86,7 +86,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationId property value. This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
+     * Gets the conversationId property value. This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
      * @return string|null
     */
     public function getConversationId(): ?string {
@@ -118,7 +118,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the messageMedia property value. This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
+     * Gets the messageMedia property value. This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
      * @return array<MessageMedia>|null
     */
     public function getMessageMedia(): ?array {
@@ -126,7 +126,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the messageText property value. The text of the message.<br><br><b>Max length:</b> 2000 characters
+     * Gets the messageText property value. The text of the message.<br><br><strong>Maximum length:</strong> 2000 characters
      * @return string|null
     */
     public function getMessageText(): ?string {
@@ -134,7 +134,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the otherPartyUsername property value. This field specifies the eBay username of the entity for which to send the message.<br><br>This field is required if starting a new conversation with another eBay user.
+     * Gets the otherPartyUsername property value. This field specifies the eBay username of the entity to whom to send the message.<br><br>This field is required if starting a new conversation with another eBay user.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getOtherPartyUsername(): ?string {
@@ -142,7 +142,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reference property value. This type specifies the reference type and associated reference ID associated with a message.
+     * Gets the reference property value. This container should be used if the new or existing conversation is related to a specific eBay listing.<br><br>For example, a <strong>referenceType</strong> of <code>LISTING</code> and an associated <strong>referenceId</strong> will specify the item ID value of the listing associated with the message.
      * @return Reference|null
     */
     public function getReference(): ?Reference {
@@ -172,7 +172,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationId property value. This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
+     * Sets the conversationId property value. This field specifies the unique identifier of the conversation in which to send the message.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.<br><br>This field is required if sending a message in an existing conversation.
      * @param string|null $value Value to set for the conversationId property.
     */
     public function setConversationId(?string $value): void {
@@ -188,7 +188,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the messageMedia property value. This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
+     * Sets the messageMedia property value. This array lists the individual forms of media, if any, to be attached to the message.<br><br>Up to five individual forms of media may be sent per message. If more than five are specified in this array, an error will occur and the call will fail.
      * @param array<MessageMedia>|null $value Value to set for the messageMedia property.
     */
     public function setMessageMedia(?array $value): void {
@@ -196,7 +196,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the messageText property value. The text of the message.<br><br><b>Max length:</b> 2000 characters
+     * Sets the messageText property value. The text of the message.<br><br><strong>Maximum length:</strong> 2000 characters
      * @param string|null $value Value to set for the messageText property.
     */
     public function setMessageText(?string $value): void {
@@ -204,7 +204,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the otherPartyUsername property value. This field specifies the eBay username of the entity for which to send the message.<br><br>This field is required if starting a new conversation with another eBay user.
+     * Sets the otherPartyUsername property value. This field specifies the eBay username of the entity to whom to send the message.<br><br>This field is required if starting a new conversation with another eBay user.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the otherPartyUsername property.
     */
     public function setOtherPartyUsername(?string $value): void {
@@ -212,7 +212,7 @@ class SendMessageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reference property value. This type specifies the reference type and associated reference ID associated with a message.
+     * Sets the reference property value. This container should be used if the new or existing conversation is related to a specific eBay listing.<br><br>For example, a <strong>referenceType</strong> of <code>LISTING</code> and an associated <strong>referenceId</strong> will specify the item ID value of the listing associated with the message.
      * @param Reference|null $value Value to set for the reference property.
     */
     public function setReference(?Reference $value): void {

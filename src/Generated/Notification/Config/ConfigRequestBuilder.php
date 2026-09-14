@@ -17,6 +17,7 @@
 namespace EBay\Communication\Generated\Notification\Config;
 
 use EBay\Communication\Generated\Notification\Models\Config;
+use EBay\Communication\Generated\Notification\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -51,19 +52,27 @@ class ConfigRequestBuilder extends BaseRequestBuilder
     */
     public function get(?ConfigRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [Config::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Config::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
      * This method allows applications to create a new configuration or update an existing configuration. This app-level configuration allows developers to set up alerts.
-     * @param Config $body The type that defines the fields for the <b>alertEmail</b> field.
+     * @param Config $body The configurations for this application.
      * @param ConfigRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function put(Config $body, ?ConfigRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -86,7 +95,7 @@ class ConfigRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method allows applications to create a new configuration or update an existing configuration. This app-level configuration allows developers to set up alerts.
-     * @param Config $body The type that defines the fields for the <b>alertEmail</b> field.
+     * @param Config $body The configurations for this application.
      * @param ConfigRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -99,6 +108,7 @@ class ConfigRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

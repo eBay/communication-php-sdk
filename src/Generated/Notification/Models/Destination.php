@@ -32,7 +32,7 @@ class Destination implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var DeliveryConfig|null $deliveryConfig A type that contains information about the delivery configuration.
+     * @var DeliveryConfig|null $deliveryConfig The configuration associated with this destination.
     */
     private ?DeliveryConfig $deliveryConfig = null;
     
@@ -47,9 +47,9 @@ class Destination implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $status The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
+     * @var DestinationStatusEnum|null $status The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <code>MARKED_DOWN</code> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul>
     */
-    private ?string $status = null;
+    private ?DestinationStatusEnum $status = null;
     
     /**
      * Instantiates a new Destination and sets the default values.
@@ -76,7 +76,7 @@ class Destination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the deliveryConfig property value. A type that contains information about the delivery configuration.
+     * Gets the deliveryConfig property value. The configuration associated with this destination.
      * @return DeliveryConfig|null
     */
     public function getDeliveryConfig(): ?DeliveryConfig {
@@ -101,7 +101,7 @@ class Destination implements AdditionalDataHolder, Parsable
             'deliveryConfig' => fn(ParseNode $n) => $o->setDeliveryConfig($n->getObjectValue([DeliveryConfig::class, 'createFromDiscriminatorValue'])),
             'destinationId' => fn(ParseNode $n) => $o->setDestinationId($n->getStringValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(DestinationStatusEnum::class)),
         ];
     }
 
@@ -114,10 +114,10 @@ class Destination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <code>MARKED_DOWN</code> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul>
+     * @return DestinationStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?DestinationStatusEnum {
         return $this->status;
     }
 
@@ -129,7 +129,7 @@ class Destination implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('deliveryConfig', $this->getDeliveryConfig());
         $writer->writeStringValue('destinationId', $this->getDestinationId());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class Destination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the deliveryConfig property value. A type that contains information about the delivery configuration.
+     * Sets the deliveryConfig property value. The configuration associated with this destination.
      * @param DeliveryConfig|null $value Value to set for the deliveryConfig property.
     */
     public function setDeliveryConfig(?DeliveryConfig $value): void {
@@ -166,10 +166,10 @@ class Destination implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The status for this destination.<br><br><span class="tablenote"><b>Note:</b> The <code>MARKED_DOWN</code> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br><br><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul>
+     * @param DestinationStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?DestinationStatusEnum $value): void {
         $this->status = $value;
     }
 

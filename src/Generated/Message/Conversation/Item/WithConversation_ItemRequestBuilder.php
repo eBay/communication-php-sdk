@@ -44,7 +44,7 @@ class WithConversation_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method can be used to retrieve messages within a specific conversation.<br><br>The <b>conversation_id</b> of the conversation for which to retrieve messages is required as path parameters, and the and <b>conversation_type</b> of the conversation is required as a query parameter.
+     * This method can be used to retrieve messages within a specific conversation.<br><br>The <strong>conversation_id</strong> of the conversation for which to retrieve messages is required as a path parameter and the <strong>conversation_type</strong> of the conversation is required as a query parameter.
      * @param WithConversation_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetMessagesByConversationIdResponse|null>
      * @throws Exception
@@ -55,7 +55,7 @@ class WithConversation_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method can be used to retrieve messages within a specific conversation.<br><br>The <b>conversation_id</b> of the conversation for which to retrieve messages is required as path parameters, and the and <b>conversation_type</b> of the conversation is required as a query parameter.
+     * This method can be used to retrieve messages within a specific conversation.<br><br>The <strong>conversation_id</strong> of the conversation for which to retrieve messages is required as a path parameter and the <strong>conversation_type</strong> of the conversation is required as a query parameter.
      * @param WithConversation_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

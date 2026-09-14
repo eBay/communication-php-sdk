@@ -32,7 +32,7 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var DeliveryConfig|null $deliveryConfig A type that contains information about the delivery configuration.
+     * @var DeliveryConfig|null $deliveryConfig This container is used to specify the destination endpoint and verification token associated with this endpoint.
     */
     private ?DeliveryConfig $deliveryConfig = null;
     
@@ -42,9 +42,9 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $status This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
+     * @var DestinationStatusEnum|null $status This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span>
     */
-    private ?string $status = null;
+    private ?DestinationStatusEnum $status = null;
     
     /**
      * Instantiates a new DestinationRequest and sets the default values.
@@ -71,7 +71,7 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the deliveryConfig property value. A type that contains information about the delivery configuration.
+     * Gets the deliveryConfig property value. This container is used to specify the destination endpoint and verification token associated with this endpoint.
      * @return DeliveryConfig|null
     */
     public function getDeliveryConfig(): ?DeliveryConfig {
@@ -87,7 +87,7 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
         return  [
             'deliveryConfig' => fn(ParseNode $n) => $o->setDeliveryConfig($n->getObjectValue([DeliveryConfig::class, 'createFromDiscriminatorValue'])),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(DestinationStatusEnum::class)),
         ];
     }
 
@@ -100,10 +100,10 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span>
+     * @return DestinationStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?DestinationStatusEnum {
         return $this->status;
     }
 
@@ -114,7 +114,7 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('deliveryConfig', $this->getDeliveryConfig());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -127,7 +127,7 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the deliveryConfig property value. A type that contains information about the delivery configuration.
+     * Sets the deliveryConfig property value. This container is used to specify the destination endpoint and verification token associated with this endpoint.
      * @param DeliveryConfig|null $value Value to set for the deliveryConfig property.
     */
     public function setDeliveryConfig(?DeliveryConfig $value): void {
@@ -143,10 +143,10 @@ class DestinationRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. This field sets the status for the destination endpoint as <code>ENABLED</code> or <code>DISABLED</code>.<br><br><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span>
+     * @param DestinationStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?DestinationStatusEnum $value): void {
         $this->status = $value;
     }
 

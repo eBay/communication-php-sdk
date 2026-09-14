@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the response payload of the <b>bulkUpdateConversation</b> method.
+ * This type defines the response payload of the <strong>bulkUpdateConversation</strong> method.
 */
 class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ConversationsMetadata|null $conversationsMetadata This type defines the metadata, such as successes and failures, associated with a bulk conversation status update.
+     * @var ConversationsMetadata|null $conversationsMetadata This container returns metadata from the call, such as how many conversations were updated, how many succeeded, and how many failed.
     */
     private ?ConversationsMetadata $conversationsMetadata = null;
     
     /**
-     * @var array<ConversationsResponse>|null $conversationsResponse This array returns a list of each conversation specified in the request, and if the requested update was successful or failed.
+     * @var array<ConversationsResponse>|null $conversationsResponse This array returns a list of each conversation specified in the request and if the requested update was successful or failed.
     */
     private ?array $conversationsResponse = null;
     
@@ -66,7 +66,7 @@ class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationsMetadata property value. This type defines the metadata, such as successes and failures, associated with a bulk conversation status update.
+     * Gets the conversationsMetadata property value. This container returns metadata from the call, such as how many conversations were updated, how many succeeded, and how many failed.
      * @return ConversationsMetadata|null
     */
     public function getConversationsMetadata(): ?ConversationsMetadata {
@@ -74,7 +74,7 @@ class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationsResponse property value. This array returns a list of each conversation specified in the request, and if the requested update was successful or failed.
+     * Gets the conversationsResponse property value. This array returns a list of each conversation specified in the request and if the requested update was successful or failed.
      * @return array<ConversationsResponse>|null
     */
     public function getConversationsResponse(): ?array {
@@ -112,7 +112,7 @@ class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationsMetadata property value. This type defines the metadata, such as successes and failures, associated with a bulk conversation status update.
+     * Sets the conversationsMetadata property value. This container returns metadata from the call, such as how many conversations were updated, how many succeeded, and how many failed.
      * @param ConversationsMetadata|null $value Value to set for the conversationsMetadata property.
     */
     public function setConversationsMetadata(?ConversationsMetadata $value): void {
@@ -120,7 +120,7 @@ class BulkUpdateConversationsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationsResponse property value. This array returns a list of each conversation specified in the request, and if the requested update was successful or failed.
+     * Sets the conversationsResponse property value. This array returns a list of each conversation specified in the request and if the requested update was successful or failed.
      * @param array<ConversationsResponse>|null $value Value to set for the conversationsResponse property.
     */
     public function setConversationsResponse(?array $value): void {

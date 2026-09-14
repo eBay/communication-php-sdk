@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type provides fields available to leave feedback in the <b>leaveFeedback</b> request.
+ * This type provides fields available to leave feedback in the <strong>leaveFeedback</strong> request.
 */
 class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $commentText Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><b>Maximum length:</b> 500 characters</p>
+     * @var string|null $commentText Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><strong>Maximum length:</strong> 500 characters</p>
     */
     private ?string $commentText = null;
     
     /**
-     * @var string|null $commentType Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
+     * @var FeedbackRatingValuesEnum|null $commentType Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p>
     */
-    private ?string $commentType = null;
+    private ?FeedbackRatingValuesEnum $commentType = null;
     
     /**
      * @var array<Image>|null $images Use this array to optionally list up to 5 images attached to the feedback.
@@ -91,7 +91,7 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentText property value. Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><b>Maximum length:</b> 500 characters</p>
+     * Gets the commentText property value. Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><strong>Maximum length:</strong> 500 characters</p>
      * @return string|null
     */
     public function getCommentText(): ?string {
@@ -99,10 +99,10 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the commentType property value. Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the commentType property value. Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p>
+     * @return FeedbackRatingValuesEnum|null
     */
-    public function getCommentType(): ?string {
+    public function getCommentType(): ?FeedbackRatingValuesEnum {
         return $this->commentType;
     }
 
@@ -114,7 +114,7 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'commentText' => fn(ParseNode $n) => $o->setCommentText($n->getStringValue()),
-            'commentType' => fn(ParseNode $n) => $o->setCommentType($n->getStringValue()),
+            'commentType' => fn(ParseNode $n) => $o->setCommentType($n->getEnumValue(FeedbackRatingValuesEnum::class)),
             'images' => fn(ParseNode $n) => $o->setImages($n->getCollectionOfObjectValues([Image::class, 'createFromDiscriminatorValue'])),
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
             'orderLineItemId' => fn(ParseNode $n) => $o->setOrderLineItemId($n->getStringValue()),
@@ -169,7 +169,7 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('commentText', $this->getCommentText());
-        $writer->writeStringValue('commentType', $this->getCommentType());
+        $writer->writeEnumValue('commentType', $this->getCommentType());
         $writer->writeCollectionOfObjectValues('images', $this->getImages());
         $writer->writeStringValue('listingId', $this->getListingId());
         $writer->writeStringValue('orderLineItemId', $this->getOrderLineItemId());
@@ -187,7 +187,7 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentText property value. Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><b>Maximum length:</b> 500 characters</p>
+     * Sets the commentText property value. Use this field to provide the feedback left by the user, describing their experience with the line item of the transaction. No HTML formatting or personal information (such as phone numbers) is permitted.<br><p><strong>Maximum length:</strong> 500 characters</p>
      * @param string|null $value Value to set for the commentText property.
     */
     public function setCommentText(?string $value): void {
@@ -195,10 +195,10 @@ class LeaveFeedbackRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the commentType property value. Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingValuesEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the commentType property.
+     * Sets the commentType property value. Set this enumerated value to indicate the overall rating of the transaction: <code>POSITIVE</code>, <code>NEUTRAL</code>, or <code>NEGATIVE</code>.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Sellers can only provide positive feedback.</span></p>
+     * @param FeedbackRatingValuesEnum|null $value Value to set for the commentType property.
     */
-    public function setCommentType(?string $value): void {
+    public function setCommentType(?FeedbackRatingValuesEnum $value): void {
         $this->commentType = $value;
     }
 

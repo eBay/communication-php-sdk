@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the attributes of the user who provided the feedback of a <b>getFeedback</b> response.
+ * This type defines the attributes of the user who provided the feedback of a <strong>getFeedback</strong> response.
 */
 class ProviderUserDetailUserAttributes implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class ProviderUserDetailUserAttributes implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $name This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <b>value</b> field indicates if the attribute applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserAttributeEnum'>eBay API documentation</a>
+     * @var UserAttributeEnum|null $name This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <strong>value</strong> field indicates if the attribute applies.
     */
-    private ?string $name = null;
+    private ?UserAttributeEnum $name = null;
     
     /**
-     * @var string|null $value If returned as <code>true</code>, the user attribute <b>name</b> applies; if returned as <code>false</code>, the attribute does not apply.
+     * @var string|null $value If returned as <code>true</code>, the user attribute <strong>name</strong> applies; if returned as <code>false</code>, the attribute does not apply.
     */
     private ?string $value = null;
     
@@ -72,21 +72,21 @@ class ProviderUserDetailUserAttributes implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
+            'name' => fn(ParseNode $n) => $o->setName($n->getEnumValue(UserAttributeEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the name property value. This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <b>value</b> field indicates if the attribute applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserAttributeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the name property value. This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <strong>value</strong> field indicates if the attribute applies.
+     * @return UserAttributeEnum|null
     */
-    public function getName(): ?string {
+    public function getName(): ?UserAttributeEnum {
         return $this->name;
     }
 
     /**
-     * Gets the value property value. If returned as <code>true</code>, the user attribute <b>name</b> applies; if returned as <code>false</code>, the attribute does not apply.
+     * Gets the value property value. If returned as <code>true</code>, the user attribute <strong>name</strong> applies; if returned as <code>false</code>, the attribute does not apply.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -98,7 +98,7 @@ class ProviderUserDetailUserAttributes implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('name', $this->getName());
+        $writer->writeEnumValue('name', $this->getName());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class ProviderUserDetailUserAttributes implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <b>value</b> field indicates if the attribute applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:UserAttributeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the name property.
+     * Sets the name property value. This enumerated value indicates an attribute of the user (for example, <code>USER_VERIFIED</code>). The <strong>value</strong> field indicates if the attribute applies.
+     * @param UserAttributeEnum|null $value Value to set for the name property.
     */
-    public function setName(?string $value): void {
+    public function setName(?UserAttributeEnum $value): void {
         $this->name = $value;
     }
 
     /**
-     * Sets the value property value. If returned as <code>true</code>, the user attribute <b>name</b> applies; if returned as <code>false</code>, the attribute does not apply.
+     * Sets the value property value. If returned as <code>true</code>, the user attribute <strong>name</strong> applies; if returned as <code>false</code>, the attribute does not apply.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

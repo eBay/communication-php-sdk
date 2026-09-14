@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines message details for a conversation.
+ * This type defines the message details for a conversation.
 */
 class MessageDetail implements AdditionalDataHolder, Parsable 
 {
@@ -57,12 +57,12 @@ class MessageDetail implements AdditionalDataHolder, Parsable
     private ?bool $readStatus = null;
     
     /**
-     * @var string|null $recipientUsername The eBay username of the message recipient.
+     * @var string|null $recipientUsername The eBay username of the message recipient.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $recipientUsername = null;
     
     /**
-     * @var string|null $senderUsername The eBay username of the message sender.
+     * @var string|null $senderUsername The eBay username of the message sender.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $senderUsername = null;
     
@@ -154,7 +154,7 @@ class MessageDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the recipientUsername property value. The eBay username of the message recipient.
+     * Gets the recipientUsername property value. The eBay username of the message recipient.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getRecipientUsername(): ?string {
@@ -162,7 +162,7 @@ class MessageDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the senderUsername property value. The eBay username of the message sender.
+     * Gets the senderUsername property value. The eBay username of the message sender.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getSenderUsername(): ?string {
@@ -242,7 +242,7 @@ class MessageDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the recipientUsername property value. The eBay username of the message recipient.
+     * Sets the recipientUsername property value. The eBay username of the message recipient.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the recipientUsername property.
     */
     public function setRecipientUsername(?string $value): void {
@@ -250,7 +250,7 @@ class MessageDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the senderUsername property value. The eBay username of the message sender.
+     * Sets the senderUsername property value. The eBay username of the message sender.<br><br><span class="tablenote"><strong>Note:</strong> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the senderUsername property.
     */
     public function setSenderUsername(?string $value): void {

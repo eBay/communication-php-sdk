@@ -32,7 +32,7 @@ class ConversationsMetadata implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var int|null $totalConversationsCount The total amount of conversations being updated.
+     * @var int|null $totalConversationsCount The total number of conversations being updated.
     */
     private ?int $totalConversationsCount = null;
     
@@ -84,7 +84,7 @@ class ConversationsMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalConversationsCount property value. The total amount of conversations being updated.
+     * Gets the totalConversationsCount property value. The total number of conversations being updated.
      * @return int|null
     */
     public function getTotalConversationsCount(): ?int {
@@ -127,7 +127,7 @@ class ConversationsMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalConversationsCount property value. The total amount of conversations being updated.
+     * Sets the totalConversationsCount property value. The total number of conversations being updated.
      * @param int|null $value Value to set for the totalConversationsCount property.
     */
     public function setTotalConversationsCount(?int $value): void {

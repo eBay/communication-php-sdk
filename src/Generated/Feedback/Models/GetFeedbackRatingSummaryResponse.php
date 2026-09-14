@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>getFeedbackRatingSummary</b> response.
+ * This type defines the fields for the <strong>getFeedbackRatingSummary</strong> response.
 */
 class GetFeedbackRatingSummaryResponse implements AdditionalDataHolder, Parsable 
 {

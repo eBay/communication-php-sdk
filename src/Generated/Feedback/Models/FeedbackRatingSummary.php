@@ -37,9 +37,9 @@ class FeedbackRatingSummary implements AdditionalDataHolder, Parsable
     private ?array $ratingSummaryByRatingType = null;
     
     /**
-     * @var string|null $ratingType This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
+     * @var FeedbackRatingTypeEnum|null $ratingType This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience.
     */
-    private ?string $ratingType = null;
+    private ?FeedbackRatingTypeEnum $ratingType = null;
     
     /**
      * Instantiates a new FeedbackRatingSummary and sets the default values.
@@ -73,7 +73,7 @@ class FeedbackRatingSummary implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'ratingSummaryByRatingType' => fn(ParseNode $n) => $o->setRatingSummaryByRatingType($n->getCollectionOfObjectValues([RatingSummaryByRatingType::class, 'createFromDiscriminatorValue'])),
-            'ratingType' => fn(ParseNode $n) => $o->setRatingType($n->getStringValue()),
+            'ratingType' => fn(ParseNode $n) => $o->setRatingType($n->getEnumValue(FeedbackRatingTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class FeedbackRatingSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ratingType property value. This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the ratingType property value. This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience.
+     * @return FeedbackRatingTypeEnum|null
     */
-    public function getRatingType(): ?string {
+    public function getRatingType(): ?FeedbackRatingTypeEnum {
         return $this->ratingType;
     }
 
@@ -99,7 +99,7 @@ class FeedbackRatingSummary implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('ratingSummaryByRatingType', $this->getRatingSummaryByRatingType());
-        $writer->writeStringValue('ratingType', $this->getRatingType());
+        $writer->writeEnumValue('ratingType', $this->getRatingType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class FeedbackRatingSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ratingType property value. This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackRatingTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the ratingType property.
+     * Sets the ratingType property value. This enumerated value indicates the type of rating being summarized. For example, <code>OVERALL_EXPERIENCE</code> indicates the rating applies to the overall transaction experience.
+     * @param FeedbackRatingTypeEnum|null $value Value to set for the ratingType property.
     */
-    public function setRatingType(?string $value): void {
+    public function setRatingType(?FeedbackRatingTypeEnum $value): void {
         $this->ratingType = $value;
     }
 

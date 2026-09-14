@@ -47,14 +47,14 @@ class Subscription implements AdditionalDataHolder, Parsable
     private ?string $filterId = null;
     
     /**
-     * @var SubscriptionPayloadDetail|null $payload A type that describes the details of the subscription payload.
+     * @var SubscriptionPayloadDetail|null $payload The payload associated with this subscription.
     */
     private ?SubscriptionPayloadDetail $payload = null;
     
     /**
-     * @var string|null $status The status of this subscription. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
+     * @var SubscriptionStatusEnum|null $status The status of this subscription.
     */
-    private ?string $status = null;
+    private ?SubscriptionStatusEnum $status = null;
     
     /**
      * @var string|null $subscriptionId The unique identifier for the subscription.
@@ -117,7 +117,7 @@ class Subscription implements AdditionalDataHolder, Parsable
             'destinationId' => fn(ParseNode $n) => $o->setDestinationId($n->getStringValue()),
             'filterId' => fn(ParseNode $n) => $o->setFilterId($n->getStringValue()),
             'payload' => fn(ParseNode $n) => $o->setPayload($n->getObjectValue([SubscriptionPayloadDetail::class, 'createFromDiscriminatorValue'])),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(SubscriptionStatusEnum::class)),
             'subscriptionId' => fn(ParseNode $n) => $o->setSubscriptionId($n->getStringValue()),
             'topicId' => fn(ParseNode $n) => $o->setTopicId($n->getStringValue()),
         ];
@@ -132,7 +132,7 @@ class Subscription implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payload property value. A type that describes the details of the subscription payload.
+     * Gets the payload property value. The payload associated with this subscription.
      * @return SubscriptionPayloadDetail|null
     */
     public function getPayload(): ?SubscriptionPayloadDetail {
@@ -140,10 +140,10 @@ class Subscription implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The status of this subscription. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The status of this subscription.
+     * @return SubscriptionStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?SubscriptionStatusEnum {
         return $this->status;
     }
 
@@ -172,7 +172,7 @@ class Subscription implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('destinationId', $this->getDestinationId());
         $writer->writeStringValue('filterId', $this->getFilterId());
         $writer->writeObjectValue('payload', $this->getPayload());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('subscriptionId', $this->getSubscriptionId());
         $writer->writeStringValue('topicId', $this->getTopicId());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -211,7 +211,7 @@ class Subscription implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payload property value. A type that describes the details of the subscription payload.
+     * Sets the payload property value. The payload associated with this subscription.
      * @param SubscriptionPayloadDetail|null $value Value to set for the payload property.
     */
     public function setPayload(?SubscriptionPayloadDetail $value): void {
@@ -219,10 +219,10 @@ class Subscription implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The status of this subscription. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The status of this subscription.
+     * @param SubscriptionStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?SubscriptionStatusEnum $value): void {
         $this->status = $value;
     }
 

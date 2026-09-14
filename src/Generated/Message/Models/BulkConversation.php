@@ -32,17 +32,17 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $conversationId This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.
+     * @var string|null $conversationId This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
     */
     private ?string $conversationId = null;
     
     /**
-     * @var string|null $conversationStatus This field indicates the status for which to update the associated conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
+     * @var string|null $conversationStatus This field indicates the status for which to update the associated conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
     */
     private ?string $conversationStatus = null;
     
     /**
-     * @var string|null $conversationType This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required for each conversation being updated.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * @var string|null $conversationType This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required for each conversation being updated.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
     */
     private ?string $conversationType = null;
     
@@ -71,7 +71,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationId property value. This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.
+     * Gets the conversationId property value. This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
      * @return string|null
     */
     public function getConversationId(): ?string {
@@ -79,7 +79,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationStatus property value. This field indicates the status for which to update the associated conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
+     * Gets the conversationStatus property value. This field indicates the status for which to update the associated conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
      * @return string|null
     */
     public function getConversationStatus(): ?string {
@@ -87,7 +87,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the conversationType property value. This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required for each conversation being updated.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * Gets the conversationType property value. This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required for each conversation being updated.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
      * @return string|null
     */
     public function getConversationType(): ?string {
@@ -127,7 +127,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationId property value. This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/api-docs/commerce/message/resources/conversation/methods/getConversations" target="_blank">getConversations</a> method to retrieve conversation ID values.
+     * Sets the conversationId property value. This field indicates the unique identifier of the conversation that is to be updated.<br><br>Use the <a href="/develop/api/sell/message_api#sell-message_api-conversation-getconversations">getConversations</a> method to retrieve conversation ID values.
      * @param string|null $value Value to set for the conversationId property.
     */
     public function setConversationId(?string $value): void {
@@ -135,7 +135,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationStatus property value. This field indicates the status for which to update the associated conversation.<br><br><b>Valid values:</b><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
+     * Sets the conversationStatus property value. This field indicates the status for which to update the associated conversation.<br><br><strong>Valid values:</strong><ul><li><code>ACTIVE</code></li><li><code>ARCHIVE</code></li><li><code>DELETE</code></li><li><code>READ</code></li><li><code>UNREAD</code></li></ul>
      * @param string|null $value Value to set for the conversationStatus property.
     */
     public function setConversationStatus(?string $value): void {
@@ -143,7 +143,7 @@ class BulkConversation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the conversationType property value. This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This value <b>cannot</b> be updated using this method, but is required for each conversation being updated.</p></div><br><b>Valid values:</b><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
+     * Sets the conversationType property value. This field specifies the existing type of the conversation that is to be updated.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><strong><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></strong></span></span> This value <strong>cannot</strong> be updated using this method but is required for each conversation being updated.</p></div><br><strong>Valid values:</strong><ul><li><code>FROM_MEMBERS</code></li><li><code>FROM_EBAY</code></li></ul>
      * @param string|null $value Value to set for the conversationType property.
     */
     public function setConversationType(?string $value): void {

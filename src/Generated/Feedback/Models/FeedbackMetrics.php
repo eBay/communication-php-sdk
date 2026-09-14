@@ -32,12 +32,12 @@ class FeedbackMetrics implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $metricName This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <b>metricValue</b> for the value of the returned feedback. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackAggregationTypeEnum'>eBay API documentation</a>
+     * @var FeedbackAggregationTypeEnum|null $metricName This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <strong>metricValue</strong> for the value of the returned feedback.
     */
-    private ?string $metricName = null;
+    private ?FeedbackAggregationTypeEnum $metricName = null;
     
     /**
-     * @var float|null $metricValue The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <b>metricName</b> (see <b>metricName</b> for interpretation and units).
+     * @var float|null $metricValue The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <strong>metricName</strong> (see <strong>metricName</strong> for interpretation and units).
     */
     private ?float $metricValue = null;
     
@@ -72,21 +72,21 @@ class FeedbackMetrics implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'metricName' => fn(ParseNode $n) => $o->setMetricName($n->getStringValue()),
+            'metricName' => fn(ParseNode $n) => $o->setMetricName($n->getEnumValue(FeedbackAggregationTypeEnum::class)),
             'metricValue' => fn(ParseNode $n) => $o->setMetricValue($n->getFloatValue()),
         ];
     }
 
     /**
-     * Gets the metricName property value. This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <b>metricValue</b> for the value of the returned feedback. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackAggregationTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the metricName property value. This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <strong>metricValue</strong> for the value of the returned feedback.
+     * @return FeedbackAggregationTypeEnum|null
     */
-    public function getMetricName(): ?string {
+    public function getMetricName(): ?FeedbackAggregationTypeEnum {
         return $this->metricName;
     }
 
     /**
-     * Gets the metricValue property value. The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <b>metricName</b> (see <b>metricName</b> for interpretation and units).
+     * Gets the metricValue property value. The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <strong>metricName</strong> (see <strong>metricName</strong> for interpretation and units).
      * @return float|null
     */
     public function getMetricValue(): ?float {
@@ -98,7 +98,7 @@ class FeedbackMetrics implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('metricName', $this->getMetricName());
+        $writer->writeEnumValue('metricName', $this->getMetricName());
         $writer->writeFloatValue('metricValue', $this->getMetricValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class FeedbackMetrics implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the metricName property value. This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <b>metricValue</b> for the value of the returned feedback. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/feedback/types/fdb:FeedbackAggregationTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the metricName property.
+     * Sets the metricName property value. This enumerated value specifies the type of feedback aggregation. For example, <code>AVG</code> would indicate the feedback returned represents the average value of the feedback. See <strong>metricValue</strong> for the value of the returned feedback.
+     * @param FeedbackAggregationTypeEnum|null $value Value to set for the metricName property.
     */
-    public function setMetricName(?string $value): void {
+    public function setMetricName(?FeedbackAggregationTypeEnum $value): void {
         $this->metricName = $value;
     }
 
     /**
-     * Sets the metricValue property value. The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <b>metricName</b> (see <b>metricName</b> for interpretation and units).
+     * Sets the metricValue property value. The decimal value of the specified metric. For example, 55.8 would represent a value associated with the <strong>metricName</strong> (see <strong>metricName</strong> for interpretation and units).
      * @param float|null $value Value to set for the metricValue property.
     */
     public function setMetricValue(?float $value): void {

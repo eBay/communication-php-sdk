@@ -16,6 +16,7 @@
 
 namespace EBay\Communication\Generated\Notification\Subscription\Item\Disable;
 
+use EBay\Communication\Generated\Notification\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -43,18 +44,23 @@ class DisableRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method disables a subscription, which prevents the subscription from providing notifications. To restart a subscription, call <strong>enableSubscription</strong>.
+     * This method disables a subscription, which prevents the subscription from providing notifications. To restart a subscription, call <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a>.
      * @param DisableRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(?DisableRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This method disables a subscription, which prevents the subscription from providing notifications. To restart a subscription, call <strong>enableSubscription</strong>.
+     * This method disables a subscription, which prevents the subscription from providing notifications. To restart a subscription, call <a href="/develop/api/sell/notification_api#sell-notification_api-subscription-enablesubscription">enableSubscription</a>.
      * @param DisableRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -67,6 +73,7 @@ class DisableRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

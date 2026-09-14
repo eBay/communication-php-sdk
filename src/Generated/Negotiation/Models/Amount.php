@@ -32,12 +32,12 @@ class Amount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="http://www.currency-iso.org/en/home/tables/table-a1.html" title="www.currency-iso.org" target="_blank">ISO4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
+     * @var CurrencyCodeEnum|null $currency This enumerated type lists the three-letter <a href="http://www.iso.org/iso/home/standards/currency_codes.htm" target="_blank">ISO 4217</a> codes representing the supported world currencies.
     */
-    private ?string $currency = null;
+    private ?CurrencyCodeEnum $currency = null;
     
     /**
-     * @var string|null $value The monetary amount in the specified <b>currency</b>.
+     * @var string|null $value The monetary amount in the specified <b>currency</b>.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> For listings on the following marketplaces, a comma (<code>,</code>) must be used as the decimal separator:<br><ul><li>France</li><li>Canada (French Language)</li><li>Germany</li><li>Italy</li><li>Spain</li></ul>All other sites should use a period (<code>.</code>) as the decimal separator. If the incorrect decimal separator is used, the decimal point will be ignored.</p></div>
     */
     private ?string $value = null;
     
@@ -66,10 +66,10 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="http://www.currency-iso.org/en/home/tables/table-a1.html" title="www.currency-iso.org" target="_blank">ISO4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the currency property value. This enumerated type lists the three-letter <a href="http://www.iso.org/iso/home/standards/currency_codes.htm" target="_blank">ISO 4217</a> codes representing the supported world currencies.
+     * @return CurrencyCodeEnum|null
     */
-    public function getCurrency(): ?string {
+    public function getCurrency(): ?CurrencyCodeEnum {
         return $this->currency;
     }
 
@@ -80,13 +80,13 @@ class Amount implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getStringValue()),
+            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(CurrencyCodeEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the value property value. The monetary amount in the specified <b>currency</b>.
+     * Gets the value property value. The monetary amount in the specified <b>currency</b>.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> For listings on the following marketplaces, a comma (<code>,</code>) must be used as the decimal separator:<br><ul><li>France</li><li>Canada (French Language)</li><li>Germany</li><li>Italy</li><li>Spain</li></ul>All other sites should use a period (<code>.</code>) as the decimal separator. If the incorrect decimal separator is used, the decimal point will be ignored.</p></div>
      * @return string|null
     */
     public function getValue(): ?string {
@@ -98,7 +98,7 @@ class Amount implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('currency', $this->getCurrency());
+        $writer->writeEnumValue('currency', $this->getCurrency());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="http://www.currency-iso.org/en/home/tables/table-a1.html" title="www.currency-iso.org" target="_blank">ISO4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the currency property.
+     * Sets the currency property value. This enumerated type lists the three-letter <a href="http://www.iso.org/iso/home/standards/currency_codes.htm" target="_blank">ISO 4217</a> codes representing the supported world currencies.
+     * @param CurrencyCodeEnum|null $value Value to set for the currency property.
     */
-    public function setCurrency(?string $value): void {
+    public function setCurrency(?CurrencyCodeEnum $value): void {
         $this->currency = $value;
     }
 
     /**
-     * Sets the value property value. The monetary amount in the specified <b>currency</b>.
+     * Sets the value property value. The monetary amount in the specified <b>currency</b>.<br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> For listings on the following marketplaces, a comma (<code>,</code>) must be used as the decimal separator:<br><ul><li>France</li><li>Canada (French Language)</li><li>Germany</li><li>Italy</li><li>Spain</li></ul>All other sites should use a period (<code>.</code>) as the decimal separator. If the incorrect decimal separator is used, the decimal point will be ignored.</p></div>
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {
