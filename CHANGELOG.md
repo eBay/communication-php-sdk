@@ -1,14 +1,14 @@
 # ChangeLog
 
-## 2.0.0 (09/14/2026)
+## 0.2.0 (09/14/2026)
 
-**Breaking changes**
-- The following operations changed signature on `NegotiationClient`:
-  - `findEligibleItems`: `(?string, ?string, ?string, ?string, ?RequestOptions)` → `(?int, ?int, ?string, ?string, ?RequestOptions)`
+### Breaking changes
 
-## 1.0.0 (09/14/2026)
+#### Changed signatures
 
-**Breaking changes**
-- The following operations changed signature on `NegotiationClient`:
-  - `findEligibleItems`: `(?string, ?string, ?string, ?RequestOptions)` → `(?string, ?string, ?string, ?string, ?RequestOptions)`
-  - `sendOfferToInterestedBuyers`: `(CreateOffersRequest, ?string, ?RequestOptions)` → `(CreateOffersRequest, ?string, ?string, ?RequestOptions)`
+`NegotiationClient`:
+
+| Operation | Previous parameters | Current parameters |
+| --- | --- | --- |
+| `findEligibleItems` | `(?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?int $limit, ?int $offset, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `sendOfferToInterestedBuyers` | `(CreateOffersRequest $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(CreateOffersRequest $body, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
