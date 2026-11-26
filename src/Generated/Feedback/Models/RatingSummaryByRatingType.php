@@ -32,7 +32,7 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<FeedbackMetrics>|null $feedbackMetrics An array of metrics associated with feedback aggregation.
+     * @var array<FeedbackMetrics>|null $feedbackMetrics An array of metrics associated with feedback aggregation. This array is only returned when the <strong>excludeRepeatFeedback</strong> filter is set to <code>true</code>.
     */
     private ?array $feedbackMetrics = null;
     
@@ -76,7 +76,7 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feedbackMetrics property value. An array of metrics associated with feedback aggregation.
+     * Gets the feedbackMetrics property value. An array of metrics associated with feedback aggregation. This array is only returned when the <strong>excludeRepeatFeedback</strong> filter is set to <code>true</code>.
      * @return array<FeedbackMetrics>|null
     */
     public function getFeedbackMetrics(): ?array {
@@ -142,7 +142,7 @@ class RatingSummaryByRatingType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feedbackMetrics property value. An array of metrics associated with feedback aggregation.
+     * Sets the feedbackMetrics property value. An array of metrics associated with feedback aggregation. This array is only returned when the <strong>excludeRepeatFeedback</strong> filter is set to <code>true</code>.
      * @param array<FeedbackMetrics>|null $value Value to set for the feedbackMetrics property.
     */
     public function setFeedbackMetrics(?array $value): void {

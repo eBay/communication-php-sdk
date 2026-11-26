@@ -37,7 +37,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     private ?string $unit = null;
     
     /**
-     * @var int|null $value Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
+     * @var int|null $value Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code> when the <strong>unit</strong> is <code>DAY</code>, or <code>5</code> when the <strong>unit</strong> is <code>YEAR</code> (for older feedback). <p>See the <strong>commentPeriod</strong> container for more information.</p>
     */
     private ?int $value = null;
     
@@ -86,7 +86,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
+     * Gets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code> when the <strong>unit</strong> is <code>DAY</code>, or <code>5</code> when the <strong>unit</strong> is <code>YEAR</code> (for older feedback). <p>See the <strong>commentPeriod</strong> container for more information.</p>
      * @return int|null
     */
     public function getValue(): ?int {
@@ -120,7 +120,7 @@ class CommentCommentPeriod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>60</code>, or <code>365</code>. <p>See the <strong>commentPeriod</strong> container for more information.</p>
+     * Sets the value property value. Value of the time period expressed in the period contained in the <strong>unit</strong>. Supported values are <code>30</code>, <code>90</code>, <code>180</code>, or <code>365</code> when the <strong>unit</strong> is <code>DAY</code>, or <code>5</code> when the <strong>unit</strong> is <code>YEAR</code> (for older feedback). <p>See the <strong>commentPeriod</strong> container for more information.</p>
      * @param int|null $value Value to set for the value property.
     */
     public function setValue(?int $value): void {
