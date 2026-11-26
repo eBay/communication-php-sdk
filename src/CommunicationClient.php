@@ -20,7 +20,6 @@ namespace EBay\Communication;
 
 use EBay\Communication\Clients\Rest\FeedbackClient;
 use EBay\Communication\Clients\Rest\MessageClient;
-use EBay\Communication\Clients\Rest\NegotiationClient;
 use EBay\Communication\Clients\Rest\NotificationClient;
 use EBay\Communication\Configuration\CommunicationConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
@@ -35,7 +34,6 @@ final class CommunicationClient
 {
     public readonly FeedbackClient $feedback;
     public readonly MessageClient $message;
-    public readonly NegotiationClient $negotiation;
     public readonly NotificationClient $notification;
 
     public function __construct(
@@ -46,7 +44,6 @@ final class CommunicationClient
 
         $this->feedback = new FeedbackClient($guzzle, $config);
         $this->message = new MessageClient($guzzle, $config);
-        $this->negotiation = new NegotiationClient($guzzle, $config);
         $this->notification = new NotificationClient($guzzle, $config);
     }
 

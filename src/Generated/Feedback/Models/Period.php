@@ -37,7 +37,7 @@ class Period implements AdditionalDataHolder, Parsable
     private ?string $unit = null;
     
     /**
-     * @var int|null $value The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
+     * @var int|null $value The value for the feedback period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>180</code>, or <code>365</code>. If the <strong>period</strong> filter is set (<code>30</code>, <code>180</code>, or <code>365</code>), the returned value matches the filter. If the filter is omitted, entries for all periods (<code>7</code>, <code>30</code>, <code>180</code>, and <code>365</code>) are returned. If <strong>excludeRepeatFeedback</strong> is <code>true</code>, only <code>365</code> is returned.
     */
     private ?int $value = null;
     
@@ -86,7 +86,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
+     * Gets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>180</code>, or <code>365</code>. If the <strong>period</strong> filter is set (<code>30</code>, <code>180</code>, or <code>365</code>), the returned value matches the filter. If the filter is omitted, entries for all periods (<code>7</code>, <code>30</code>, <code>180</code>, and <code>365</code>) are returned. If <strong>excludeRepeatFeedback</strong> is <code>true</code>, only <code>365</code> is returned.
      * @return int|null
     */
     public function getValue(): ?int {
@@ -120,7 +120,7 @@ class Period implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported value: <code>90</code>.
+     * Sets the value property value. The value for the feedback period, specified in units of <strong>unit</strong>. Supported values are <code>7</code>, <code>30</code>, <code>180</code>, or <code>365</code>. If the <strong>period</strong> filter is set (<code>30</code>, <code>180</code>, or <code>365</code>), the returned value matches the filter. If the filter is omitted, entries for all periods (<code>7</code>, <code>30</code>, <code>180</code>, and <code>365</code>) are returned. If <strong>excludeRepeatFeedback</strong> is <code>true</code>, only <code>365</code> is returned.
      * @param int|null $value Value to set for the value property.
     */
     public function setValue(?int $value): void {
